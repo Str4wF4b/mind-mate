@@ -1,0 +1,8 @@
+{
+  "name": "Mind Mate",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular",
+  "id": "0149b94d"
+}
