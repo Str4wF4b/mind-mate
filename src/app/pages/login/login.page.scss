@@ -1,0 +1,93 @@
+ion-content {
+    --background: url('../../../assets/backgrounds/login/login_background1.png') no-repeat left center/cover;
+    /*--background: unset;
+
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(45deg, #d2001a, #7462ff, #96ceb4, #23d5ab);
+    background-size: 300% 300%;
+    animation: color 12s ease-in-out infinite;
+
+    @keyframes color {
+        0%{
+            background-position: 0 50%;
+        }
+        50%{
+            background-position: 100% 50%;
+        
+        }
+        100%{
+            background-position: 0 50%;
+        }
+    }
+        */
+
+
+    .logo-background {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transform: translateY(115%);
+        //background-color: white;
+        border-radius: 100px;
+
+        .logo {
+            //max-width: 40%;
+            //justify-content: center;
+            width: 150px; /* Adjust the width of the image */
+  height: 150px; /* Adjust the height of the image */
+  //border: 2px solid #000; /* Border properties */
+  border-radius: 50%; /* Creates a circular border */
+  object-fit: cover; /* Ensure the image fills the circular container */
+  background-color: white;
+  //padding: 10px;
+        }
+    }
+
+    ion-card {
+        box-shadow: none;
+        border-radius: 20px;
+        transform: translateY(60%);
+        background-color: rgba($color: #000000, $alpha: 0.1);//rgba(89, 165, 255, 0.2);
+        //backdrop-filter: blur(8px);
+        
+
+        ion-item {
+            --border-radius: 30px;
+            --ion-item-background: #cfeef9;
+
+            ion-icon {
+                color: rgb(68, 68, 68);
+                font-size: 20px;
+            }
+
+            .pwd-eye {
+                color: rgb(95, 95, 95);
+            }
+        }
+        
+        ion-input{
+            font-size: 1rem;
+            color: rgb(22, 22, 22);
+        }
+
+        .fpwd {
+            font-size: 0.9rem;
+            color: rgb(61, 61, 61);
+        }
+
+        .submit {
+            margin-top: 2rem;
+            ion-button {
+                --background: linear-gradient(to right, #3d88eb, #0b5bee);
+                --border-radius: 15px;
+                text-transform: none;
+            }
+
+            ion-text {
+                font-size: 1.2rem;
+            }
+        }
+    }
+}
+
