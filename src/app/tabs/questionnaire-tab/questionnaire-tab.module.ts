@@ -1,0 +1,19 @@
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { IonicModule } from '@ionic/angular';
+import { ExploreContainerComponentModule } from 'src/app/explore-container/explore-container.module';
+import { QuestionnaireTabPageRoutingModule } from './questionnaire-tab-routing.module';
+import { QuestionnaireTabPage } from './questionnaire-tab.page';
+
+@NgModule({
+  imports: [
+    CommonModule,
+    FormsModule,
+    IonicModule,
+    ExploreContainerComponentModule,
+    QuestionnaireTabPageRoutingModule
+  ],
+  declarations: [QuestionnaireTabPage]
+})
+export class QuestionnaireTabPageModule {}
