@@ -1,19 +1,29 @@
-<ion-tabs>
+<ion-tabs #tabs (ionTabsDidChange)="setCurrentTab($event)">
 
   <ion-tab-bar slot="bottom">
-    <ion-tab-button tab="tab1" href="/tabs/tab1">
-      <ion-icon aria-hidden="true" name="triangle"></ion-icon>
-      <ion-label>Tab 1</ion-label>
+    <ion-tab-button tab="home" href="/tabs/home-tab" [ngClass]="{'selected' : selectedTab == 'home'}">
+      <ion-icon aria-hidden="true" [name]="selectedTab == 'home' ? 'home' : 'home-outline'"></ion-icon>
+      <ion-label *ngIf="selectedTab == 'home'">Home</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button tab="tab2" href="/tabs/tab2">
-      <ion-icon aria-hidden="true" name="ellipse"></ion-icon>
-      <ion-label>Tab 2</ion-label>
+    <ion-tab-button tab="well-being" href="/tabs/well-being-tab" [ngClass]="{'selected' : selectedTab == 'well-being'}">
+      <ion-icon aria-hidden="true" [name]="selectedTab == 'well-being' ? 'happy' : 'happy-outline'"></ion-icon>
+      <ion-label *ngIf="selectedTab == 'well-being'">Well-Being</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button tab="tab3" href="/tabs/tab3">
-      <ion-icon aria-hidden="true" name="square"></ion-icon>
-      <ion-label>Tab 3</ion-label>
+    <ion-tab-button tab="questionnaire" href="/tabs/questionnaire-tab" [ngClass]="{'selected' : selectedTab == 'questionnaire'}">
+      <ion-icon aria-hidden="true" [name]="selectedTab == 'questionnaire' ? 'documents' : 'documents-outline'"></ion-icon>
+      <ion-label *ngIf="selectedTab == 'questionnaire'">Questionnaires</ion-label>
+    </ion-tab-button>
+    
+    <ion-tab-button tab="playlist" href="/tabs/playlist-tab" [ngClass]="{'selected' : selectedTab == 'playlist'}">
+      <ion-icon aria-hidden="true" [name]="selectedTab == 'playlist' ? 'play' : 'play-outline'"></ion-icon>
+      <ion-label *ngIf="selectedTab == 'playlist'">Playlists</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="more" href="/tabs/more-tab" [ngClass]="{'selected' : selectedTab == 'more'}">
+      <ion-icon aria-hidden="true" [name]="selectedTab == 'more' ? 'ellipsis-horizontal' : 'ellipsis-horizontal-outline'"></ion-icon>
+      <ion-label *ngIf="selectedTab == 'more'">More</ion-label>
     </ion-tab-button>
   </ion-tab-bar>
 

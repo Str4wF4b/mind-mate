@@ -1,1 +1,28 @@
+ion-tabs {
+    ion-tab-bar {
+        ion-tab-button {
+            --color: rgb(160, 160, 160);
+            --color-selected: azure;
 
+            ion-icon {
+                font-size: 1.5rem;
+            }
+        }
+
+        ion-tab-button.selected {
+            //background-color: white;
+            //border-radius: 25px;
+            //border: 6px solid #2f2f2f;
+            //padding: 0 -15px;
+            //box-shadow: 0;
+            ion-label {
+                font-weight: 600;
+                padding-top: 1px;
+            }
+            ion-icon {
+                min-width: 0;
+                font-size: 1.6rem;
+            }
+        }
+    }
+}
