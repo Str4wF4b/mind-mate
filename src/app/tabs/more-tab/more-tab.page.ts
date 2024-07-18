@@ -7,9 +7,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MoreTabPage implements OnInit {
 
-  constructor() { }
+  constructor(
+  ) { }
 
   ngOnInit() {
   }
 
+  //openFeature(page: string) {
+  //  this.navCtrl.navigateRoot(`/more-tab/${page}`);
+  //}
+
+  //openOthers(page: string) {
+  //  this.navCtrl.navigateRoot(`/more-tab/${page}`);
+  //}
 }

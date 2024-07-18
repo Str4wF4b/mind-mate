@@ -1,17 +1,98 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      More
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-menu menuId="more-menu" contentId="more-settings" side="end">
+  <ion-content class="ion-no-padding">
+    <ion-list class="menu-list" lines="none">
+      <ion-item class="menu-items" color="transparent">
+        Background
+      </ion-item>
+      <ion-item class="menu-items" color="transparent">
+        Notifications
+      </ion-item>
+      <ion-item class="menu-items" color="transparent">
+        Profile
+      </ion-item>
+      <ion-item class="menu-items" color="transparent">
+        Logout
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-menu>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
+<div class="ion-page" id="more-settings">
+  <ion-header [translucent]="true" class="ion-no-border">
     <ion-toolbar>
-      <ion-title size="large">More</ion-title>
+      <ion-buttons slot="start">
+        <ion-button>
+          <ion-icon slot="icon-only" name="person-circle"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+      <ion-title>
+        More
+      </ion-title>
+      <ion-buttons slot="primary">
+        <ion-menu-button menu="more-menu">
+          <ion-icon name="ellipsis-vertical"></ion-icon>
+        </ion-menu-button>
+      </ion-buttons>
     </ion-toolbar>
   </ion-header>
 
-  <app-explore-container name="More"></app-explore-container>
-</ion-content>
+  <ion-content [fullscreen]="true">
+    <div>
+      <ion-list lines="none" class="features-list">
+        <ion-list-header>
+          Features
+        </ion-list-header>
+
+        <ion-item color="transparent" routerLink="/more-tab/tips">
+          <ion-icon name="bulb" item-start></ion-icon>
+          <button ion-item icon-start>
+            Tips & Tricks
+          </button>
+        </ion-item>
+
+        <ion-item color="transparent" routerLink="/more-tab/mindpedia">
+          <ion-icon name="book-outline" item-start></ion-icon>
+          <button ion-item icon-start>
+            Mindpedia
+          </button>
+        </ion-item>
+
+        <ion-item color="transparent" routerLink="/more-tab/search-specialists">
+          <ion-icon name="search" item-start></ion-icon>
+          <button ion-item icon-start>
+            Search for Specialists
+          </button>
+        </ion-item>
+
+      </ion-list>
+
+      <ion-list lines="none" class="other-list">
+        <ion-list-header>
+          Other
+        </ion-list-header>
+
+        <ion-item color="transparent">
+          <ion-icon name="language-outline" item-start></ion-icon>
+          <button ion-item icon-start>
+            Language
+          </button>
+        </ion-item>
+
+        <ion-item color="transparent" routerLink="/more-tab/about">
+          <ion-icon name="help-circle-outline" item-start></ion-icon>
+          <button ion-item icon-start>
+            About
+          </button>
+        </ion-item>
+
+        <ion-item color="transparent" routerLink="/more-tab/disclaimer">
+          <ion-icon name="alert-circle-outline" item-start></ion-icon>
+          <button ion-item icon-start>
+            Disclaimer
+          </button>
+        </ion-item>
+
+      </ion-list>
+    </div>
+  </ion-content>
+</div>
