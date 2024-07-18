@@ -1,0 +1,30 @@
+<ion-header [translucent]="true" class="ion-no-border">
+  <ion-toolbar color="transparent">
+    <ion-buttons slot="start">
+      <ion-back-button icon="close"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Search for Specialists</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <p class="question">Where do You live?</p>
+  <ion-input placeholder="Enter Name of Home Place" [clearInput]="true" fill="outline"
+    [(ngModel)]="locationInput"></ion-input>
+
+  <p class="question">What are you searching for?</p>
+  <ion-select interface="popover" placeholder="Select Type" [(ngModel)]="selectedType">
+    <ion-select-option value="Counseling">Counseling</ion-select-option>
+    <ion-select-option value="Psychatrist">Psychatrist</ion-select-option>
+    <ion-select-option value="Psychotherapy">Psychotherapy</ion-select-option>
+  </ion-select>
+
+  <ion-button shape="round" (click)="openGoogleSearch()">
+    Search
+    <ion-icon slot="end" name="logo-google"></ion-icon>
+  </ion-button>
+
+
+
+</ion-content>
