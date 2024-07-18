@@ -13,6 +13,10 @@ export class HomeTabPage implements OnInit {
   ngOnInit() {
   }
 
+  /**
+   * 
+   * @param tab 
+   */
   switchTab(tab: string) {
     this.navCtrl.navigateRoot(`/tabs/${tab}`);
   }
