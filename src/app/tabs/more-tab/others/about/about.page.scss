@@ -1,0 +1,33 @@
+ion-toolbar {
+
+    ion-title {
+        color: black;
+        font-weight: 600;
+    }
+
+    ion-buttons {
+        color: black;
+        font-size: large;
+    }
+}
+
+ion-content {
+    --background: #CFEEF9;
+    --margin-top: 20px;
+    --padding-start: 20px;
+    --padding-end: 20px;
+
+    h5, p, .copyright {
+        color: black;
+    }
+
+    h5 {
+        font-weight: bold;
+    }
+
+    .copyright {
+        margin-top: 50px;
+        font-size: 12px;
+        font-weight: bold;
+    }
+}
