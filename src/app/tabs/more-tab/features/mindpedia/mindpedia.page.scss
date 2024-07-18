@@ -1,0 +1,54 @@
+ion-toolbar {
+    background-color: #CFEEF9;
+
+    ion-title {
+        color: black;
+        font-weight: 600;
+    }
+
+    ion-buttons {
+        color: black;
+        font-size: large;
+    }
+}
+
+ion-content {
+    --background: #CFEEF9;
+    --margin-top: 20px;
+    --padding-start: 20px;
+    --padding-end: 20px;
+
+    .searchbar-container {
+        margin-left: 15px;
+        margin-right: 15px;
+        margin-bottom: 24px;
+
+        ion-searchbar {
+            margin-top: 20px;
+            height: 50px;
+            --border-radius: 30px;
+            --box-shadow: none;
+            //background-color: azure;
+            border-radius: 30px;
+            border: 1px solid black; // or background-color: azure;
+            color: black; // grey with background-color: azure
+            //box-shadow: 0 8px 14px rgba(0, 0, 0, 0.2);
+        }
+    }
+
+
+    ion-list {
+        background-color: transparent;
+        
+        ion-item {
+            margin-top: 15px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            background-color: grey;
+            //border-radius: 22px;
+            border-radius: 26px;
+            
+        }
+
+    }
+}
