@@ -10,32 +10,12 @@
 <ion-content [fullscreen]="true">
 
   <div class="searchbar-container">
-    <ion-searchbar color="transparent" show-clear-button="focus"></ion-searchbar>
+    <ion-searchbar color="transparent" show-clear-button="focus" (ionInput)="handleInput($event)"></ion-searchbar>
   </div>
 
   <ion-list lines="none">
-    <ion-item color="transparent">
-      <label>Depression</label>
-      <ion-icon slot="end" name="arrow-forward"></ion-icon>
-    </ion-item>
-
-    <ion-item color="transparent">
-      <label>Schizophrenia</label>
-      <ion-icon slot="end" name="arrow-forward"></ion-icon>
-    </ion-item>
-
-    <ion-item color="transparent">
-      <label>Bipolar Disorder</label>
-      <ion-icon slot="end" name="arrow-forward"></ion-icon>
-    </ion-item>
-
-    <ion-item color="transparent">
-      <label>PTSD</label>
-      <ion-icon slot="end" name="arrow-forward"></ion-icon>
-    </ion-item>
-
-    <ion-item color="transparent">
-      <label>Obsessive Compulsive Disorder</label>
+    <ion-item color="transparent" *ngFor="let result of results">
+      <ion-label>{{ result }}</ion-label>
       <ion-icon slot="end" name="arrow-forward"></ion-icon>
     </ion-item>
   </ion-list>

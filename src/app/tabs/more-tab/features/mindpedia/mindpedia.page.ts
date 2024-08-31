@@ -7,9 +7,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MindpediaPage implements OnInit {
 
-  constructor() { }
+  public diseaseData = [
+    'Depression',
+    'Schizophrenia',
+    'Bipolar Disorder',
+    'PTSD',
+    'Obsessive Compulsive Disorder'
+  ];
 
-  ngOnInit() {
+  public results = [...this.diseaseData];
+
+  constructor() {}
+
+  ngOnInit() {}
+
+  handleInput(event:any) {
+    const query = event.target.value.toLowerCase();
+    this.results = this.diseaseData.filter((d) => d.toLowerCase().indexOf(query) > -1);
   }
+
+
 
 }

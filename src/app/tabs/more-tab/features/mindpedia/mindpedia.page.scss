@@ -13,7 +13,7 @@ ion-toolbar {
 }
 
 ion-content {
-    --background: #CFEEF9;
+    --background: rgb(207, 238, 249);
     --margin-top: 20px;
     --padding-start: 20px;
     --padding-end: 20px;
@@ -44,10 +44,21 @@ ion-content {
             margin-top: 15px;
             padding-top: 10px;
             padding-bottom: 10px;
-            background-color: grey;
+            background: rgb(123, 195, 255);//rgb(201, 201, 201);//rgb(61, 136, 235);
             //border-radius: 22px;
-            border-radius: 26px;
-            
+            border-radius: 30px;
+
+            ion-label {
+                font-size: 17px;
+                margin-left: 7px;
+                color: black;
+                //font-weight: 600;
+            }
+
+            ion-icon {
+                margin-right: 6px;
+                color: black;
+            }
         }
 
     }
