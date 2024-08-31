@@ -6,11 +6,11 @@ const routes: Routes = [
     path: '',
     //loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
     //loadChildren: () => import('./pages/loader/loader.module').then(m => m.LoaderPageModule)
-    redirectTo: 'login', pathMatch: 'full'
+    redirectTo: 'auth-main', pathMatch: 'full'
   },
   {
-    path: 'login',
-    loadChildren: () => import('./pages/login/login.module').then(m => m.LoginPageModule)
+    path: 'auth-main',
+    loadChildren: () => import('./pages/auth/auth-main/auth-main.module').then(m => m.AuthMainPageModule)
   },
   {
     path: 'tabs',
@@ -19,10 +19,6 @@ const routes: Routes = [
   {
     path: 'more-tab',
     loadChildren: () => import('./tabs/more-tab/more-tab.module').then(m => m.MoreTabPageModule)
-  },
-  {
-    path: 'loader',
-    loadChildren: () => import('./pages/loader/loader.module').then(m => m.LoaderPageModule)
   }
 
 
