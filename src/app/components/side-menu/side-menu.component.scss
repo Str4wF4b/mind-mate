@@ -1,0 +1,30 @@
+ion-menu {
+    --height: 23vh;
+    --width: 20vh;
+
+    .home-menu-content {
+        --background: #CFEEF9;
+        --margin-top: 20px;
+        --padding-start: 20px;
+        --padding-end: 20px;
+
+        .menu-list {
+            background-color: transparent;
+
+            .menu-items {
+                color: black;
+                border-bottom: 1px solid black;
+                border-color: black;
+            }
+
+            .last-item {
+                border-bottom: none;
+            }
+        }
+    }
+}
+
+ion-menu::part(container) {
+    border-radius: 0 0 0 30px;
+    box-shadow: 4px 0px 16px rgba(0, 0, 0, 0.6);
+}
