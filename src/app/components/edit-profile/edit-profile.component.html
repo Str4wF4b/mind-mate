@@ -1,0 +1,64 @@
+<ion-content fullscreen="true" class="main-content">
+  <div class="user-content ion-padding">
+    <ion-row class="header">
+      <ion-col>
+        <ion-label class="edit-profile">Edit Profile</ion-label>
+      </ion-col>
+      <ion-col size="auto">
+        <ion-buttons (click)="close()">
+          <ion-icon name="close"></ion-icon>
+        </ion-buttons>
+      </ion-col>
+    </ion-row>
+    
+    <div class="user-info">
+      <div class="profile-pic"></div>
+      <ion-label class="username">{{ username }}</ion-label>
+    </div>
+
+
+    <div class="user-settings">
+      <ion-input
+        type="text"
+        fill="outline"
+        label="Username"
+        labelPlacement="stacked"
+        placeholder="Change Username"
+        [clearInput]="true"
+        maxlength="18"
+        [(ngModel)]="username">
+      </ion-input>
+
+      <ion-input
+        type="email"
+        fill="outline"
+        label="Email"
+        labelPlacement="stacked"
+        placeholder="Change Email"
+        [clearInput]="true"
+        ngModel>
+      </ion-input>
+
+      <ion-input
+        type="password"
+        fill="outline"
+        label="Password"
+        labelPlacement="stacked"
+        placeholder="Change Password"
+        [clearInput]="true"
+        minlength="8"
+        ngModel>
+      </ion-input>
+  </div>
+
+  <div class="save-button">
+    <ion-button id="save-changes" mode="ios" shape="round" >Save</ion-button>
+  </div>  
+  <ion-action-sheet 
+    trigger="save-changes" 
+    header="Save Settings?" 
+    [buttons]="actionSheetButtons">
+  </ion-action-sheet>
+
+  </div>
+</ion-content>
