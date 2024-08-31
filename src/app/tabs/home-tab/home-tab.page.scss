@@ -1,34 +1,24 @@
-ion-menu {
-    --height: 30vh;
-
-    .menu-list {
-        background-color: transparent;
-
-        .menu-items {
-            color: black;
-            border-bottom: 1px solid black;
-            border-color: black;
-        }
-    }
-}
-
-ion-menu::part(container) {
-    border-radius: 0 0 0 30px;
-    box-shadow: 4px 0px 16px rgba(0, 0, 0, 0.6);
-}
-
 ion-toolbar {
     --background: #CFEEF9;
-    padding-left: 3px;
+    padding-left: 9px;
     padding-right: 5px;
 
     ion-buttons {
         color: black;
         font-size: large;
     }
+
 }
 
-ion-content {
+::ng-deep ion-modal {
+    --ion-background-color: var(--ion-color-secondary);
+
+    ion-header {
+        --ion-background: transparent; //var(--ion-background-secondary);
+    }
+}
+
+.main-content {
     --background: #CFEEF9; //url('../../../assets/backgrounds/tabs/home_background.png') no-repeat center center/cover;
     --margin-top: 20px;
     --padding-start: 20px;
@@ -69,11 +59,12 @@ ion-content {
         margin: 0;
         margin-bottom: 22px;
         border-radius: 27px;
-        box-shadow: 0 0px 10px rgba(80, 80, 80, 0.5),
-            0 -0px 10px rgb(80, 80, 80, 0.5),
-            -0px 0 108px rgba(80, 80, 80, 0.5),
-            0px 0 10px rgba(80, 80, 80, 0.5);
-        background-color: rgb(65, 149, 233);
+        /*         box-shadow: 0 0px 8px rgba(80, 80, 80, 0.5),
+            0 -0px 8px rgb(80, 80, 80, 0.5),
+            -0px 0 88px rgba(80, 80, 80, 0.5),
+            0px 0 8px rgba(80, 80, 80, 0.5); */
+        box-shadow: none;
+        background-color:  rgb(92, 165, 237); // rgb(76, 154, 233);
 
         ion-card-title {
             font-weight: bold;
@@ -84,7 +75,7 @@ ion-content {
             font-size: 20px;
             color: azure;
             rotate: 4deg;
-        }   
+        }
 
         ion-card-content {
             color: azure;

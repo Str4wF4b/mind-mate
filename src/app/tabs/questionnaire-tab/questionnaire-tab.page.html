@@ -1,17 +1,93 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Questionnaire
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
+<!-- <ion-menu menuId="questionnaire-menu" contentId="questionnaire-settings" side="end">
+  <ion-content class="ion-no-padding questionnaire-menu-content">
+    <ion-list class="menu-list" lines="none">
+      <ion-item class="menu-items" color="transparent">
+        Background
+      </ion-item>
+      <ion-item class="menu-items" color="transparent">
+        Notifications
+      </ion-item>
+      <ion-item class="menu-items" color="transparent">
+        Profile
+      </ion-item>
+      <ion-item class="menu-items" color="transparent">
+        Logout
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-menu> -->
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
+<div class="ion-page" id="side-menu-content">
+  <ion-header [translucent]="true" class="ion-no-border">
     <ion-toolbar>
-      <ion-title size="large">Questionnaire</ion-title>
+      <ion-buttons slot="start" id="questionnaire-edit-profile">
+        <ion-icon slot="icon-only" name="person-circle"></ion-icon>
+      </ion-buttons>
+      <ion-title>
+        Questionnaires
+      </ion-title>
+      <ion-buttons slot="primary">
+        <ion-menu-button menu="side-menu">
+          <ion-icon name="ellipsis-vertical"></ion-icon>
+        </ion-menu-button>
+      </ion-buttons>
     </ion-toolbar>
   </ion-header>
 
-  <app-explore-container name="Questionnaire"></app-explore-container>
-</ion-content>
+  <ion-modal #edit_profile trigger="questionnaire-edit-profile">
+    <ng-template>
+      <div class="transparent">
+        <app-edit-profile></app-edit-profile>
+      </div>
+    </ng-template>
+  </ion-modal>
+
+  <ion-content [fullscreen]="true" class="main-content">
+
+    <div>
+      <ion-list lines="none" class="questionnaires-list">
+
+        <ion-item color="transparent">
+          <!-- routerLink="/more-tab/tips" -->
+          <div slot="start" class="icon-circle">
+            <ion-icon name="today" item-start></ion-icon>
+          </div>
+          <ion-label>
+            <h2>Daily</h2>
+            <p>How are you feeling today?</p>
+          </ion-label>
+        </ion-item>
+
+        <ion-item color="transparent">
+          <!-- routerLink="/more-tab/tips" -->
+          <div slot="start" class="icon-circle">
+            <ion-icon name="calendar" item-start></ion-icon>
+          </div>
+          <ion-label>
+            <h2>Weekly</h2>
+            <p>How was your week?</p>
+          </ion-label>
+        </ion-item>
+
+        <ion-item color="transparent">
+          <!-- routerLink="/more-tab/tips" -->
+          <div slot="start" class="icon-circle">
+            <ion-icon name="timer-outline" item-start></ion-icon>
+          </div>
+          <ion-label>
+            <h2>Short Test</h2>
+            <p>Check your current psychological state</p>
+          </ion-label>
+        </ion-item>
+
+      </ion-list>
+    </div>
+
+    <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+      <ion-fab-button class="settings-button">
+        <ion-icon name="settings"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+
+  </ion-content>
+</div>

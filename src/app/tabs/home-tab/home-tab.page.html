@@ -1,5 +1,5 @@
-<ion-menu menuId="home-menu" contentId="home-settings" side="end">
-  <ion-content class="ion-no-padding">
+<!-- <ion-menu menuId="home-menu" contentId="home-settings" side="end">
+  <ion-content class="ion-no-padding home-menu-content">
     <ion-list class="menu-list" lines="none">
       <ion-item class="menu-items" color="transparent">
         Background
@@ -10,32 +10,38 @@
       <ion-item class="menu-items" color="transparent">
         Profile
       </ion-item>
-      <ion-item class="menu-items" color="transparent">
+      <ion-item ion-button class="menu-items" color="transparent" (click)="logout()">
         Logout
       </ion-item>
     </ion-list>
   </ion-content>
-</ion-menu>
-
-<div class="ion-page" id="home-settings">
+</ion-menu> -->
+<app-side-menu></app-side-menu>
+<div class="ion-page" id="side-menu-content">
   <ion-header [translucent]="true" class="ion-no-border">
     <ion-toolbar>
-      <ion-buttons slot="start">
-        <ion-button>
-          <ion-icon slot="icon-only" name="person-circle"></ion-icon>
-        </ion-button>
+      <ion-buttons slot="start" id="home-edit-profile">
+        <ion-icon slot="icon-only" name="person-circle"></ion-icon>
       </ion-buttons>
       <ion-buttons slot="primary">
-        <ion-menu-button menu="home-menu">
+        <ion-menu-button menu="side-menu">
           <ion-icon name="ellipsis-vertical"></ion-icon>
         </ion-menu-button>
       </ion-buttons>
     </ion-toolbar>
   </ion-header>
 
-  <ion-content [fullscreen]="true">
+  <ion-modal #edit_profile trigger="home-edit-profile">
+    <ng-template>
+      <div class="transparent">
+        <app-edit-profile [username]="username"></app-edit-profile>
+      </div>
+    </ng-template>
+  </ion-modal>
+
+  <ion-content [fullscreen]="true" class="main-content">
     <div class="headline-container">
-      <p>Nice to see You [Name]!</p>
+      <p *ngIf="username">Nice to see You {{ username }}!</p>
       <img src="assets/images/penguins/penguin_waves.png" class="penguin-wave" art="Penguin Waves">
     </div>
 
@@ -145,7 +151,7 @@
             </ion-grid>
           </ion-card>
 
-          <ion-card color="secondary" class="mindpedia-card" routerLink="/more-tab/mindpedia">
+          <ion-card class="mindpedia-card" routerLink="/more-tab/mindpedia">
             <ion-grid>
               <ion-row>
                 <ion-col size="auto">
@@ -170,5 +176,6 @@
 
     </div>
 
+    <!-- <app-edit-profile *ngIf="showEditProfile"></app-edit-profile> -->
   </ion-content>
 </div>

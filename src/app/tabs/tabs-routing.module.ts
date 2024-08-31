@@ -40,6 +40,11 @@ const routes: Routes = [
     redirectTo: '/tabs/home',
     pathMatch: 'full'
   },
+  {
+    path: 'device',
+    loadChildren: () => import('./well-being-tab/device/device.module').then( m => m.DevicePageModule)
+  },
+
 
 ];
 

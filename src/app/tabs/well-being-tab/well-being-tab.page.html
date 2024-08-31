@@ -1,18 +1,174 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Well-Being
-    </ion-title>
-    <ion-progress-bar type="indeterminate"></ion-progress-bar>
-  </ion-toolbar>
-</ion-header>
+<!-- <ion-menu menuId="well-being-menu" contentId="well-being-settings" side="end">
+  <ion-content class="ion-no-padding well-being-menu-content">
+    <ion-list class="menu-list" lines="none">
+      <ion-item class="menu-items" color="transparent">
+        Background
+      </ion-item>
+      <ion-item class="menu-items" color="transparent">
+        Notifications
+      </ion-item>
+      <ion-item class="menu-items" color="transparent">
+        Profile
+      </ion-item>
+      <ion-item class="menu-items" color="transparent">
+        Logout
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-menu> -->
+<!-- <app-side-menu></app-side-menu> -->
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
+<div class="ion-page" id="side-menu-content">
+  <ion-header [translucent]="true" class="ion-no-border">
     <ion-toolbar>
-      <ion-title size="large">Well-Being</ion-title>
+      <ion-buttons slot="start" id="well-being-edit-profile">
+        <ion-icon slot="icon-only" name="person-circle"></ion-icon>
+      </ion-buttons>
+      <ion-title>
+        Well-Being
+      </ion-title>
+      <ion-progress-bar type="indeterminate"></ion-progress-bar>
+      <ion-buttons slot="primary">
+        <ion-menu-button menu="side-menu">
+          <ion-icon name="ellipsis-vertical"></ion-icon>
+        </ion-menu-button>
+      </ion-buttons>
     </ion-toolbar>
   </ion-header>
 
-  <app-explore-container name="Mood & Activity"></app-explore-container>
-</ion-content>
+  <ion-modal #edit_profile trigger="well-being-edit-profile">
+    <ng-template>
+      <div class="transparent">
+        <app-edit-profile></app-edit-profile>
+      </div>
+    </ng-template>
+  </ion-modal>
+
+  <ion-content [fullscreen]="true" class="main-content">
+
+    <div>
+      <ion-list lines="none" class="device-list well-being-list">
+        <div class="headline">
+          <ion-list-header>
+            Your Device
+          </ion-list-header>
+        </div>
+        <ion-item color="transparent" routerLink="device" class="list-content">
+          <ion-icon class="smartwatch" name="watch" item-start></ion-icon>
+          <ion-label class="device-label">
+            <p [class.connected]="connected" (click)="toggleConnection()">
+              {{ connected ? 'Connected' : 'Not Connected' }}</p>
+            <h2>{{ connected ? 'Smartwatch XYZ' : 'No Smartwatch' }}</h2>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+
+      <ion-list lines="none" class="mood-list well-being-list">
+        <div class="headline">
+          <ion-list-header>
+            Mood
+          </ion-list-header>
+        </div>
+        <div class="mood-list-container">
+          <ion-item color="transparent" routerLink="device" class="list-content">
+            <ion-label>
+              <h1>Trend</h1>
+              <canvas id="mood-trend-chart"></canvas>
+            </ion-label>
+          </ion-item>
+          <ion-item color="transparent" class="list-content">
+            <ion-label>
+              <h1>Feeling</h1>
+              <ion-row>
+                <ion-buttons class="feeling-buttons">
+                  <ion-button [ngClass]="{'selected': selectedFeeling === 'very-sad'}" (click)="saveFeeling('very-sad')"
+                    class="emojis">
+                    <ion-img src="assets/images/emojis/very-sad_smiley.png"></ion-img>
+                  </ion-button>
+                  <ion-button [ngClass]="{'selected': selectedFeeling === 'sad'}" (click)="saveFeeling('sad')"
+                    class="emojis">
+                    <ion-img src="assets/images/emojis/sad_smiley.png"></ion-img>
+                  </ion-button>
+                  <ion-button [ngClass]="{'selected': selectedFeeling === 'normal'}" (click)="saveFeeling('normal')"
+                    class="emojis">
+                    <ion-img src="assets/images/emojis/normal_smiley.png"></ion-img>
+                  </ion-button>
+                  <ion-button [ngClass]="{'selected': selectedFeeling === 'good'}" (click)="saveFeeling('good')"
+                    class="emojis">
+                    <ion-img src="assets/images/emojis/good_smiley.png"></ion-img>
+                  </ion-button>
+                  <ion-button [ngClass]="{'selected': selectedFeeling === 'very-good'}"
+                    (click)="saveFeeling('very-good')" class="emojis">
+                    <ion-img src="assets/images/emojis/very-good_smiley.png"></ion-img>
+                  </ion-button>
+                </ion-buttons>
+              </ion-row>
+            </ion-label>
+          </ion-item>
+        </div>
+      </ion-list>
+
+      <ion-list lines="none" class="heart-rate-list well-being-list">
+        <div class="headline">
+          <ion-list-header>
+            Heart Rate
+          </ion-list-header>
+        </div>
+        <div class="hr-list-container">
+          <ion-item color="transparent" routerLink="device" class="list-content">
+            <ion-label>
+              <h1>Trend</h1>
+              <canvas id="hr-trend-chart"></canvas>
+            </ion-label>
+          </ion-item>
+        </div>
+      </ion-list>
+
+      <ion-list lines="none" class="activities-list well-being-list">
+
+        <div class="headline">
+          <ion-list-header>
+            Activities
+          </ion-list-header>
+        </div>
+        <ion-item color="transparent" routerLink="device" class="list-content">
+          <ion-label>
+            <h1>Trend</h1>
+            <canvas id="act-trend-chart"></canvas>
+          </ion-label>
+        </ion-item>
+
+        <div class="split-columns">
+          <ion-item color="transparent" class="list-content small-headlines">
+            <ion-list color="transparent" lines="none" class="add-activity-list">
+              <ion-item color="transparent">
+                <ion-label class="activity-label">
+                  <ion-item color="transparent" *ngFor="let activitiy of allActivities">
+                    <div class="add-activity-container">
+                      <h1>• {{ activitiy }}</h1>
+                      <!-- <ion-button fill="clear" size="small">
+                        <ion-icon name="remove-circle"></ion-icon>
+                      </ion-button> -->
+                    </div>
+                  </ion-item>
+                </ion-label>
+              </ion-item>
+              <ion-item color="transparent">
+                <ion-button color="transparent" (click)="addActivity()">
+                  <ion-icon name="add-circle"></ion-icon>
+                </ion-button>
+                <ion-input placeholder="Add Activity" [(ngModel)]="newActivity" class="add-activity-input"></ion-input>
+              </ion-item>
+            </ion-list>
+          </ion-item>
+
+          <ion-item color="transparent" class="list-content small-headlines">
+            <h1>Trend</h1>
+          </ion-item>
+        </div>
+
+      </ion-list>
+
+    </div>
+  </ion-content>
+</div>

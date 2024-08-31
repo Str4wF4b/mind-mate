@@ -1,0 +1,252 @@
+/* ion-menu {
+    --height: 30vh;
+
+    .well-being-menu-content {
+        --background: #CFEEF9;
+        --margin-top: 20px;
+        --padding-start: 20px;
+        --padding-end: 20px;
+
+        .menu-list {
+            background-color: transparent;
+
+            .menu-items {
+                color: black;
+                border-bottom: 1px solid black;
+                border-color: black;
+            }
+        }
+    }
+}
+
+ion-menu::part(container) {
+    border-radius: 0 0 0 30px;
+    box-shadow: 4px 0px 16px rgba(0, 0, 0, 0.6);
+} */
+
+
+ion-toolbar {
+    --background: #CFEEF9;
+    padding-left: 9px;
+    padding-right: 5px;
+
+    ion-title {
+        color: black;
+        font-weight: 600;
+        text-align: center;
+    }
+
+    ion-buttons {
+        color: black;
+        font-size: large;
+    }
+}
+
+::ng-deep ion-modal {
+    --ion-background-color: var(--ion-color-secondary);
+
+    ion-header {
+        --ion-background: transparent; //var(--ion-background-secondary);
+    }
+}
+
+
+.main-content {
+    --background: #CFEEF9;
+    --margin-top: 20px;
+    --padding-start: 20px;
+    --padding-end: 20px;
+
+    .well-being-list {
+        background-color: transparent;
+        margin-top: 30px;
+
+        .headline {
+            background-color: rgb(56, 56, 56, 0.25);
+            border-radius: 15px;
+
+            ion-list-header {
+                color: black;
+                font-weight: bolder;
+                font-size: larger;
+            }
+        }
+
+        .mood-list-container {
+            background-color: rgb(56, 56, 56, 0.25);
+            border-radius: 15px;
+
+            .list-content {
+                background-color: transparent;
+
+                ion-label {
+                    margin: 0px 0px;
+
+                    #mood-trend-chart {
+                        margin-left: 10px;
+                        margin-right: 13px;
+                        margin-bottom: 20px;
+                        width: 100%;
+                    }
+
+                    ion-row {
+                        .feeling-buttons {
+                            margin-bottom: 18px;
+                            justify-content: space-between;
+
+                            .emojis {
+                                ion-img {
+                                    width: 250%;
+                                    height: 250%;
+                                    border: 6px solid transparent;
+                                    border-radius: 50%;
+                                }
+
+                                &.selected ion-img {
+                                    border-color: rgb(0, 128, 0, 0.5);
+                                }
+
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+
+        .hr-list-container {
+            background-color: rgba(56, 56, 56, 0.25);
+            border-radius: 15px;
+
+            .list-content {
+                background-color: transparent;
+
+                ion-label {
+                    margin: 0px 0px;
+
+                    #hr-trend-chart {
+                        margin-left: 10px;
+                        margin-right: 13px;
+                        margin-bottom: 10px;
+                        width: 100%;
+                    }
+                }
+            }
+        }
+
+
+        .list-content {
+            margin-top: 4px;
+            background-color: rgb(56, 56, 56, 0.25);
+            border-radius: 15px;
+
+            .smartwatch {
+                font-size: 40px;
+            }
+
+            .device-label {
+                margin: 20px 0px 20px 15px;
+
+                p.connected {
+                    color: green;
+                }
+            }
+
+            h2 {
+                font-weight: bold;
+                font-size: 20px;
+            }
+
+            h1 {
+                font-weight: bold;
+                font-size: 18px;
+                margin: 20px 6px;
+            }
+        }
+
+    }
+
+    .activities-list {
+
+        .split-columns {
+            display: flex;
+            width: 100%;
+        }
+
+        .split-columns ion-item:nth-child(1) {
+            margin-right: 2px;
+            flex: 1 1 56%;
+        }
+
+        .split-columns ion-item:nth-child(2) {
+            margin-left: 2px;
+            flex: 1 1 44%;
+            height: 100%;
+        }
+
+        .small-headlines {
+            h1 {
+                margin: 0;
+            }
+
+            .add-activity-list {
+                background-color: transparent;
+                margin-left: -24px;
+                margin-top: -30px;
+
+                .activity-label {
+                    ion-item {
+                        margin-right: -18px;
+                        margin-top: 2%;
+
+                        .add-activity-container {
+                            margin-right: 50%;
+                            h1 {
+                                word-break: break-word;
+                                overflow-wrap: break-word;
+                                flex-grow: 1;
+                                margin: 0;
+                            }
+                        }
+                    }
+                }
+
+                .add-activity-input {
+                    --placeholder-color: grey;
+                    font-weight: bold;
+                    font-size: 18px;
+                    margin-left: -5px;
+                    --highlight-color: rgb(0, 82, 150);
+                }
+
+                ion-button {
+                    font-size: large;
+                    --box-shadow: none;
+                    background-color: transparent;
+                    color: rgb(102, 102, 102);
+
+                    ion-icon {
+                        font-size: 25px;
+                        background-color: transparent;
+                    }
+                }
+            }
+        }
+
+        ion-label {
+            margin: 0px 0px;
+
+            #act-trend-chart {
+                margin-left: 10px;
+                margin-right: 13px;
+                margin-bottom: 10px;
+                width: 100%;
+            }
+        }
+    }
+
+    ion-item {
+        margin-top: 18px;
+        color: black;
+    }
+}

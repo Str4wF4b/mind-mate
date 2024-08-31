@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AnimationController } from '@ionic/angular';
+import { AnimationController, MenuController } from '@ionic/angular';
 
 @Component({
   selector: 'app-tabs',
@@ -10,7 +10,7 @@ export class TabsPage {
 
   selectedTab: any;
 
-  constructor(private animationCtrl: AnimationController) { }
+  constructor(private animationCtrl: AnimationController, private menuController: MenuController) { }
 
   /**
    * 
@@ -27,6 +27,7 @@ export class TabsPage {
    */
   setCurrentTab(event: any) {
     this.selectedTab = event.tab;
+    this.menuController.close('home-menu'); //close menu on previous tab
 
     // Create tab animation bouncing effect:
     const tabButton = document.querySelector(`ion-tab-button[tab="${this.selectedTab}"]`); // set current tabButton to selectedTab

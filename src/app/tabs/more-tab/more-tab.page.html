@@ -1,5 +1,5 @@
-<ion-menu menuId="more-menu" contentId="more-settings" side="end">
-  <ion-content class="ion-no-padding">
+<!-- <ion-menu menuId="more-menu" contentId="more-settings" side="end">
+  <ion-content class="ion-no-padding more-menu-content">
     <ion-list class="menu-list" lines="none">
       <ion-item class="menu-items" color="transparent">
         Background
@@ -15,30 +15,36 @@
       </ion-item>
     </ion-list>
   </ion-content>
-</ion-menu>
+</ion-menu> -->
 
-<div class="ion-page" id="more-settings">
+<div class="ion-page" id="side-menu-content">
   <ion-header [translucent]="true" class="ion-no-border">
     <ion-toolbar>
-      <ion-buttons slot="start">
-        <ion-button>
+        <ion-buttons slot="start" id="more-edit-profile">
           <ion-icon slot="icon-only" name="person-circle"></ion-icon>
-        </ion-button>
-      </ion-buttons>
+        </ion-buttons>
       <ion-title>
         More
       </ion-title>
       <ion-buttons slot="primary">
-        <ion-menu-button menu="more-menu">
+        <ion-menu-button menu="side-menu">
           <ion-icon name="ellipsis-vertical"></ion-icon>
         </ion-menu-button>
       </ion-buttons>
     </ion-toolbar>
   </ion-header>
 
-  <ion-content [fullscreen]="true">
+  <ion-modal #edit_profile trigger="more-edit-profile">
+    <ng-template>
+      <div class="transparent">
+        <app-edit-profile></app-edit-profile>
+      </div>
+    </ng-template>
+  </ion-modal>
+
+  <ion-content [fullscreen]="true" class="main-content">
     <div>
-      <ion-list lines="none" class="features-list">
+      <ion-list lines="none" class="features-list more-list">
         <ion-list-header>
           Features
         </ion-list-header>
@@ -66,16 +72,19 @@
 
       </ion-list>
 
-      <ion-list lines="none" class="other-list">
+      <ion-list lines="none" class="other-list more-list">
         <ion-list-header>
           Other
         </ion-list-header>
 
         <ion-item color="transparent">
           <ion-icon name="language-outline" item-start></ion-icon>
-          <button ion-item icon-start>
-            Language
-          </button>
+          <ion-select label="Language" header="Select Language" [(ngModel)]="selectedLanguage"
+            *ngIf="languages && languages.length > 0">
+            <ion-select-option *ngFor="let language of languages" [value]="language.value">
+              {{ language.display }}
+            </ion-select-option>
+          </ion-select>
         </ion-item>
 
         <ion-item color="transparent" routerLink="/more-tab/about">
