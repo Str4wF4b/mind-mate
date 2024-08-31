@@ -10,7 +10,7 @@
 <ion-content [fullscreen]="true">
 
   <p class="question">Where do You live?</p>
-  <ion-input placeholder="Enter Name of Home Place" [clearInput]="true" fill="outline"
+  <ion-input placeholder="Enter Name of Home Place" [clearInput]="true" fill="outline" shape="round" color="primary"
     [(ngModel)]="locationInput"></ion-input>
 
   <p class="question">What are you searching for?</p>
@@ -20,11 +20,11 @@
     <ion-select-option value="Psychotherapy">Psychotherapy</ion-select-option>
   </ion-select>
 
-  <ion-button shape="round" (click)="openGoogleSearch()">
+  <ion-button mode="ios" shape="round" type="submit" expand="block" (click)="openGoogleSearch()">
     Search
     <ion-icon slot="end" name="logo-google"></ion-icon>
   </ion-button>
 
-
+  <img src="assets/images/more/start-making-changes.png" alt="Start making Changes" style="max-width: 100%; height: auto;">
 
 </ion-content>

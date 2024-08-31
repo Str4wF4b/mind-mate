@@ -22,4 +22,28 @@ ion-content {
         color: black;
     }
 
+    p, ion-select {
+        font-weight: bold;
+        font-size: large;
+        margin: 1vh 1.5vh;
+        margin-top: 3vh;
+    }
+
+    ion-select {
+        margin-top: 1vh;
+    }
+
+    ion-input {
+        margin-bottom: 6vh;
+    }
+
+    ion-button {
+        color: azure;
+        margin-top: 6vh;
+    }
+
+    img {
+        margin-top: 100px;
+    }
+
 }

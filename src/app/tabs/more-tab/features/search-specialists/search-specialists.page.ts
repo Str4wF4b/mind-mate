@@ -7,9 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SearchSpecialistsPage implements OnInit {
 
-  locationInput!: String;
-  selectedType!: String; //Type must be selected
-
+  locationInput: String = "";
+  selectedType: String = "";
 
   constructor() { }
 
