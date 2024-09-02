@@ -12,8 +12,10 @@
     </ion-row>
     
     <div class="user-info">
-      <div class="profile-pic"></div>
-      <ion-label class="username">{{ username }}</ion-label>
+      <div class="profile-pic" (click)="presentPhotoActionSheet()">
+        <img *ngIf="profileImage" [src]="profileImage" alt="Profile Image">
+      </div>
+      <ion-label class="username">{{ username.trim() === '' ? 'User' : username }}</ion-label>
     </div>
 
 
@@ -23,10 +25,12 @@
         fill="outline"
         label="Username"
         labelPlacement="stacked"
-        placeholder="Change Username"
+        [placeholder]="usernamePlaceholder"
         [clearInput]="true"
         maxlength="18"
-        [(ngModel)]="username">
+        [(ngModel)]="newUsername">
+        <!-- (ionBlur)="onUsernameInput($event)" -->
+        <!-- [(ngModel)]="username" -->
       </ion-input>
 
       <ion-input
@@ -34,20 +38,29 @@
         fill="outline"
         label="Email"
         labelPlacement="stacked"
-        placeholder="Change Email"
+        [placeholder]="emailPlaceholder"
         [clearInput]="true"
-        ngModel>
+        [(ngModel)]="newEmail"
+        #emailInput="ngModel"
+        email>
       </ion-input>
+      <div *ngIf="emailInput.invalid && emailInput.touched" class="error-text">
+        <small *ngIf="emailInput.errors?.['email']">Please enter a valid email address.</small>
+      </div>
 
       <ion-input
         type="password"
         fill="outline"
         label="Password"
         labelPlacement="stacked"
+        [type]="isPwd ? 'text' : 'password'"
         placeholder="Change Password"
         [clearInput]="true"
         minlength="8"
         ngModel>
+        <ion-button slot="end" fill="clear" (click)="togglePwd()">
+          <ion-icon class="pwd-eye" slot="icon-only" [name]="isPwd ? 'eye-off' : 'eye'"></ion-icon>
+        </ion-button>
       </ion-input>
   </div>
 

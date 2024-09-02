@@ -35,12 +35,20 @@
                 height: 120px;
                 width: 120px;
                 border-radius: 100%;
-                background-image: url('../../../assets/images/playlists/boy_free-your-mind.png');
+                background-image: url('../../../assets/images/edit-profile/person.png');
                 background-color: azure;
                 background-size: cover;
                 background-repeat: no-repeat;
+                //background-position: center;
                 margin: 0 auto;
                 margin-bottom: 12px;
+
+                img {
+                    height: 100%;
+                    width: 100%;
+                    object-fit: cover;
+                    border-radius: 50%;
+                  }
             }
 
             .username {
@@ -55,8 +63,8 @@
 
             ion-input {
                 color: black;
-                margin-bottom: 40px;
-                --padding-top: 4px;
+                margin-bottom: 15%;
+                --padding-top: 0.9%;
                 --border-width: 0px;
 
                 ::ng-deep {
@@ -67,6 +75,10 @@
                     .native-input:focus {
                         color: black;
                     }
+                }
+
+                .pwd-eye {
+                    color: rgb(95, 95, 95);
                 }
 
             }
@@ -85,8 +97,10 @@
                 font-size: 17px;
             }
 
-            ion-input .input-text {
+            .error-text {
                 color: red;
+                margin-top: -15%;
+                margin-bottom: 9.7%;
             }
         }
 

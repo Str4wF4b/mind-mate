@@ -1,6 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { ModalController, ToastController } from '@ionic/angular';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { FormGroup } from '@angular/forms';
+import { ActionSheetController, ModalController, ToastController } from '@ionic/angular';
 import { UserDataService } from 'src/app/services/user-data.service';
+// import { Camera, CameraOptions } from '@awesome-cordova-plugins/camera/ngx'
+import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
+
 
 @Component({
   selector: 'app-edit-profile',
@@ -9,31 +13,138 @@ import { UserDataService } from 'src/app/services/user-data.service';
 })
 export class EditProfileComponent implements OnInit {
   @Input() username!: string;
+  @Input() email!: string;
+  @Input() password!: string;
+  usernamePlaceholder: string = '';
+  emailPlaceholder: string = '';
+  newUsername: string = '';
+  newEmail: string = '';
+  form!: FormGroup;
+  isPwd: boolean = false;
+  profileImage: string /* | ArrayBuffer */ | null | undefined = null;
+
+  @ViewChild('fileInput') fileInput: any;
 
   constructor(
     private modalController: ModalController,
     private userDataService: UserDataService,
-    private toastController: ToastController
-  ) { }
+    private toastController: ToastController,
+    private actionSheetController: ActionSheetController
+  ) {
+  }
 
   ngOnInit() {
+    this.profileImage = this.userDataService.getProfileImage();
+    this.usernamePlaceholder = this.userDataService.getUsername();
+    this.emailPlaceholder = this.userDataService.getEmail(); // get current email user has logged in or signed up with
     console.log('Username Modal: ', this.username);
+    console.log('Email Modal: ', this.emailPlaceholder);
   }
 
-  async saveChanges() {
-    this.userDataService.setUsername(this.username);
-
-    const usernameToast = await this.toastController.create({
-      message: 'Username saved successfully!',
-      duration: 2000,
-      color: 'success'
+  async presentPhotoActionSheet() {
+    const actionSheet = await this.actionSheetController.create({
+      header: 'Select Image Source',
+      buttons: [
+        {
+          text: 'Choose from Gallery',
+          icon: 'image',
+          handler: () => {
+            this.takePhoto(CameraSource.Photos);
+          }
+        },
+        {
+          text: 'Take Photo',
+          icon: 'camera',
+          handler: () => {
+            this.takePhoto(CameraSource.Camera);
+          }
+        }
+      ]
     });
-    await usernameToast.present();
+    await actionSheet.present();
   }
 
+  async takePhoto(source: CameraSource) {
+    try {
+      const image = await Camera.getPhoto({
+        quality: 100,
+        resultType: CameraResultType.DataUrl,
+        source: source,
+      });
+
+      this.profileImage = image.dataUrl;
+      if (this.profileImage !== undefined) {
+        this.userDataService.setProfileImage(this.profileImage);
+      }
+      //console.log('Profile Image URL:', this.profileImage);
+    } catch (error: any) {
+      //console.error('Camera issue:', error);
+      if (error.message.includes('User cancelled photos app')) {
+        const toast = await this.toastController.create({
+          message: 'Photo selection cancelled.',
+          duration: 2000,
+          color: 'warning'
+        });
+        await toast.present();
+      } else {
+        console.error('Camera issue:', error);
+      }
+    }
+  }
+
+  /**
+   * Handles saving of user changes and updates placeholders if fields are changed
+   */
+  async saveChanges() {
+    let isChanged = false; // flag to track active changes
+
+    // update profile image:
+    if (this.profileImage) {
+      this.userDataService.setProfileImage(this.profileImage);
+      isChanged = true; // active changes
+    }
+
+    // update username placeholder on change:
+    if (this.newUsername.trim() !== '') {
+      this.userDataService.setUsername(this.newUsername); // new input is new username
+      this.usernamePlaceholder = this.newUsername; // update placeholder
+      isChanged = true; // active changes
+      this.newUsername = ''; // reset new username
+    }
+
+    // update email placeholder on change:
+    if (this.email !== '' && this.newEmail !== '' && this.newEmail.includes('@')) {
+      this.userDataService.setEmail(this.newEmail); // new input is new email
+      this.emailPlaceholder = this.newEmail; // update placeholder
+      isChanged = true; // active changes
+      this.newEmail = ''; // reset new email
+    }
+
+    if (isChanged) {
+      const usernameToast = await this.toastController.create({
+        message: 'Changes saved successfully!',
+        duration: 2000,
+        color: 'success'
+      });
+      await usernameToast.present();
+    } else {
+      const noChangesToast = await this.toastController.create({
+        message: 'No changes to save.',
+        duration: 2000,
+        color: 'warning'
+      });
+      await noChangesToast.present();
+    }
+  }
+
+  /**
+   * 
+   */
   close() {
     this.modalController.dismiss();
   }
+
+
 
   public actionSheetButtons = [
     {
@@ -52,4 +163,8 @@ export class EditProfileComponent implements OnInit {
       },
     },
   ];
+
+  togglePwd() {
+    this.isPwd = !this.isPwd; // toggle password visibility
+  }
 }
