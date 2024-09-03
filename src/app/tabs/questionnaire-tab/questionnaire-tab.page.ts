@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserDataService } from 'src/app/services/user-data.service';
 
 @Component({
   selector: 'app-questionnaire-tab',
@@ -6,10 +7,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./questionnaire-tab.page.scss'],
 })
 export class QuestionnaireTabPage implements OnInit {
+  username!: string;
+  profileImage: string | null | undefined = null;
 
-  constructor() { }
+  constructor(private userDataService: UserDataService) {
+    this.userDataService.username$.subscribe(name => {
+      this.username = name;
+    })
+   }
 
   ngOnInit() {
+    this.userDataService.profileStorageImage$.subscribe((image) => {
+      this.profileImage = image;
+    });
   }
 
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ResetPasswordComponent } from '../reset-password/reset-password.component';
+import { UserDataService } from 'src/app/services/user-data.service';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +14,7 @@ export class LoginComponent  implements OnInit {
   isPwd: boolean = false;
 
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private userDataService: UserDataService) {
     this.initForm();
   }
 
@@ -29,6 +30,7 @@ export class LoginComponent  implements OnInit {
 
   togglePwd() {
     this.isPwd = !this.isPwd; // toggle password visibility
+    console.log('isPwd' + this.isPwd);
   }
 
   onSubmit() {
@@ -36,6 +38,7 @@ export class LoginComponent  implements OnInit {
       this.form.markAllAsTouched(); // showing all errors
       return;
     } else {
+      this.userDataService.setEmail(this.form.value.email); // save email for later use
       this.router.navigate(['/tabs']);
     }
     console.log(this.form.value);

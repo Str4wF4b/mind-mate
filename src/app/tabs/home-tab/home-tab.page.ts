@@ -10,19 +10,24 @@ import { UserDataService } from 'src/app/services/user-data.service';
 })
 export class HomeTabPage implements OnInit {
   username!: string;
+  profileImage: string | null | undefined = null;
+
 
   constructor(
-    private navCtrl: NavController, 
+    private navCtrl: NavController,
     /* private router: Router, */
-    private usernameService: UserDataService
+    private userDataService: UserDataService
   ) {
-    this.usernameService.username$.subscribe(name => {
+    this.userDataService.username$.subscribe(name => {
       this.username = name;
     })
   }
 
   ngOnInit() {
-    console.log('EditProfileComponent loaded');
+    //this.profileImage = localStorage.getItem('profileImage');
+    this.userDataService.profileStorageImage$.subscribe((image) => {
+      this.profileImage = image;
+    })
   }
 
   /**

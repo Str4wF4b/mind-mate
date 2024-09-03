@@ -22,7 +22,8 @@
   <ion-header [translucent]="true" class="ion-no-border">
     <ion-toolbar>
       <ion-buttons slot="start" id="well-being-edit-profile">
-        <ion-icon slot="icon-only" name="person-circle"></ion-icon>
+        <ion-icon *ngIf="!profileImage" slot="icon-only" name="person-circle"></ion-icon>
+        <img *ngIf="profileImage" [src]="profileImage" class="header-profile-pic">
       </ion-buttons>
       <ion-title>
         Well-Being

@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { MenuController } from '@ionic/angular';
 import { Chart, registerables } from 'chart.js';
+import { UserDataService } from 'src/app/services/user-data.service';
 
 Chart.register(...registerables);
 
@@ -14,12 +15,23 @@ export class WellBeingTabPage implements OnInit, AfterViewInit {
   selectedFeeling: string = "empty";
   allActivities: string[] = [];
   newActivity: string = "";
+  username!: string;
+  profileImage: string | null | undefined = null;
 
-  constructor(private menuController: MenuController) { }
+  constructor(
+    private menuController: MenuController, 
+    private userDataService: UserDataService) {
+    this.userDataService.username$.subscribe(name => {
+      this.username = name;
+    })
+   }
 
 
   ngOnInit() {
    // this.menuController.enable(true, 'side-menu');
+   this.userDataService.profileStorageImage$.subscribe((image) => {
+    this.profileImage = image;
+  });
   }
 
   ngAfterViewInit(): void {

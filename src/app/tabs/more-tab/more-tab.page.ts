@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserDataService } from 'src/app/services/user-data.service';
 
 @Component({
   selector: 'app-more-tab',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./more-tab.page.scss'],
 })
 export class MoreTabPage implements OnInit {
+  username!: string;
+  profileImage: string | null | undefined = null;
 
   selectedLanguage: string = 'english';
   languages: { value: string, display: string }[] = [
@@ -33,15 +36,21 @@ export class MoreTabPage implements OnInit {
     { value: 'turkish', display: 'Turkish' },
   ];
 
-  constructor() {
+  constructor(private userDataService: UserDataService) {
     //this.selectedLanguage = 'english';
     //this.languages = [];
+    this.userDataService.username$.subscribe(name => {
+      this.username = name;
+    })
   }
 
   ngOnInit() {
+    this.userDataService.profileStorageImage$.subscribe((image) => {
+      this.profileImage = image;
+    });
   }
 
-  
+
 
   //openFeature(page: string) {
   //  this.navCtrl.navigateRoot(`/more-tab/${page}`);

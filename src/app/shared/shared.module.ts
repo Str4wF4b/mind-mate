@@ -4,6 +4,7 @@ import { IonicModule } from '@ionic/angular';
 import { SideMenuComponent } from '../components/side-menu/side-menu.component';
 import { EditProfileComponent } from '../components/edit-profile/edit-profile.component';
 import { FormsModule } from '@angular/forms';
+import { Camera } from '@awesome-cordova-plugins/camera/ngx'
 
 
 
@@ -14,6 +15,7 @@ import { FormsModule } from '@angular/forms';
     IonicModule,
     FormsModule
   ],
+  providers: [Camera],
   exports: [SideMenuComponent, EditProfileComponent]
 })
 export class SharedModule { }

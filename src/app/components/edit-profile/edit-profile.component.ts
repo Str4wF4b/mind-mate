@@ -12,7 +12,7 @@ import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
   styleUrls: ['./edit-profile.component.scss'],
 })
 export class EditProfileComponent implements OnInit {
-  @Input() username!: string;
+  @Input() username: string = '';
   @Input() email!: string;
   @Input() password!: string;
   usernamePlaceholder: string = '';
@@ -105,7 +105,7 @@ export class EditProfileComponent implements OnInit {
     }
 
     // update username placeholder on change:
-    if (this.newUsername.trim() !== '') {
+    if (this.newUsername && this.newUsername.trim() !== '') {
       this.userDataService.setUsername(this.newUsername); // new input is new username
       this.usernamePlaceholder = this.newUsername; // update placeholder
       isChanged = true; // active changes
