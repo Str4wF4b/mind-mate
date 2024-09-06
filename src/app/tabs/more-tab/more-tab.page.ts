@@ -36,12 +36,12 @@ export class MoreTabPage implements OnInit {
     { value: 'turkish', display: 'Turkish' },
   ];
 
-  constructor(private userDataService: UserDataService) {
-    //this.selectedLanguage = 'english';
-    //this.languages = [];
-    this.userDataService.username$.subscribe(name => {
+  constructor(
+    private userDataService: UserDataService
+  ) {
+    this.userDataService.usernameStorage$.subscribe((name) => {
       this.username = name;
-    })
+    });
   }
 
   ngOnInit() {

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { UserDataService } from 'src/app/services/user-data.service';
+import { LayoutManager } from 'src/app/utils/layout-manager.';
 
 @Component({
   selector: 'app-home-tab',
@@ -15,19 +16,22 @@ export class HomeTabPage implements OnInit {
 
   constructor(
     private navCtrl: NavController,
-    /* private router: Router, */
     private userDataService: UserDataService
   ) {
-    this.userDataService.username$.subscribe(name => {
+    this.userDataService.usernameStorage$.subscribe((name) => {
       this.username = name;
-    })
+    });
   }
 
   ngOnInit() {
     //this.profileImage = localStorage.getItem('profileImage');
     this.userDataService.profileStorageImage$.subscribe((image) => {
       this.profileImage = image;
-    })
+    });
+  }
+
+  ngAfterViewInit() {
+    new LayoutManager();
   }
 
   /**

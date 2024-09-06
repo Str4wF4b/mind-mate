@@ -11,7 +11,7 @@ export class PlaylistTabPage implements OnInit {
   profileImage: string | null | undefined = null;
 
   constructor(private userDataService: UserDataService) {
-    this.userDataService.username$.subscribe(name => {
+    this.userDataService.usernameStorage$.subscribe(name => {
       this.username = name;
     })
    }

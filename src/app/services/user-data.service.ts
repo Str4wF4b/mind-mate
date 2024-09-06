@@ -6,7 +6,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class UserDataService {
   private usernameSubject = new BehaviorSubject<string>('User');
-  username$ = this.usernameSubject.asObservable();
+  usernameStorage$ = this.usernameSubject.asObservable();
   private currentUsername: string = 'User';
   private currentEmail: string = '';
   private profileImage: string /* | ArrayBuffer */ | null | undefined = null;
@@ -14,7 +14,7 @@ export class UserDataService {
   profileStorageImage$ = this.profileImageSubject.asObservable();
 
   constructor() { 
-    const savedUsername = localStorage.getItem('username');
+    const savedUsername = localStorage.getItem('usernameStorage');
     if (savedUsername) {
       this.usernameSubject.next(savedUsername);
     }
@@ -25,9 +25,10 @@ export class UserDataService {
    * @param username 
    */
   setUsername(username: string) {
-    this.usernameSubject.next(username);
     this.currentUsername = username;
-    localStorage.setItem('username', username);
+    
+    localStorage.setItem('usernameStorage', username);
+    this.usernameSubject.next(username);
   }
 
   getUsername() {
@@ -43,9 +44,14 @@ export class UserDataService {
   }
 
   logout() {
+    this.profileImage = null;
+    this.profileImageSubject.next(null);
+    localStorage.removeItem('profileImage');
     this.usernameSubject = new BehaviorSubject<string>('User');
-    this.username$ = this.usernameSubject.asObservable();
+    this.usernameStorage$ = this.usernameSubject.asObservable();
     this.currentUsername = 'User';
+    this.usernameSubject.next('User');
+    localStorage.removeItem('usernameStorage');
     this.currentEmail = '';
   }
 
