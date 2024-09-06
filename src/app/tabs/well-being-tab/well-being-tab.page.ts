@@ -11,33 +11,57 @@ Chart.register(...registerables);
   styleUrls: ['./well-being-tab.page.scss'],
 })
 export class WellBeingTabPage implements OnInit, AfterViewInit {
+  progressBarType: string = 'indeterminate'
+  progressValue: number = 0;
   connected: boolean = true;
+  isLoading: boolean = true;
   selectedFeeling: string = "empty";
   allActivities: string[] = [];
-  newActivity: string = "";
+  newActivity: string = '';
   username!: string;
   profileImage: string | null | undefined = null;
 
   constructor(
-    private menuController: MenuController, 
+    private menuController: MenuController,
     private userDataService: UserDataService) {
-    this.userDataService.username$.subscribe(name => {
+    this.userDataService.usernameStorage$.subscribe(name => {
       this.username = name;
     })
-   }
+  }
 
 
   ngOnInit() {
-   // this.menuController.enable(true, 'side-menu');
-   this.userDataService.profileStorageImage$.subscribe((image) => {
-    this.profileImage = image;
-  });
+    this.startProgressBar();
+    this.userDataService.profileStorageImage$.subscribe((image) => {
+      this.profileImage = image;
+    });
   }
 
   ngAfterViewInit(): void {
     this.createMoodChart();
     this.createHeartRateChart();
     this.createActivityChart();
+  }
+
+  startProgressBar() {
+    // For normal progress bar type:
+    /* let interval = setInterval(() => {this.progressValue += 0.01;
+      if (this.progressValue > 1) { // stopping progress bar if 100% is reached
+        clearInterval(interval); 
+      }
+    }, 30); // refreshing-pace (in ms)
+
+
+    setTimeout(() => {
+      clearInterval(interval); // ending progress bar after 3 seconds
+      this.isLoading = false; // show if Smartwatch connection is on or off
+    }, 3000); // stopping after 3000 ms (= 3 seconds) */
+
+    setTimeout(() => {
+      this.progressBarType = 'determinate';
+      this.progressValue = 1;
+      this.isLoading = false;
+    }, 3000);
   }
 
   toggleConnection() {
