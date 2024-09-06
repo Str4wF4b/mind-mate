@@ -5,17 +5,18 @@ import { SideMenuComponent } from '../components/side-menu/side-menu.component';
 import { EditProfileComponent } from '../components/edit-profile/edit-profile.component';
 import { FormsModule } from '@angular/forms';
 import { Camera } from '@awesome-cordova-plugins/camera/ngx'
+import { SpecialistsInfoComponent } from '../components/specialists-info/specialists-info.component';
 
 
 
 @NgModule({
-  declarations: [SideMenuComponent, EditProfileComponent],
+  declarations: [SideMenuComponent, EditProfileComponent, SpecialistsInfoComponent],
   imports: [
     CommonModule,
     IonicModule,
     FormsModule
   ],
   providers: [Camera],
-  exports: [SideMenuComponent, EditProfileComponent]
+  exports: [SideMenuComponent, EditProfileComponent, SpecialistsInfoComponent]
 })
 export class SharedModule { }

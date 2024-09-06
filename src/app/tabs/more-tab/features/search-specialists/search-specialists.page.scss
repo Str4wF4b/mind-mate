@@ -17,24 +17,40 @@ ion-content {
     --margin-top: 20px;
     --padding-start: 20px;
     --padding-end: 20px;
+    --text-align: center;
 
-    p, ion-input, ion-select {
+    p,
+    ion-input,
+    ion-select {
         color: black;
     }
 
-    p, ion-select {
+    p,
+    ion-select {
         font-weight: bold;
         font-size: large;
         margin: 1vh 1.5vh;
         margin-top: 3vh;
     }
 
+    p {
+        display: flex;
+        align-items: center;
+
+        .info-icon {
+            margin-left: 4%;
+            font-size: 110%;
+        }
+    }
+
     ion-select {
         margin-top: 1vh;
+        --highlight-color: none;
     }
 
     ion-input {
         margin-bottom: 6vh;
+        --highlight-color: #007bff;
     }
 
     ion-button {
@@ -42,8 +58,20 @@ ion-content {
         margin-top: 6vh;
     }
 
-    img {
-        margin-top: 100px;
+    .changes-image {
+        display: block;
+        margin: 60% auto 0 auto;
+        width: 80%;
+        height: auto;
     }
 
+}
+
+ion-select-popover {
+    --width: 300px; /* Passe die Breite des Popovers an */
+}
+
+ion-select-popover .popover-content {
+    white-space: normal;
+    word-break: break-word; /* Lange Texte umbrechen */
 }

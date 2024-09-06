@@ -9,22 +9,44 @@
 
 <ion-content [fullscreen]="true">
 
-  <p class="question">Where do You live?</p>
-  <ion-input placeholder="Enter Name of Home Place" [clearInput]="true" fill="outline" shape="round" color="primary"
-    [(ngModel)]="locationInput"></ion-input>
-
-  <p class="question">What are you searching for?</p>
-  <ion-select interface="popover" placeholder="Select Type" [(ngModel)]="selectedType">
-    <ion-select-option value="Counseling">Counseling</ion-select-option>
-    <ion-select-option value="Psychatrist">Psychatrist</ion-select-option>
-    <ion-select-option value="Psychotherapy">Psychotherapy</ion-select-option>
+  <p class="question">Where do you live?</p>
+  <ion-input 
+    placeholder="Enter Name of Home Place" 
+    [clearInput]="true" 
+    fill="outline" 
+    shape="round"
+    [(ngModel)]="locationInput">
+  </ion-input>
+  
+  
+  <p class="question">What are you searching for?
+    <ion-icon
+      name="information-circle-outline"
+      class="info-icon"
+      (click)="openInfoModal()">
+    </ion-icon>
+  </p>
+  
+  <ion-select 
+    interface="popover" 
+    placeholder="Select" 
+    [(ngModel)]="selectedType"
+    [interfaceOptions]="{'cssClass': 'popover'}">
+    <ion-select-option *ngFor="let type of types" [value]="type.display"> {{ type.display }} </ion-select-option>
   </ion-select>
+  <ion-modal
+    #infoModal
+    [cssClass]="'info-modal'">
+    <ng-template>
+      <app-specialists-info></app-specialists-info>
+    </ng-template>
+  </ion-modal>
 
   <ion-button mode="ios" shape="round" type="submit" expand="block" (click)="openGoogleSearch()">
     Search
     <ion-icon slot="end" name="logo-google"></ion-icon>
   </ion-button>
 
-  <img src="assets/images/more/start-making-changes.png" alt="Start making Changes" style="max-width: 100%; height: auto;">
+  <img src="assets/images/more/start-making-changes.png" class="changes-image" alt="Start making Changes">
 
 </ion-content>
