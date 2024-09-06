@@ -2,8 +2,9 @@ import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ActionSheetController, ModalController, ToastController } from '@ionic/angular';
 import { UserDataService } from 'src/app/services/user-data.service';
-// import { Camera, CameraOptions } from '@awesome-cordova-plugins/camera/ngx'
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
+import { Plugins } from '@capacitor/core';
+const { Permissions } = Plugins;
 
 
 @Component({
@@ -31,7 +32,7 @@ export class EditProfileComponent implements OnInit {
     private toastController: ToastController,
     private actionSheetController: ActionSheetController
   ) {
-  }
+  } 
 
   ngOnInit() {
     this.profileImage = this.userDataService.getProfileImage();
@@ -67,7 +68,7 @@ export class EditProfileComponent implements OnInit {
   async takePhoto(source: CameraSource) {
     try {
       const image = await Camera.getPhoto({
-        quality: 100,
+        quality: 80,
         resultType: CameraResultType.DataUrl,
         source: source,
       });
