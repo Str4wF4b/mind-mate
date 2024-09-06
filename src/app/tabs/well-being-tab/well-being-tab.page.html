@@ -144,30 +144,11 @@
         </ion-item>
 
         <div class="split-columns">
-          <!--           <ion-item color="transparent" class="list-content small-headlines">
-            <ion-list color="transparent" lines="none" class="add-activity-list">
-              <ion-item color="transparent">
-                <ion-label class="activity-label">
-                  <ion-item color="transparent" *ngFor="let activitiy of allActivities">
-                    <div class="add-activity-container">
-                      <h1>• {{ activitiy }}</h1>
-                    </div>
-                  </ion-item>
-                </ion-label>
-              </ion-item>
-              <ion-item color="transparent">
-                <ion-button color="transparent" (click)="addActivity()">
-                  <ion-icon name="add-circle"></ion-icon>
-                </ion-button>
-                <ion-input placeholder="Add Activity" [(ngModel)]="newActivity" class="add-activity-input"></ion-input>
-              </ion-item>
-            </ion-list>
-          </ion-item> -->
           <ion-item color="transparent" class="list-content small-headlines">
             <div class="add-activity">
               <ion-text *ngFor="let activity of allActivities">
                 • {{ activity }}
-                  <ion-icon name="remove" (click)="removeActivity(activity)"></ion-icon>
+                <ion-icon name="close" (click)="removeActivity(activity)"></ion-icon>
               </ion-text>
               <div class="add-activity-input">
                 <ion-button color="transparent" (click)="addActivity()">

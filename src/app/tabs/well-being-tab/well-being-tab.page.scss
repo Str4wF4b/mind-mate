@@ -195,13 +195,12 @@ ion-toolbar {
 
             .add-activity {
                 display: flex;
-                align-items: start;
+                align-items: flex-start;
                 flex-direction: column;
                 margin-top: 1%;
-                //margin-left: -8%;
                 justify-content: space-between;
                 width: 100%;
-                
+
                 ion-text {
                     margin-top: 10%;
                     margin-left: 5%;
@@ -209,6 +208,7 @@ ion-toolbar {
 
                     ion-icon {
                         color: rgb(255, 101, 101);
+                        margin-bottom: -3.8%;
                     }
                 }
 
@@ -227,7 +227,7 @@ ion-toolbar {
                         background-color: transparent;
                         color: rgb(102, 102, 102);
                         margin-top: 3%;
-    
+
                         ion-icon {
                             font-size: 120%;
                             background-color: transparent;
@@ -235,56 +235,6 @@ ion-toolbar {
                     }
                 }
             }
-
-            /*                 .add-activity-list {
-                    background-color: transparent;
-                    text-align: start;
-                    //margin-left: -16%;
-    
-                    .activity-label {
-                        ion-item {
-                            //margin-right: -6%;
-                            margin-top: 2%;
-    
-                            .add-activity-container {
-                                margin-right: 50%;
-    
-                                h1 {
-                                    word-break: break-word;
-                                    overflow-wrap: break-word;
-                                    flex-grow: 1;
-                                    margin: 0;
-                                }
-                            }
-                        }
-                    }
-
-                    .add-activity {
-                        display: flex;
-                        align-items: center;
-                    }
-    
-                    .add-activity-input {
-                        --placeholder-color: grey;
-                        font-weight: bold;
-                        font-size: 18px;
-                        margin-left: -5px;
-                        --highlight-color: rgb(0, 82, 150);
-                    }
-    
-                    ion-button {
-                        font-size: large;
-                        --box-shadow: none;
-                        background-color: transparent;
-                        color: rgb(102, 102, 102);
-    
-                        ion-icon {
-                            font-size: 25px;
-                            background-color: transparent;
-                        }
-                    }
-                } */
-            //}
         }
 
         .split-columns ion-item:nth-child(1) {
