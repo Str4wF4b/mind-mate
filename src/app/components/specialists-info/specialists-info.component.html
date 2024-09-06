@@ -1,0 +1,30 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <div class="title-container">
+      <ion-icon name="information-circle-outline" class="info-icon"></ion-icon>
+      <ion-title>Specialists-Wiki</ion-title>
+    </div>
+    <ion-buttons slot="end">
+      <ion-button (click)="closeInfoModal()">
+        <ion-icon name="close" size="large"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true" class="ion-padding main-content">
+  <ion-list lines="none">
+    <div *ngFor="let type of types">
+      <ion-item (click)="toggleInfo(type)" color="transparent" [class.no-border]="type.showInfo">
+        <ion-label> {{ type.name }} </ion-label>
+        <ion-icon name="chevron-down-outline" slot="end" *ngIf="!type.showInfo"></ion-icon>
+        <ion-icon name="chevron-up-outline" slot="end" *ngIf="type.showInfo"></ion-icon>
+      </ion-item>
+      <ion-item *ngIf="type.showInfo" color="transparent" lines="none" padding>
+        <div class="type-content">
+          <ion-text [innerHTML]="type.info"></ion-text>
+          <ion-text class="sources">Sources: {{ type.sources }}</ion-text>
+        </div>
+      </ion-item>
+    </div>
+  </ion-list>
+</ion-content>
