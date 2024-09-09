@@ -1,16 +1,34 @@
 ion-menu {
-    --height: 23vh;
-    --width: 20vh;
+    @media (max-height: 700px) {
+        --height: 32%
+    }
+
+    @media (min-height: 701px) {
+        --height: 28.5%;
+    }
+
+    @media (min-height: 801px) {
+        --height: 25%
+    }
+
+    @media (min-height: 851px) {
+        --height: 23.5%
+    }
+    
+    --width: var(--screen-width, 40%);
+    
 
     .home-menu-content {
         --background: #CFEEF9;
-        --margin-top: 20px;
-        --padding-start: 20px;
-        --padding-end: 20px;
+        --margin-top: 8%; // 20px;
+        --padding-start: 8%; // 20px;
+        --padding-end: 8%; // 20px;
 
         .menu-list {
             background-color: transparent;
-
+            justify-content: space-between;
+            
+         
             .menu-items {
                 color: black;
                 border-bottom: 1px solid black;
@@ -24,7 +42,7 @@ ion-menu {
     }
 }
 
-ion-menu::part(container) {
+ ion-menu::part(container) {
     border-radius: 0 0 0 30px;
     box-shadow: 4px 0px 16px rgba(0, 0, 0, 0.6);
 }

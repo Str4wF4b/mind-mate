@@ -1,0 +1,92 @@
+ion-toolbar {
+    background-color: var(--ion-color-secondary);
+
+    ion-title {
+        color: black;
+        font-weight: 600;
+    }
+
+    ion-buttons {
+        color: black;
+        margin-right: 4%;
+    }
+}
+
+ion-content {
+    --background: var(--ion-color-secondary);
+    --overflow: hidden;
+
+    ion-list {
+        background-color: transparent;
+
+        ion-item {
+            color: black;
+            width: 100%;
+        }
+
+        .settings-option {
+            background-color: rgb(56, 56, 56, 0.25);
+            border-radius: 15px;
+
+            .disabled {
+                opacity: 0.5;
+                pointer-events: none;
+            }
+
+            .disabled ion-label,
+            .disabled ion-text,
+            .disabled p,
+            .disabled ion-input,
+            .disabled ion-toggle,
+            .disabled ion-select {
+                opacity: 0.5;
+                pointer-events: none;
+            }
+
+            .disabled ion-icon {
+                opacity: 1;
+                pointer-events: auto;
+            }
+
+            .sub-notifications {
+                display: flex;
+                align-items: center;
+
+                ion-label {
+                    flex: 0 0 auto;
+
+                    @media (min-width: 410px) {
+                        width: 18%;
+                    }
+
+                    @media (min-width: 376px) {
+                        width: 20%;
+                    }
+
+                    @media (min-width: 351px) {
+                        width: 22%;
+                    }
+
+                    @media (min-width: 351px) {
+                        width: 24%;
+                    }
+                }
+
+                .time-stamp {
+                    flex: 1;
+                    text-align: center;
+                    color: rgb(100, 100, 100);
+                }
+
+                ion-toggle {
+                    margin-left: auto;
+                }
+            }
+
+        }
+    }
+
+    .notification-item {
+        margin-top: 10%;
+    }
+}

@@ -1,0 +1,58 @@
+ion-title,
+ion-icon {
+    font-weight: bold;
+    color: black;
+}
+
+ion-list {
+    background-color: rgb(56, 56, 56, 0.25);
+    border-radius: 15px;
+
+    ion-item {
+        color: black;
+        width: 100%;
+    }
+
+    .selections {
+        display: flex;
+        align-items: center;
+
+        ion-label {
+            flex: 0 0 auto;
+            width: auto;
+        }
+
+        ion-select::part(icon) {
+            color: black; //rgb(100, 100, 100);
+        }
+
+        ion-select {
+            color: rgb(100, 100, 100);
+        }
+
+        ion-input {
+            margin-right: auto;
+            color: rgb(100, 100, 100);
+        }
+    }
+
+    .time-selection {
+        --border-width-bottom: 0;
+    }
+}
+
+ion-item::part(native) {
+    margin-right: 16px;
+}
+
+ion-list ion-item:last-child {
+    --inner-border-width: 0px;
+} 
+
+.confirm-button {
+    color: azure;
+    margin-top: 6%;
+    display: block;
+    margin-left: 30%;
+    margin-right: 30%;
+}

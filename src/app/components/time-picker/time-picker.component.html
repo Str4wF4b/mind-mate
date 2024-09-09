@@ -1,0 +1,36 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="transparent">
+    <ion-title>Set Alarm</ion-title>
+    <ion-buttons slot="end">
+      <ion-button class="close-button" slot="end" (click)="closeModal()">
+        <ion-icon name="close" size="large"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-list lines="no lines">
+    <ion-item class="selections" color="transparent" *ngIf="type === 'weekly' || type === 'custom'">
+      <ion-label>Select Day:</ion-label>
+      <ion-select slot="end" [(ngModel)]="selectedDay" placeholder="Day">
+        <ion-select-option value="Mon,">Monday</ion-select-option>
+        <ion-select-option value="Tue,">Tuesday</ion-select-option>
+        <ion-select-option value="Wed,">Wednesday</ion-select-option>
+        <ion-select-option value="Thu,">Thursday</ion-select-option>
+        <ion-select-option value="Fri,">Friday</ion-select-option>
+        <ion-select-option value="Sat,">Saturday</ion-select-option>
+        <ion-select-option value="Sun,">Sunday</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+
+    <ion-item class="selections time-selection" color="transparent">
+      <ion-label>Select Time:</ion-label>
+      <ion-input slot="end" type="time" [(ngModel)]="selectedTime"></ion-input>
+    </ion-item>
+  </ion-list>
+
+  <ion-button class="confirm-button" mode="ios" shape="round" type="submit" expand="block" (click)="confirmSelection()">Confirm</ion-button>
+
+</ion-content>
