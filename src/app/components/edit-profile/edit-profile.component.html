@@ -1,4 +1,4 @@
-<ion-content fullscreen="true" class="main-content">
+<ion-content [fullscreen]="true" class="main-content">
   <div class="user-content ion-padding">
     <ion-row class="header">
       <ion-col>
@@ -54,6 +54,7 @@
         [type]="isPwd ? 'text' : 'password'"
         placeholder="Change Password"
         [clearInput]="true"
+        [(ngModel)]="newPassword"
         minlength="8"
         ngModel>
         <ion-button slot="end" fill="clear" (click)="togglePwd()">

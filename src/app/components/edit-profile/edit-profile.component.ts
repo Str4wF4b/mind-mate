@@ -20,6 +20,7 @@ export class EditProfileComponent implements OnInit {
   emailPlaceholder: string = '';
   newUsername: string = '';
   newEmail: string = '';
+  newPassword: string = '';
   form!: FormGroup;
   isPwd: boolean = false;
   profileImage: string /* | ArrayBuffer */ | null | undefined = null;
@@ -32,7 +33,7 @@ export class EditProfileComponent implements OnInit {
     private toastController: ToastController,
     private actionSheetController: ActionSheetController
   ) {
-  } 
+  }
 
   ngOnInit() {
     this.profileImage = this.userDataService.getProfileImage();
@@ -110,7 +111,9 @@ export class EditProfileComponent implements OnInit {
       this.userDataService.setUsername(this.newUsername); // new input is new username
       this.usernamePlaceholder = this.newUsername; // update placeholder
       isChanged = true; // active changes
+      console.log(this.newUsername);
       this.newUsername = ''; // reset new username
+      console.log(this.userDataService.getUsername);
     }
 
     // update email placeholder on change:
@@ -119,6 +122,12 @@ export class EditProfileComponent implements OnInit {
       this.emailPlaceholder = this.newEmail; // update placeholder
       isChanged = true; // active changes
       this.newEmail = ''; // reset new email
+    }
+
+    // update password:
+    if (this.password !== '' && this.newPassword.length > 7) {
+      isChanged = true; // active changes
+      this.newPassword = ''; // reset new password
     }
 
     if (isChanged) {

@@ -10,6 +10,10 @@
     width: 100%;
     --overflow: hidden;
 
+    @media (max-height: 799px) {
+        --overflow: auto;
+    }
+
     .user-content {
         width: 100%;
         height: 260px; //310

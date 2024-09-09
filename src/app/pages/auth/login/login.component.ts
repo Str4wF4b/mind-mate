@@ -38,6 +38,7 @@ export class LoginComponent  implements OnInit {
       this.form.markAllAsTouched(); // showing all errors
       return;
     } else {
+      this.userDataService.setUsername('User');
       this.userDataService.setEmail(this.form.value.email); // save email for later use
       this.router.navigate(['/tabs']);
     }
