@@ -33,6 +33,7 @@ ion-item {
     ion-button {
         --background: linear-gradient(to right, #3d88eb, #0b5bee);
         text-transform: none;
+        --box-shadow: none;
     }
 
     ion-text {
