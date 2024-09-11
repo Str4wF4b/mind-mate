@@ -30,9 +30,16 @@ ion-list {
             color: rgb(100, 100, 100);
         }
 
-        ion-input {
-            margin-right: auto;
+        // ion-input {
+        //     //margin-right: auto;
+        //     color: rgb(100, 100, 100);
+        // }
+
+        input {
             color: rgb(100, 100, 100);
+            background-color: transparent;
+            border: none;
+            width: auto;
         }
     }
 
