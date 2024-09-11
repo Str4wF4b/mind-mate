@@ -35,6 +35,9 @@ export class WellBeingTabPage implements OnInit, AfterViewInit {
     this.userDataService.profileStorageImage$.subscribe((image) => {
       this.profileImage = image;
     });
+    this.userDataService.selectedFeeling$.subscribe((feeling) => {
+      this.selectedFeeling = feeling;
+    });
   }
 
   ngAfterViewInit(): void {
@@ -129,6 +132,7 @@ export class WellBeingTabPage implements OnInit, AfterViewInit {
 
   saveFeeling(feeling: string) {
     this.selectedFeeling = feeling;
+    this.userDataService.saveUserFeeling(feeling);
     console.log(`Selected Feeling: ${feeling}`);
   }
 

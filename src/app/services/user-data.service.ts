@@ -12,6 +12,13 @@ export class UserDataService {
   private profileImage: string /* | ArrayBuffer */ | null | undefined = null;
   private profileImageSubject = new BehaviorSubject<string | null>(localStorage.getItem('profileImage'));
   profileStorageImage$ = this.profileImageSubject.asObservable();
+  
+  private weeklyQuestionnaireResult: { short: string, text: string, weight: number} = { short: '', text: '', weight: 0 };
+  private dailyQuestionnaireResult: {  short: string, text: string, weight: number} = { short: '', text: '', weight: 0 };
+  private shortQuestionnaireResult: {  short: string, text: string, weight: number} = { short: '', text: '', weight: 0 };
+
+  private selectedFeelingSubject = new BehaviorSubject<string>('empty');
+  selectedFeeling$ = this.selectedFeelingSubject.asObservable();
 
   constructor() { 
     const savedUsername = localStorage.getItem('usernameStorage');
@@ -53,6 +60,10 @@ export class UserDataService {
     this.usernameSubject.next('User');
     localStorage.removeItem('usernameStorage');
     this.currentEmail = '';
+    this.saveUserFeeling('empty');
+    this.setWeeklyQuestionnaireResult({ short: '', text: '', weight: 0 });
+    this.setDailyQuestionnaireResult({ short: '', text: '', weight: 0 });
+    this.setShortQuestionnaireResult({ short: '', text: '', weight: 0 });
   }
 
   getProfileImage(): string /* | ArrayBuffer */ | null | undefined {
@@ -64,5 +75,33 @@ export class UserDataService {
     
     localStorage.setItem('profileStorageImage', image);
     this.profileImageSubject.next(image);
+  }
+
+  setWeeklyQuestionnaireResult(result: { short: string, text: string, weight: number}) {
+    this.weeklyQuestionnaireResult = result;
+  }
+
+  getWeeklyQuestionnaireResult(): { short: string, text: string, weight: number} {
+    return this.weeklyQuestionnaireResult;
+  }
+
+  setDailyQuestionnaireResult(result: { short: string, text: string, weight: number}) {
+    this.dailyQuestionnaireResult = result;
+  }
+
+  getDailyQuestionnaireResult(): { short: string, text: string, weight: number} {
+    return this.dailyQuestionnaireResult;
+  }
+
+  setShortQuestionnaireResult(result: { short: string, text: string, weight: number}) {
+    this.shortQuestionnaireResult = result;
+  }
+
+  getShortQuestionnaireResult(): { short: string, text: string, weight: number} {
+    return this.shortQuestionnaireResult;
+  }
+
+  saveUserFeeling(feeling: string) {
+    this.selectedFeelingSubject.next(feeling);
   }
 }

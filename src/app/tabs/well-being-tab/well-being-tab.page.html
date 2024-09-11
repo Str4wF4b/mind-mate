@@ -54,7 +54,8 @@
             Your Device
           </ion-list-header>
         </div>
-        <ion-item color="transparent" routerLink="device" class="list-content">
+        <ion-item color="transparent" class="list-content">
+          <!-- routerLink = "device" -->
           <ion-icon class="smartwatch" name="watch" item-start></ion-icon>
           <ion-label class="device-label">
             <p *ngIf="isLoading">
@@ -75,7 +76,7 @@
           </ion-list-header>
         </div>
         <div class="mood-list-container">
-          <ion-item color="transparent" routerLink="device" class="list-content">
+          <ion-item color="transparent" class="list-content">
             <ion-label>
               <h1>Trend</h1>
               <canvas id="mood-trend-chart"></canvas>
@@ -120,7 +121,7 @@
           </ion-list-header>
         </div>
         <div class="hr-list-container">
-          <ion-item color="transparent" routerLink="device" class="list-content">
+          <ion-item color="transparent" class="list-content">
             <ion-label>
               <h1>Trend</h1>
               <canvas id="hr-trend-chart"></canvas>
@@ -136,7 +137,7 @@
             Activities
           </ion-list-header>
         </div>
-        <ion-item color="transparent" routerLink="device" class="list-content">
+        <ion-item color="transparent" class="list-content">
           <ion-label>
             <h1>Trend</h1>
             <canvas id="act-trend-chart"></canvas>

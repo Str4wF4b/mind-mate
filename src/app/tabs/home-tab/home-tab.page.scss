@@ -56,10 +56,6 @@ ion-toolbar {
         justify-content: space-between;
     }
 
-    //.act-row {
-    //    justify-content: space-evenly;
-    //}
-
     ion-card {
         margin: 0;
         margin-bottom: 22px;
@@ -74,6 +70,36 @@ ion-toolbar {
         ion-card-title {
             font-weight: bold;
             color: azure;
+        }
+
+        .act-row {
+            .no-mood {
+                color: azure;
+                font-size: 17px;
+                font-weight: 500;
+                margin: 0;
+            }
+
+            .mood-item {
+                display: flex;
+                align-items: center;
+                //justify-content: center;
+
+                ion-img {
+                    min-height: 35px;
+                    min-width: 35px;
+                    height: 35px;
+                    width: 35px;
+                }
+
+                .phrases {
+                    color: azure;
+                    font-size: small;
+                    margin: 0;
+                    margin-left: 15%;
+                    padding: 0;
+                }
+            }
         }
 
         .tips-bulb {
