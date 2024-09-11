@@ -1,37 +1,56 @@
 ion-content {
     --background: url('../../../../assets/backgrounds/login/login_background1.png') no-repeat left center/cover;
-
-    /*--background: unset;
-
+    display: flex;
+    align-items: center;
     height: 100%;
-    width: 100%;
-    background: linear-gradient(45deg, #d2001a, #7462ff, #96ceb4, #23d5ab);
-    background-size: 300% 300%;
-    animation: color 12s ease-in-out infinite;
-
-    @keyframes color {
-        0%{
-            background-position: 0 50%;
-        }
-        50%{
-            background-position: 100% 50%;
-        
-        }
-        100%{
-            background-position: 0 50%;
-        }
-    }
-        */
 
     .logo-background {
         display: flex;
         justify-content: center;
         //align-items: center;
-        transform: translateY(16vh);
+        margin-top: 30%;
+        //transform: translateY(16vh);
         border-radius: 100px;
+
+        @media (max-height: 897px) {
+            margin-top: 27%;
+        }
+
+        @media (max-height: 871px) {
+            margin-top: 24.5%;
+        }
+
+        @media (max-height: 845px) {
+            margin-top: 22%;
+        }
+
+        @media (max-height: 819px) {
+            margin-top: 19.75%;
+        }
+
+        @media (max-height: 793px) {
+            margin-top: 17.5%;
+        }
+
+        @media (max-height: 767px) {
+            margin-top: 13.75%;
+        }
+
+        @media (max-height: 741px) {
+            margin-top: 10%;
+        }
+
+        @media (max-height: 705px) {
+            margin-top: 7.5%;
+        }
+
+        @media (max-height: 668px) {
+            margin-top: 5%;
+        }
 
         .logo {
             max-width: 40%;
+            //min-width: 40%;
             //justify-content: center;
             align-items: center;
             width: 150px;
@@ -47,7 +66,8 @@ ion-content {
     ion-card {
         box-shadow: none;
         border-radius: 20px;
-        transform: translateY(16vh);
+        margin-top: 0;
+        //transform: translateY(16vh);
         background-color: rgba($color: #000000, $alpha: 0.1);
 
         //display: flex;

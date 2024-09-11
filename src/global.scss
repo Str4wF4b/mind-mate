@@ -53,5 +53,10 @@ input[type="time"]::-webkit-calendar-picker-indicator {
     position: absolute;
     right: 0;
     top: 0;
-    width: auto
+    width: auto;
 }
+
+:root {
+    --current-width: 100vw;
+    --current-height: 100vh;
+  }
