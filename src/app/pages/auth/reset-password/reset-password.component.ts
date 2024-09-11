@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-reset-password',
@@ -16,7 +17,7 @@ export class ResetPasswordComponent implements OnInit {
   code: string = '';
   flag: number = 1;
 
-  constructor() { }
+  constructor(private modalController: ModalController) { }
 
   ngOnInit() { }
 
@@ -25,6 +26,10 @@ export class ResetPasswordComponent implements OnInit {
       email: form.value.email || '',
       new_passowrd: form.value.new_password || '',
       //otp: form.value.code || ''
+    }
+
+    if (this.flag == 2) {
+      this.closeModal();
     }
   }
 
@@ -54,4 +59,7 @@ export class ResetPasswordComponent implements OnInit {
     return data;
   }
 
+  async closeModal() {
+    await this.modalController.dismiss();
+  }
 }
