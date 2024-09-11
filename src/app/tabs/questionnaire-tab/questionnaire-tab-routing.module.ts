@@ -7,7 +7,19 @@ const routes: Routes = [
   {
     path: '',
     component: QuestionnaireTabPage
+  },  {
+    path: 'short',
+    loadChildren: () => import('./questionnaires/short/short.module').then( m => m.ShortPageModule)
+  },
+  {
+    path: 'daily',
+    loadChildren: () => import('./questionnaires/daily/daily.module').then( m => m.DailyPageModule)
+  },
+  {
+    path: 'weekly',
+    loadChildren: () => import('./questionnaires/weekly/weekly.module').then( m => m.WeeklyPageModule)
   }
+
 ];
 
 @NgModule({

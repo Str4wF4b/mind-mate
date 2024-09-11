@@ -26,7 +26,7 @@ ion-menu::part(container) {
 
 
 ion-toolbar {
-    --background: transparent;
+    --background: var(--ion-color-secondary);
     padding-left: 9px;
     padding-right: 5px;
 
@@ -98,9 +98,61 @@ ion-toolbar {
         }
     }
 
+    .questionnaire-results {
+        background-color: rgba(56, 56, 56, 0.25);
+        margin-top: 30%;
+        margin-left: 10px;
+        margin-right: 10px;
+        margin-bottom: 5%;
+        border-radius: 20px;
+
+        .inner-questionnaire-results {
+            margin-left: 4%;
+            margin-right: 4%;
+
+            &.with-padding {
+                padding-bottom: 4%;
+
+                h4 {
+                    padding-top: 4%;
+                }
+            }
+
+            h4,
+            ion-text,
+            p {
+                color: black;
+            }
+
+            h4,
+            p {
+                font-weight: bold;
+            }
+
+            ion-text {
+                text-align: justify;
+                hyphens: auto;
+                word-break: break-word;
+                -webkit-hyphens: auto;
+                -moz-hyphens: auto;
+                -ms-hyphens: auto;
+            }
+
+            p {
+                margin-bottom: 2px;
+            }
+        }
+    }
+
+    .fab-hidden {
+        opacity: 0;
+        transition: opacity 0.3s ease-in-out;
+        pointer-events: none;
+    }
+
     .settings-button {
         --color: var(--ion-color-secondary); // azure;
         --background: black; // rgb(67, 162, 240);
         --box-shadow: none;
     }
-}   
+}

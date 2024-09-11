@@ -48,8 +48,7 @@
     <div>
       <ion-list lines="none" class="questionnaires-list">
 
-        <ion-item color="transparent">
-          <!-- routerLink="/more-tab/tips" -->
+        <ion-item color="transparent" routerLink="daily">
           <div slot="start" class="icon-circle">
             <ion-icon name="today" item-start></ion-icon>
           </div>
@@ -59,8 +58,7 @@
           </ion-label>
         </ion-item>
 
-        <ion-item color="transparent">
-          <!-- routerLink="/more-tab/tips" -->
+        <ion-item color="transparent" routerLink="weekly">
           <div slot="start" class="icon-circle">
             <ion-icon name="calendar" item-start></ion-icon>
           </div>
@@ -70,8 +68,7 @@
           </ion-label>
         </ion-item>
 
-        <ion-item color="transparent">
-          <!-- routerLink="/more-tab/tips" -->
+        <ion-item color="transparent" routerLink="short">
           <div slot="start" class="icon-circle">
             <ion-icon name="timer-outline" item-start></ion-icon>
           </div>
@@ -84,7 +81,26 @@
       </ion-list>
     </div>
 
-    <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+    <div class="questionnaire-results">
+      <div class="inner-questionnaire-results"
+        [ngClass]="{ 'with-padding': dailyQuestionnaireText || weeklyQuestionnaireText || shortQuestionnaireText }">
+        <h4 *ngIf="dailyQuestionnaireText || weeklyQuestionnaireText || shortQuestionnaireText">Result:</h4>
+        <ion-text *ngIf="dailyQuestionnaireText">
+          <p> Your daily result: {{ dailyQuestionnaireShortText }}</p>
+          {{ dailyQuestionnaireText }} ({{ currentDate }})
+        </ion-text>
+        <ion-text *ngIf="weeklyQuestionnaireText">
+          <p> Your weekly result: {{ weeklyQuestionnaireShortText }}</p>
+          {{ weeklyQuestionnaireText }} ({{ lastWeekDay }}. - {{ currentDate }})
+        </ion-text>
+        <ion-text *ngIf="shortQuestionnaireText">
+          <p> Your short test result: {{ shortQuestionnaireShortText }}</p>
+          {{ shortQuestionnaireText }} ({{ currentDate }})
+        </ion-text>
+      </div>
+    </div>
+
+    <ion-fab slot="fixed" vertical="bottom" horizontal="end" (click)="openSettingsModal()" [ngClass]="{ 'fab-hidden': isFabHidden }">
       <ion-fab-button class="settings-button">
         <ion-icon name="settings"></ion-icon>
       </ion-fab-button>
@@ -92,3 +108,12 @@
 
   </ion-content>
 </div>
+
+
+<ion-modal #settings>
+  <ng-template>
+    <div class="transparent">
+      <app-settings></app-settings>
+    </div>
+  </ng-template>
+</ion-modal>

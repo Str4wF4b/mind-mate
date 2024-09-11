@@ -1,0 +1,43 @@
+<ion-header [translucent]="true" class="ion-no-border">
+  <ion-toolbar color="transparent">
+    <ion-buttons slot="start">
+      <ion-back-button icon="arrow-back-outline"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Weekly Questionnaire</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+
+  <form (submit)="submitAnswers()">
+
+    <div class="question-set" *ngFor="let question of questions; let i = index">
+      
+      <ion-item lines="none" color="transparent">
+        <ion-label class="question-text">{{ question.questionText }}</ion-label>
+      </ion-item>
+
+      <!-- Yes/No question -->
+      <ion-list lines="none" *ngIf="question.type === 'boolean'">
+        <ion-radio-group class="question-type" [(ngModel)]="question.selectedAnswer" name="boolean_question_{{i}}">
+          <ion-item color="transparent" *ngFor="let option of question.options">
+            <ion-label>{{ option }}</ion-label>
+            <ion-radio slot="start" [value]="option"></ion-radio>
+          </ion-item>
+        </ion-radio-group>
+      </ion-list>
+
+      <!-- Scale questions (1-5) -->
+      <ion-item lines="none" color="transparent" *ngIf="question.type === 'scale'">
+        <ion-range class="question-type" min="1" max="5" pin="true" [(ngModel)]="question.selectedAnswer" name="scale_question_{{i}}">
+          <ion-label slot="start">1</ion-label>
+          <ion-label slot="end">5</ion-label>
+        </ion-range>
+      </ion-item>
+
+    </div>
+
+    <ion-button class="submit-button" mode="ios" shape="round" expand="block" type="submit">Submit</ion-button>
+  </form>
+
+</ion-content>

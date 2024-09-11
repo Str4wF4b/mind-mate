@@ -1,0 +1,58 @@
+ion-toolbar {
+    background-color: #CFEEF9;
+
+    ion-title {
+        color: black;
+        font-weight: 600;
+    }
+
+    ion-buttons {
+        color: black;
+        font-size: large;
+    }
+}
+
+ion-content {
+    --background: rgb(207, 238, 249);
+    --margin-top: 20px;
+    --padding-start: 20px;
+    --padding-end: 20px;
+
+    .question-set {
+        background-color: rgb(56, 56, 56, 0.25);
+        border-radius: 20px;
+        margin-bottom: 10%;
+    }
+
+    ion-item {
+        color: black;
+    }
+
+    ion-list {
+        background-color: transparent;
+
+        ion-radio-group ion-radio {
+            --color: rgb(75, 75, 75);
+          }
+    }
+
+    ion-range {
+        --bar-height: 5px;
+        --knob-size: 24px;
+        --bar-border-radius: 20px;
+    }
+
+    .question-text {
+        font-weight: bold;
+        margin-top: 3%;
+        margin-bottom: 0;
+    }
+
+    .submit-button {
+        color: azure;
+        margin-top: 6%;
+        display: block;
+        margin-left: 30%;
+        margin-right: 30%;
+    }
+}
