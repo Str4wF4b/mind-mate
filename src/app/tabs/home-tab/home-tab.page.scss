@@ -102,6 +102,30 @@ ion-toolbar {
             }
         }
 
+        .act-row-canvas {
+              display: flex;
+              //align-items: center;
+              justify-content: space-between;
+
+            canvas {
+                max-width: 130px;
+                max-height: 52.5px;
+            }
+
+            #hr-trend-chart-home {
+                
+                padding-right: 10%;
+                border-right: 1px solid rgb(240, 255, 255, 0.7);
+            }
+
+            #act-trend-chart-home {
+               
+                padding-left: 8%;
+            }
+        }
+
+
+
         .tips-bulb {
             font-size: 20px;
             color: azure;
