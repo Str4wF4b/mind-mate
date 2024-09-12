@@ -235,11 +235,19 @@ ion-toolbar {
                     }
                 }
             }
+
+            .trend-text {
+                color: green;
+                margin-left: 6px;
+                margin-right: 6px;
+                hyphens: auto;
+            }
         }
 
         .split-columns ion-item:nth-child(1) {
             margin-right: 2px;
             flex: 1 1 56%;
+            height: 100%;
         }
 
         .split-columns ion-item:nth-child(2) {
