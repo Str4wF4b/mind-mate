@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { IonModal, MenuController } from '@ionic/angular';
 import { UserDataService } from 'src/app/services/user-data.service';
-import { LayoutManager } from 'src/app/utils/layout-manager.';
+import { LayoutManager } from 'src/app/utils/layout-manager';
 
 @Component({
   selector: 'app-side-menu',
