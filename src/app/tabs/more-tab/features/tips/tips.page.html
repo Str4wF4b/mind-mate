@@ -10,23 +10,16 @@
 <ion-content [fullscreen]="true">
   <ion-list lines="none">
 
-    <ion-item color="transparent" button routerLink="/more-tab/tips/stay-calm">
+    <div *ngFor="let tip of allTips">
+      <ion-item color="transparent" button routerLink="{{ tip.routerLink }}">
       <ion-row>
         <ion-avatar item-start>
-          <img src="assets/images/penguins/penguin_waves.png">
+          <img src="{{ tip.image }}">
         </ion-avatar>
-        <h2>Stay calm</h2>
+        <h2> {{ tip.title }} </h2>
       </ion-row>
     </ion-item>
-
-    <ion-item color="transparent" button routerLink="/more-tab/tips/concentrate">
-      <ion-row>
-        <ion-avatar item-start>
-          <img src="assets/images/penguins/penguin_waves.png">
-        </ion-avatar>
-        <h2>Concentrate</h2>
-      </ion-row>
-    </ion-item>
+    </div>
 
   </ion-list>
 </ion-content>
