@@ -7,12 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MindpediaPage implements OnInit {
 
-  public diseaseData = [
-    'Depression',
-    'Schizophrenia',
-    'Bipolar Disorder',
-    'PTSD',
-    'Obsessive Compulsive Disorder'
+  public diseaseData: { title: string, routerLink: string }[] = [
+    { title: 'Depression', routerLink: '/more-tab/mindpedia/depression' },
+    { title: 'Schizophrenia', routerLink: '/more-tab/mindpedia/schizophrenia' },
+    { title: 'Bipolar Disorder', routerLink: '/more-tab/mindpedia/bipolar-disorder' },
+    { title: 'PTSD', routerLink: '/more-tab/mindpedia/ptsd' },
+    { title: 'Obsessive Compulsive Disorder', routerLink: 'ocd' },
   ];
 
   public results = [...this.diseaseData];
@@ -23,7 +23,7 @@ export class MindpediaPage implements OnInit {
 
   handleInput(event:any) {
     const query = event.target.value.toLowerCase();
-    this.results = this.diseaseData.filter((d) => d.toLowerCase().indexOf(query) > -1);
+    this.results = this.diseaseData.filter((d) => d.title.toLowerCase().indexOf(query) > -1);
   }
 
 
