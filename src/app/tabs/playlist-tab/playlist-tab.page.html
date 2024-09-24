@@ -47,61 +47,15 @@
 
     <div>
       <ion-list lines="none" class="playlist-list">
-
-        <ion-item color="transparent">
-          <!-- routerLink="/more-tab/tips" -->
-          <img class="playlist-pictures" src="assets/images/playlists/girl_meditating.png">
-          <ion-label>
-            <h2>Calm Down</h2>
-            <p>Time to relax and rest</p>
-          </ion-label>
-        </ion-item>
-
-        <ion-item color="transparent">
-          <!-- routerLink="/more-tab/tips" -->
-          <img class="playlist-pictures" src="assets/images/playlists/girl_work.png">
-          <ion-label>
-            <h2>Work & Focus</h2>
-            <p>Start enjoying your work again</p>
-          </ion-label>
-        </ion-item>
-
-        <ion-item color="transparent">
-          <!-- routerLink="/more-tab/tips" -->
-          <img class="playlist-pictures" src="assets/images/playlists/boy_running.png">
-          <ion-label>
-            <h2>Moving</h2>
-            <p>Move and feel better</p>
-          </ion-label>
-        </ion-item>
-
-        <ion-item color="transparent">
-          <!-- routerLink="/more-tab/tips" -->
-          <img class="playlist-pictures" src="assets/images/playlists/landscape.png">
-          <ion-label>
-            <h2>Ambiente</h2>
-            <p>Calm & atmospheric music fitting your mood</p>
-          </ion-label>
-        </ion-item>
-
-        <ion-item color="transparent">
-          <!-- routerLink="/more-tab/tips" -->
-          <img class="playlist-pictures" src="assets/images/playlists/girl_sleeping.png">
-          <ion-label>
-            <h2>Sleep</h2>
-            <p>Right atmosphere to fall asleep</p>
-          </ion-label>
-        </ion-item>
-
-        <ion-item color="transparent">
-          <!-- routerLink="/more-tab/tips" -->
-            <img class="playlist-pictures" src="assets/images/playlists/boy_free-your-mind.png">
-          <ion-label>
-            <h2>Free Your Mind</h2>
-            <p>Forget your thoughts for some minutes</p>
-          </ion-label>
-        </ion-item>
-
+        <div *ngFor="let playlist of playlists">
+          <ion-item color="red" routerLink="{{ playlist.routerLink }}">
+            <img class="playlist-pictures" src="assets/images/playlists/{{ playlist.imageSrc }}">
+            <ion-label>
+              <h2>{{ playlist.title }}</h2>
+              <p>{{ playlist.caption }}</p> 
+            </ion-label>
+          </ion-item>
+        </div>
       </ion-list>
     </div>
 

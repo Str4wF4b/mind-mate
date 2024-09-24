@@ -1,0 +1,33 @@
+<ion-content [fullscreen]="true">
+  <ion-row class="header">
+    <ion-col size="auto">
+      <ion-buttons (click)="goBack()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </ion-buttons>
+    </ion-col>
+    <ion-col>
+      <div class="title">
+        <ion-label>Free Your Mind</ion-label>
+      </div>
+    </ion-col>
+  </ion-row>
+
+  <div class="audio-container">
+    <audio id="freeYourMindSongs" width="320" height="240" controls>
+      <source src="assets/songs/free-your-mind/Echoes-of-the-Night-Dusk_FreeSoundServer.mp3" type="audio/mpeg">
+    </audio>
+  </div>
+
+  <ion-button (click)="playSong()">
+    <ion-icon name="play-circle"></ion-icon>
+  </ion-button>
+  <ion-button (click)="pauseSong()">
+    <ion-icon name="pause-circle"></ion-icon>
+  </ion-button>
+  <ion-button (click)="previousSong()">
+    <ion-icon name="play-skip-back-circle"></ion-icon>
+  </ion-button>
+  <ion-button (click)="nextSong()">
+    <ion-icon name="play-skip-forward-circle"></ion-icon>
+  </ion-button>
+</ion-content>
