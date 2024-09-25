@@ -21,6 +21,7 @@ export class EditProfileComponent implements OnInit {
   newUsername: string = '';
   newEmail: string = '';
   newPassword: string = '';
+  passwordError: boolean = false;
   form!: FormGroup;
   isPwd: boolean = false;
   profileImage: string /* | ArrayBuffer */ | null | undefined = null;
@@ -92,6 +93,13 @@ export class EditProfileComponent implements OnInit {
         console.error('Camera issue:', error);
       }
     }
+  }
+
+  /**
+   * Checks if the new password is too short
+   */
+  checkPasswordLength() {
+    this.passwordError = this.newPassword.length < 8;
   }
 
   /**

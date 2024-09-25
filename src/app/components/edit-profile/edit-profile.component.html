@@ -55,12 +55,16 @@
         placeholder="Change Password"
         [clearInput]="true"
         [(ngModel)]="newPassword"
+        (ngModelChange)="checkPasswordLength()"
         minlength="8"
         ngModel>
         <ion-button slot="end" fill="clear" (click)="togglePwd()">
           <ion-icon class="pwd-eye" slot="icon-only" [name]="isPwd ? 'eye-off' : 'eye'"></ion-icon>
         </ion-button>
       </ion-input>
+      <div *ngIf="passwordError" class="error-text">
+        <small>Password is too short</small>
+      </div>
   </div>
 
   <div class="save-button">
