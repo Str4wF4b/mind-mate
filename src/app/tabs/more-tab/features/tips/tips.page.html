@@ -12,13 +12,13 @@
 
     <div *ngFor="let tip of allTips">
       <ion-item color="transparent" button routerLink="{{ tip.routerLink }}">
-      <ion-row>
-        <ion-avatar item-start>
-          <img src="{{ tip.image }}">
-        </ion-avatar>
-        <h2> {{ tip.title }} </h2>
-      </ion-row>
-    </ion-item>
+        <ion-row>
+          <ion-avatar item-start>
+            <img src="{{ tip.image }}">
+          </ion-avatar>
+          <h2> {{ tip.title }} </h2>
+        </ion-row>
+      </ion-item>
     </div>
 
   </ion-list>

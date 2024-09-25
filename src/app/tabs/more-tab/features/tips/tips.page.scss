@@ -20,19 +20,25 @@ ion-content {
 
     ion-list {
         background-color: transparent;
-        
+
         ion-item {
             margin-top: 15px;
             margin-bottom: 20px;
             padding-top: 10px;
             padding-bottom: 10px;
-            background-color: rgb(123, 195, 255);;
+            background-color: rgb(123, 195, 255);
             border-radius: 35px;
 
-            img {
-                height: 80%;
-                width: auto;
-                margin-top: 5px;
+            ion-avatar {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                img {
+                    height: 80%;
+                    width: auto;
+                    margin-top: 5px;
+                }
             }
 
             h2 {
