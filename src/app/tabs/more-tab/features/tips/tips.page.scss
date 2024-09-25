@@ -33,11 +33,13 @@ ion-content {
                 display: flex;
                 justify-content: center;
                 align-items: center;
+                border-radius: 0;
 
                 img {
+                    object-fit: scale-down;
                     height: 80%;
                     width: auto;
-                    margin-top: 5px;
+                    border-radius: 0;
                 }
             }
 
