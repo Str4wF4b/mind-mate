@@ -25,6 +25,7 @@ export class EditProfileComponent implements OnInit {
   form!: FormGroup;
   isPwd: boolean = false;
   profileImage: string /* | ArrayBuffer */ | null | undefined = null;
+  resetProfileImage: boolean = false;
 
   @ViewChild('fileInput') fileInput: any;
 
@@ -60,6 +61,14 @@ export class EditProfileComponent implements OnInit {
           icon: 'camera',
           handler: () => {
             this.takePhoto(CameraSource.Camera);
+          }
+        },
+        {
+          text: 'Remove Image',
+          icon: 'trash',
+          handler: () => {
+            this.resetProfileImage = true;
+            this.profileImage = null;
           }
         }
       ]
@@ -113,6 +122,12 @@ export class EditProfileComponent implements OnInit {
     if (this.profileImage) {
       this.userDataService.setProfileImage(this.profileImage);
       isChanged = true; // active changes
+    }
+
+    // check if profile image is removed:
+    if (this.resetProfileImage) {
+      isChanged = true; // active changes
+      this.resetProfileImage = false; // reset profile image removed
     }
 
     // update username placeholder on change:
