@@ -60,18 +60,17 @@ ion-content {
 
     .changes-image {
         display: block;
-        margin: 60% auto 0 auto;
+        margin: 50% auto 0 auto;
         width: 80%;
         height: auto;
     }
-
 }
 
 ion-select-popover {
-    --width: 300px; /* Passe die Breite des Popovers an */
+    --width: 300px;
 }
 
 ion-select-popover .popover-content {
     white-space: normal;
-    word-break: break-word; /* Lange Texte umbrechen */
+    word-break: break-word;
 }
