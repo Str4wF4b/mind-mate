@@ -25,6 +25,7 @@ export class EditProfileComponent implements OnInit {
   form!: FormGroup;
   isPwd: boolean = false;
   profileImage: string /* | ArrayBuffer */ | null | undefined = null;
+  currentProfileImage: string | null | undefined = null;
   resetProfileImage: boolean = false;
 
   @ViewChild('fileInput') fileInput: any;
@@ -118,11 +119,12 @@ export class EditProfileComponent implements OnInit {
   async saveChanges() {
     let isChanged = false; // flag to track active changes
 
-    // update profile image:
-    if (this.profileImage) {
+    if (this.profileImage && this.profileImage !== this.currentProfileImage) {
       this.userDataService.setProfileImage(this.profileImage);
-      isChanged = true; // active changes
+      isChanged = true;
     }
+
+    this.currentProfileImage = this.profileImage;
 
     // check if profile image is removed:
     if (this.resetProfileImage) {
@@ -140,6 +142,8 @@ export class EditProfileComponent implements OnInit {
       console.log(this.userDataService.getUsername);
     }
 
+    console.log('Here ' + this.newEmail.includes('@') + this.newEmail);
+
     // update email placeholder on change:
     if (this.email !== '' && this.newEmail !== '' && this.newEmail.includes('@')) {
       this.userDataService.setEmail(this.newEmail); // new input is new email
@@ -153,6 +157,8 @@ export class EditProfileComponent implements OnInit {
       isChanged = true; // active changes
       this.newPassword = ''; // reset new password
     }
+
+    console.log(isChanged);
 
     if (isChanged) {
       const usernameToast = await this.toastController.create({
@@ -171,6 +177,8 @@ export class EditProfileComponent implements OnInit {
       });
       await noChangesToast.present();
     }
+
+    isChanged = false;
   }
 
   /**
