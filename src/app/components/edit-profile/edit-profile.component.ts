@@ -24,9 +24,10 @@ export class EditProfileComponent implements OnInit {
   passwordError: boolean = false;
   form!: FormGroup;
   isPwd: boolean = false;
-  profileImage: string /* | ArrayBuffer */ | null | undefined = null;
+  profileImage: string | null | undefined = null;
   currentProfileImage: string | null | undefined = null;
   resetProfileImage: boolean = false;
+  isChanged: boolean = false; // flag to track active changes
 
   @ViewChild('fileInput') fileInput: any;
 
@@ -40,6 +41,7 @@ export class EditProfileComponent implements OnInit {
 
   ngOnInit() {
     this.profileImage = this.userDataService.getProfileImage();
+    this.currentProfileImage = this.profileImage; // save current profile image
     this.usernamePlaceholder = this.userDataService.getUsername();
     this.emailPlaceholder = this.userDataService.getEmail(); // get current email user has logged in or signed up with
     console.log('Username Modal: ', this.username);
@@ -86,8 +88,10 @@ export class EditProfileComponent implements OnInit {
       });
 
       this.profileImage = image.dataUrl;
-      if (this.profileImage !== undefined) {
+
+      if (this.profileImage !== undefined && this.profileImage !== this.currentProfileImage) {
         this.userDataService.setProfileImage(this.profileImage);
+        this.isChanged = true;
       }
       //console.log('Profile Image URL:', this.profileImage);
     } catch (error: any) {
@@ -97,7 +101,7 @@ export class EditProfileComponent implements OnInit {
           message: 'Photo selection cancelled.',
           duration: 2000,
           color: 'undefined',
-          cssClass: 'success-toast'
+          cssClass: 'warning-toast'
         });
         await toast.present();
       } else {
@@ -117,18 +121,18 @@ export class EditProfileComponent implements OnInit {
    * Handles saving of user changes and updates placeholders if fields are changed
    */
   async saveChanges() {
-    let isChanged = false; // flag to track active changes
+    //let isChanged = false; // flag to track active changes
 
-    if (this.profileImage && this.profileImage !== this.currentProfileImage) {
-      this.userDataService.setProfileImage(this.profileImage);
-      isChanged = true;
-    }
+    // if (this.profileImage && this.profileImage !== this.currentProfileImage) {
+    //   this.userDataService.setProfileImage(this.profileImage);
+    //   this.isChanged = true;
+    // }
 
     this.currentProfileImage = this.profileImage;
 
     // check if profile image is removed:
     if (this.resetProfileImage) {
-      isChanged = true; // active changes
+      this.isChanged = true; // active changes
       this.resetProfileImage = false; // reset profile image removed
     }
 
@@ -136,7 +140,7 @@ export class EditProfileComponent implements OnInit {
     if (this.newUsername && this.newUsername.trim() !== '') {
       this.userDataService.setUsername(this.newUsername); // new input is new username
       this.usernamePlaceholder = this.newUsername; // update placeholder
-      isChanged = true; // active changes
+      this.isChanged = true; // active changes
       console.log(this.newUsername);
       this.newUsername = ''; // reset new username
       console.log(this.userDataService.getUsername);
@@ -148,19 +152,19 @@ export class EditProfileComponent implements OnInit {
     if (this.email !== '' && this.newEmail !== '' && this.newEmail.includes('@')) {
       this.userDataService.setEmail(this.newEmail); // new input is new email
       this.emailPlaceholder = this.newEmail; // update placeholder
-      isChanged = true; // active changes
+      this.isChanged = true; // active changes
       this.newEmail = ''; // reset new email
     }
 
     // update password:
     if (this.password !== '' && this.newPassword.length > 7) {
-      isChanged = true; // active changes
+      this.isChanged = true; // active changes
       this.newPassword = ''; // reset new password
     }
 
-    console.log(isChanged);
+    console.log(this.isChanged);
 
-    if (isChanged) {
+    if (this.isChanged) {
       const usernameToast = await this.toastController.create({
         message: 'Changes saved successfully!',
         duration: 2000,
@@ -178,7 +182,7 @@ export class EditProfileComponent implements OnInit {
       await noChangesToast.present();
     }
 
-    isChanged = false;
+    this.isChanged = false;
   }
 
   /**
