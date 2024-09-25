@@ -15,7 +15,19 @@ ion-menu {
         --height: 23.5%
     }
     
-    --width: var(--screen-width, 40%);
+    //--width: var(--screen-width, 40%);
+
+     @media (min-width: 351px) {
+        --width: var(--screen-width, 44%);
+    }
+
+    @media (min-width: 376px) {
+        --width: var(--screen-width, 42%);
+    }
+
+    @media (min-width: 410px) {
+        --width: var(--screen-width, 40%);
+    }
     
 
     .home-menu-content {
