@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { ModalController } from '@ionic/angular';
+import { ModalController, ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-reset-password',
@@ -17,7 +17,7 @@ export class ResetPasswordComponent implements OnInit {
   code: string = '';
   flag: number = 1;
 
-  constructor(private modalController: ModalController) { }
+  constructor(private modalController: ModalController, private toastController: ToastController) { }
 
   ngOnInit() { }
 
@@ -61,5 +61,13 @@ export class ResetPasswordComponent implements OnInit {
 
   async closeModal() {
     await this.modalController.dismiss();
+
+    const toast = await this.toastController.create({
+      message: 'Password changed successfully.',
+      duration: 2000,
+      color: 'undefined',
+      cssClass: 'success-toast'
+    });
+    await toast.present();
   }
 }

@@ -86,7 +86,8 @@ export class EditProfileComponent implements OnInit {
         const toast = await this.toastController.create({
           message: 'Photo selection cancelled.',
           duration: 2000,
-          color: 'warning'
+          color: 'undefined',
+          cssClass: 'success-toast'
         });
         await toast.present();
       } else {
@@ -142,14 +143,16 @@ export class EditProfileComponent implements OnInit {
       const usernameToast = await this.toastController.create({
         message: 'Changes saved successfully!',
         duration: 2000,
-        color: 'success'
+        color: 'undefined',
+        cssClass: 'success-toast'
       });
       await usernameToast.present();
     } else {
       const noChangesToast = await this.toastController.create({
         message: 'No changes to save.',
         duration: 2000,
-        color: 'warning'
+        color: 'undefined',
+        cssClass: 'warning-toast'
       });
       await noChangesToast.present();
     }
