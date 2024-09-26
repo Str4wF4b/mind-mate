@@ -4,8 +4,6 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    //loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
-    //loadChildren: () => import('./pages/loader/loader.module').then(m => m.LoaderPageModule)
     redirectTo: 'auth-main', pathMatch: 'full'
   },
   {
@@ -15,6 +13,10 @@ const routes: Routes = [
   {
     path: 'tabs',
     loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
+  },
+  {
+    path: 'playlist-tab',
+    loadChildren: () => import('./tabs/playlist-tab/playlist-tab.module').then(m => m.PlaylistTabPageModule)
   },
   {
     path: 'more-tab',
