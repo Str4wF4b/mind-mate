@@ -16,6 +16,7 @@ export class ResetPasswordComponent implements OnInit {
 
   code: string = '';
   flag: number = 1;
+  isPwd: boolean = false;
 
   constructor(private modalController: ModalController, private toastController: ToastController) { }
 
@@ -57,6 +58,10 @@ export class ResetPasswordComponent implements OnInit {
     }
 
     return data;
+  }
+
+  togglePwd() {
+    this.isPwd = !this.isPwd; // toggle password visibility
   }
 
   async closeModal() {
