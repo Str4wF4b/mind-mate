@@ -100,7 +100,7 @@ ion-toolbar {
             .no-mood {
                 color: azure;
                 font-size: 17px;
-                font-weight: 500;
+                font-weight: normal;
                 margin: 0;
 
                 @media (max-width: 398px) {
@@ -221,64 +221,45 @@ ion-toolbar {
 
 
     .questionnaire-img {
-        width: 80px;
-        height: auto;
+        width: 80%;
         margin-left: 10px;
         margin-top: 10px;
 
         @media (max-width: 386px) {
-            width: 75px;
+            margin-left: 7px;
         }
 
         @media (max-width: 381px) {
             margin-top: 12px;
-            width: 70px;
+            margin-left: 7px;
         }
 
         @media (max-width: 370px) {
             margin-top: 14px;
             margin-left: 7px;
-            width: 68px;
         }
 
         @media (max-width: 364px) {
             margin-top: 16px;
             margin-left: 6px;
-            width: 65px;
         }
 
         @media (max-width: 356px) {
             margin-top: 16px;
             margin-left: 4px;
         }
+
+        @media (max-width: 342px) {
+            margin-top: 16px;
+            margin-left: 3px;
+        }
     }
 
     .penguin-reading {
-        width: 38px;
-        height: auto;
+        width: 80%;
         margin-top: 50px;
         margin-right: 8px;
         margin-left: 0;
-
-        @media (max-width: 392px) {
-            width: 35px;
-        }
-
-        @media (max-width: 387px) {
-            width: 32px;
-        }
-
-        @media (max-width: 372px) {
-            width: 30px;
-        }
-
-        @media (max-width: 364px) {
-            width: 28px;
-        }
-
-        @media (max-width: 346px) {
-            width: 26px;
-        }
     }
 
     .mood-card,
