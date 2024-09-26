@@ -17,6 +17,7 @@ export class AuthMainPage implements OnInit {
   }
 
   ngOnInit() {
+    this.segmentValue = '1';
   }
 
   segmentChanged(event: any) {

@@ -46,6 +46,5 @@ export class LoginComponent  implements OnInit {
   }
 
   reset(event: any) {
-    
   }
 }

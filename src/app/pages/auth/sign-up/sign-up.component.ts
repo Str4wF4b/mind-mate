@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { UserDataService } from 'src/app/services/user-data.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -15,7 +16,7 @@ export class SignUpComponent implements OnInit {
   isConfirmPwd: boolean = false;
 
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private userDataService: UserDataService) {
     this.initForm();
   }
 
@@ -93,9 +94,10 @@ export class SignUpComponent implements OnInit {
       this.signUpForm.markAllAsTouched(); // showing all errors
       return;
     } else {
+      this.userDataService.setUsername('User');
+      this.userDataService.setEmail(this.signUpForm.value.email); // save email for later use
       this.router.navigate(['/tabs']);
     }
     console.log(this.signUpForm.value); 
   }
-
 }
