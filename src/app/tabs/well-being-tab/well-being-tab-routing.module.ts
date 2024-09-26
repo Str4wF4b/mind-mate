@@ -8,10 +8,6 @@ const routes: Routes = [
     path: '',
     component: WellBeingTabPage
   },
-  {
-    path: 'device',
-    loadChildren: () => import('./device/device.module').then(m => m.DevicePageModule)
-  },
 ];
 
 @NgModule({
