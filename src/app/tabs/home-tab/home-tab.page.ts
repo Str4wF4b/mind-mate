@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { Chart } from 'chart.js';
 import { UserDataService } from 'src/app/services/user-data.service';
-import { LayoutManager } from 'src/app/utils/layout-manager.';
+import { LayoutManager } from 'src/app/utils/layout-manager';
 
 @Component({
   selector: 'app-home-tab',
@@ -14,7 +13,6 @@ export class HomeTabPage implements OnInit {
   username!: string;
   profileImage: string | null | undefined = null;
   selectedUserFeeling: string = 'empty';
-
 
   constructor(
     private navCtrl: NavController,
