@@ -36,6 +36,10 @@ ion-toolbar {
         @media (max-width: 352px) {
             font-size: 16px;
         }
+
+        @media (max-width: 344px) {
+            font-size: 15.75px;
+        }
     }
 
     ion-buttons {
