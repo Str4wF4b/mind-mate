@@ -15,6 +15,9 @@ export class CalmDownPage implements OnInit {
   recentSong: string = '';
   recentTitle: string = '';
   recentArtist: string = '';
+  recentCalmDownSong: string = '';
+  recentCalmDownTitle: string = '';
+  recentCalmDownArtist: string = '';
   isRecentSong: boolean = false;
   @ViewChild('audioPlayer', { static: false }) audioPlayer!: ElementRef<HTMLAudioElement>;
   duration: number = 0;
@@ -50,7 +53,7 @@ export class CalmDownPage implements OnInit {
   ngOnInit() {
     this.addEventListener();
     this.loadRecentSong();
-    this.laodCustomPlaylist();
+    this.loadCustomPlaylist();
   }
 
   segmentChanged(event: any) {
@@ -63,7 +66,7 @@ export class CalmDownPage implements OnInit {
 
   playFirstSong() {
     if (this.isRecentSong) {
-      const song = { title: this.recentTitle, artist: this.recentArtist, songUrl: this.recentSong };
+      const song = { title: this.recentCalmDownTitle, artist: this.recentCalmDownArtist, songUrl: this.recentCalmDownSong };
       if (this.isCustomList) {
         this.playCustomSong(song, this.customSongs.findIndex(s => s.songUrl === song.songUrl));
       } else {
@@ -182,10 +185,13 @@ export class CalmDownPage implements OnInit {
     localStorage.setItem('recentSong', song.songUrl);
     localStorage.setItem('recentTitle', song.title);
     localStorage.setItem('recentArtist', song.artist);
+    localStorage.setItem('recentCalmDownSong', song.songUrl);
+    localStorage.setItem('recentCalmDownTitle', song.title);
+    localStorage.setItem('recentCalmDownArtist', song.artist);
 
-    this.recentSong = song.songUrl;
-    this.recentTitle = song.title;
-    this.recentArtist = song.artist;
+    this.recentCalmDownSong = song.songUrl;
+    this.recentCalmDownTitle = song.title;
+    this.recentCalmDownArtist = song.artist;
     this.isRecentSong = true;
 
     this.userDataService.saveRecentSong(song);
@@ -213,14 +219,14 @@ export class CalmDownPage implements OnInit {
   }
 
   loadRecentSong() {
-    const savedSong = localStorage.getItem('recentSong');
-    const savedTitle = localStorage.getItem('recentTitle');
-    const savedArtist = localStorage.getItem('recentArtist');
+    const savedSong = localStorage.getItem('recentCalmDownSong');
+    const savedTitle = localStorage.getItem('recentCalmDownTitle');
+    const savedArtist = localStorage.getItem('recentCalmDownArtist');
 
     if (savedSong && savedTitle && savedArtist) {
-      this.recentSong = savedSong;
-      this.recentTitle = savedTitle;
-      this.recentArtist = savedArtist;
+      this.recentCalmDownSong = savedSong;
+      this.recentCalmDownTitle = savedTitle;
+      this.recentCalmDownArtist = savedArtist;
       this.currentSongNumber = this.songs.findIndex(song => song.songUrl === savedSong);
       this.isRecentSong = true;
     } else {
@@ -269,7 +275,7 @@ export class CalmDownPage implements OnInit {
     }
   }
 
-  laodCustomPlaylist() {
+  loadCustomPlaylist() {
     const savedCustomSongs = localStorage.getItem('customSongs');
     if (savedCustomSongs) {
         this.customSongs = JSON.parse(savedCustomSongs);

@@ -104,9 +104,21 @@
 
                   <ion-card-content>
                     <ion-row class="act-row">
-                      <ion-icon name="pause-circle" size="large"></ion-icon>
-                      <ion-icon name="stop-circle" size="large"></ion-icon>
-                      <ion-icon name="play-circle" size="large"></ion-icon>
+                      <ion-label *ngIf="recentTitle && recentArtist">
+                        <div class="song-details">
+                          <p class="title">
+                            <ion-icon name="play-circle" slot="end"></ion-icon>
+                            <b>{{ recentTitle }}</b> 
+                          </p>
+                          <p class="artist">{{ recentArtist }}</p>
+                        </div>
+                      </ion-label>
+                      <ion-label class="start-playing-container" *ngIf="!recentTitle || !recentArtist">
+                        <p class="start-playing">
+                          <ion-icon name="play"></ion-icon>
+                          Enjoy some Music
+                        </p>
+                      </ion-label>
                     </ion-row>
                   </ion-card-content>
                 </ion-col>
@@ -180,7 +192,5 @@
       </ion-grid>
 
     </div>
-
-    <!-- <app-edit-profile *ngIf="showEditProfile"></app-edit-profile> -->
   </ion-content>
 </div>

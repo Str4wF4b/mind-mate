@@ -41,6 +41,8 @@ export class LoginComponent  implements OnInit {
       this.userDataService.setUsername('User');
       this.userDataService.setEmail(this.form.value.email); // save email for later use
       this.router.navigate(['/tabs']);
+      this.userDataService.saveRecentSong({ title: '', artist: '', songUrl: '' });
+      localStorage.setItem('customSongs', JSON.stringify([]));
     }
     console.log(this.form.value);
   }

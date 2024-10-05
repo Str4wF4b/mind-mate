@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { FreeYourMindPageRoutingModule } from './free-your-mind-routing.module';
 
 import { FreeYourMindPage } from './free-your-mind.page';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    FreeYourMindPageRoutingModule
+    FreeYourMindPageRoutingModule,
+    SharedModule
   ],
   declarations: [FreeYourMindPage]
 })

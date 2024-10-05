@@ -16,7 +16,9 @@ export class SignUpComponent implements OnInit {
   isConfirmPwd: boolean = false;
 
 
-  constructor(private router: Router, private userDataService: UserDataService) {
+  constructor(
+    private router: Router, 
+    private userDataService: UserDataService) {
     this.initForm();
   }
 
@@ -90,13 +92,15 @@ export class SignUpComponent implements OnInit {
   }
 
   onSubmit() {
-    if (this.signUpForm.invalid) {
+    if (this.signUpForm.invalid) { 
       this.signUpForm.markAllAsTouched(); // showing all errors
       return;
     } else {
       this.userDataService.setUsername('User');
       this.userDataService.setEmail(this.signUpForm.value.email); // save email for later use
       this.router.navigate(['/tabs']);
+      this.userDataService.saveRecentSong({ title: '', artist: '', songUrl: '' });
+      localStorage.setItem('customSongs', JSON.stringify([]));
     }
     console.log(this.signUpForm.value); 
   }

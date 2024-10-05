@@ -13,6 +13,9 @@ export class HomeTabPage implements OnInit {
   username!: string;
   profileImage: string | null | undefined = null;
   selectedUserFeeling: string = 'empty';
+  recentTitle = '';
+  recentArtist = '';
+  isLoggedIn: boolean = false;
 
   constructor(
     private navCtrl: NavController,
@@ -30,12 +33,21 @@ export class HomeTabPage implements OnInit {
     this.userDataService.selectedFeeling$.subscribe((feeling) => {
       this.selectedUserFeeling = feeling;
     });
+
+    this.isLoggedIn = true;
   }
 
   ngAfterViewInit() {
     this.createHeartRateChart();
     this.createActivityChart();
     new LayoutManager();
+  }
+
+  ionViewWillEnter() {
+    if (this.isLoggedIn) { // update title and artist only after the log in or sign up
+      this.recentTitle = this.userDataService.getRecentSong().title;
+      this.recentArtist = this.userDataService.getRecentSong().artist;
+    }
   }
 
   /**
@@ -46,7 +58,7 @@ export class HomeTabPage implements OnInit {
     this.navCtrl.navigateRoot(`/tabs/${tab}`);
   }
 
-  
+
   createHeartRateChart() {
     const ctx_hr = (document.getElementById('hr-trend-chart-home') as HTMLCanvasElement).getContext('2d');
 

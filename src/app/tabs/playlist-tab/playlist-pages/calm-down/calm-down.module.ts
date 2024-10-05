@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { CalmDownPageRoutingModule } from './calm-down-routing.module';
 
 import { CalmDownPage } from './calm-down.page';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    CalmDownPageRoutingModule
+    CalmDownPageRoutingModule,
+    SharedModule
   ],
   declarations: [CalmDownPage]
 })

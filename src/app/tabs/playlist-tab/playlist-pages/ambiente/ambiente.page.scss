@@ -1,32 +1,353 @@
+ion-toolbar {
+    --background: transparent;
+    --border-color: transparent;
+    position: absolute;
+
+    ion-title {
+        color: black;
+        font-weight: 600;
+    }
+
+    ion-buttons {
+        color: black;
+        font-size: large;
+    }
+}
+
 ion-content {
     --background: var(--ion-color-secondary);
+    --offset-top: 0px;
 
-    .header {
+    .header-background {
         background: url('/assets/images/playlists/playlist_ambiente.jpg') no-repeat center;
         background-size: cover;
+        position: absolute;
         height: 240px;
         border-end-start-radius: 100%;
         border-end-end-radius: 100%;
+        left: 0;
+        right: 0;
+    }
 
-        .title {
-            margin-top: 12px;
-            margin-left: 22px;
-            
-            ion-label {
+    .caption {
+        margin-top: 270px;
+        margin-left: 40px;
+        margin-right: 40px;
+        font-size: 18px;
+        color: black;
+        text-align: center;
+
+        p {
+            margin-top: 4px;
+            color: grey;
+            font-size: xx-small;
+        }
+    }
+
+    .recently-played {
+        margin-top: 70px;
+        margin-left: 20%;
+        margin-right: 20%;
+        background-color: rgb(56, 56, 56, 0.25);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border-radius: 20px;
+
+        h3 {
+            margin-top: 10px;
+            font-weight: bold;
+            color: black;
+
+            @media (max-width: 406px) {
+                font-size: 19.5px;
+            }
+
+            @media (max-width: 396px) {
+                font-size: 19.25px;
+            }
+
+            @media (max-width: 386px) {
+                font-size: 19px;
+            }
+
+            @media (max-width: 376px) {
+                font-size: 18.75px;
+            }
+
+            @media (max-width: 366px) {
+                font-size: 18.5px;
+            }
+
+            @media (max-width: 356px) {
+                font-size: 18.25px;
+            }
+        }
+
+        .playing {
+            color: #008000 !important;
+        }
+
+        .recently-played-content {
+            margin-top: -10px;
+            margin-bottom: 10px;
+            padding: 0 10px;
+            padding-top: 0;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            max-width: 100%;
+
+            .start-listening {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                margin-top: 5px;
+                margin-bottom: 0;
+
+                ion-icon {
+                    font-size: 20px;
+                    margin-top: 0;
+                    margin-right: 6px;
+                    color: black;
+                }
+
+                p {
+                    font-size: 17px;
+                    margin-left: 6px;
+                    color: black;
+                }
+            }
+
+            ion-icon {
+                font-size: 24px;
+                margin-top: 5px;
+                margin-right: 6px;
                 color: black;
+                flex-shrink: 0;
+            }
+
+            ion-label {
+                margin-top: 10px;
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
+
+                p {
+                    margin-left: 6px;
+                    color: black;
+                    font-size: small;
+                }
+
+                p::-webkit-scrollbar {
+                    display: none;
+                }
+
+                .title {
+                    margin-bottom: 0;
+                    white-space: nowrap;
+                }
+
+                .artist {
+                    margin-top: 0;
+                    white-space: nowrap;
+                }
+            }
+        }
+    }
+
+    ion-segment {
+        margin-top: 60px;
+        margin-left: 40px;
+        margin-right: 40px;
+        --margin-bottom: -15px;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+
+        ion-segment-button {
+            --color: rgb(56, 56, 56, 0.25);
+            font-weight: bold;
+            --color-checked: black;
+            --indicator-color: black;
+            text-transform: none;
+            width: 100px;
+        }
+    }
+
+    ion-list {
+        margin: 5px 20px 5px 20px;
+        background-color: rgb(56, 56, 56, 0.25); //rgba(255, 167, 2, 0.25);
+        border-radius: 30px;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+
+        ion-item {
+            margin-bottom: 5px;
+
+            .playlist-song {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+
+                ion-icon {
+                    font-size: 24px;
+                    color: black;
+                }
+
+                p {
+                    margin-left: 20px;
+                    color: black;
+                }
+
+                p::-webkit-scrollbar {
+                    display: none;
+                }
+
+                .title {
+                    margin-bottom: 4px;
+                    white-space: nowrap;
+                    overflow-x: scroll;
+                    text-overflow: scroll;
+                    max-width: 185px;
+
+                    @media (min-width: 330px) {
+                        max-width: 195px;
+                    }
+
+                    @media (min-width: 340px) {
+                        max-width: 205px;
+                    }
+
+                    @media (min-width: 350px) {
+                        max-width: 215px;
+                    }
+
+                    @media (min-width: 360px) {
+                        max-width: 225px;
+                    }
+
+                    @media (min-width: 370px) {
+                        max-width: 235px;
+                    }
+
+                    @media (min-width: 383px) {
+                        max-width: 245px;
+                    }
+
+                    @media (min-width: 393px) {
+                        max-width: 255px;
+                    }
+
+                    @media (min-width: 403px) {
+                        max-width: 265px;
+                    }
+
+                    @media (min-width: 407px) {
+                        max-width: 270px;
+                    }
+
+                    @media (min-width: 413px) {
+                        max-width: 280px;
+                    }
+
+                    @media (min-width: 430px) {
+                        max-width: 285px;
+                    }
+                }
+
+                .artist {
+                    margin-top: 4px;
+                }
+            }
+
+            .more-icon,
+            .remove-icon {
                 font-size: 20px;
-                font-weight: bold;
+                color: black;
+                margin-left: auto;
+            }
+        }
+
+        .current-song {
+            color: #008000 !important;
+        }
+
+        .current-song ion-icon,
+        .current-song p {
+            color: #008000 !important;
+        }
+
+        .current-song ion-icon {
+            transform: scale(1.2);
+        }
+    }
+}
+
+.controls-container {
+    background: rgb(123, 195, 255);
+
+}
+
+.controls {
+    background-color: rgb(123, 195, 255);
+    height: 95px;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 5px;
+
+    ion-row {
+        margin-bottom: 0;
+
+        p {
+            color: black;
+            margin-top: 0;
+            white-space: nowrap;
+            overflow: scroll;
+        }
+
+        p::-webkit-scrollbar {
+            display: none;
+        }
+
+        .icon-col {
+            max-width: 45%;
+
+            @media (max-width: 350px) {
+                max-width: 50%;
+            }
+        }
+
+        .song-col {
+            max-width: 55%;
+
+            @media (max-width: 350px) {
+                max-width: 50%;
             }
         }
 
         ion-icon {
+            font-size: 32px;
+            margin-left: 10px;
             color: black;
-            font-size: 23px;
-            align-items: center;
-            margin-top: 12px;
-            margin-left: 12px;
+            justify-content: flex-end;
+
+            @media (max-width: 363px) {
+                font-size: 30px;
+            }
         }
 
-        
+        .first-icon {
+            margin-left: 5px;
+        }
+    }
+
+    ion-range {
+        color: black;
+        margin-top: -30px;
+        margin-left: 20px;
+        margin-right: 20px;
+        --bar-height: 5px;
+        --bar-border-radius: 10px;
     }
 }

@@ -1,33 +1,101 @@
-<ion-content [fullscreen]="true">
-  <ion-row class="header">
-    <ion-col size="auto">
-      <ion-buttons (click)="goBack()">
-        <ion-icon name="arrow-back"></ion-icon>
-      </ion-buttons>
-    </ion-col>
-    <ion-col>
-      <div class="title">
-        <ion-label>Ambiente</ion-label>
-      </div>
-    </ion-col>
-  </ion-row>
+<ion-header class="ion-no-border">
+  <ion-toolbar #toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button icon="arrow-back"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Ambiente</ion-title>
+  </ion-toolbar>
+</ion-header>
 
-  <div class="audio-container">
-    <audio id="ambienteSongs" width="320" height="240" controls>
-      <source src="assets/songs/ambiente/Autumn-Fall_CalvinClavier.mp3" type="audio/mpeg">
-    </audio>
+  <ion-content [fullscreen]="true" [scrollEvents]="true" [appFadeHeader]="toolbar">
+  <div class="header-background"></div>
+
+  <div class="caption">
+    A calming environment can significantly reduce stress and anxiety, promoting overall well-being and mental
+    relaxation. <p class="source">healthline.com</p>
   </div>
 
-  <ion-button (click)="playSong()">
-    <ion-icon name="play-circle"></ion-icon>
-  </ion-button>
-  <ion-button (click)="pauseSong()">
-    <ion-icon name="pause-circle"></ion-icon>
-  </ion-button>
-  <ion-button (click)="previousSong()">
-    <ion-icon name="play-skip-back-circle"></ion-icon>
-  </ion-button>
-  <ion-button (click)="nextSong()">
-    <ion-icon name="play-skip-forward-circle"></ion-icon>
-  </ion-button>
+  <div class="recently-played">
+    <h3 [ngClass]="{ 'playing': isPlaying }">{{ isPlaying ? 'Playing ...' : 'Recently Played'}}</h3>
+    <div class="recently-played-content">
+      <ion-icon *ngIf="isRecentSong; else noSong" [name]="isPlaying ? 'musical-note' : 'play-circle'"
+        (click)="playFirstSong()"></ion-icon>
+
+      <ng-template #noSong>
+        <div class="start-listening" *ngIf="!isRecentSong" (click)="playFirstSong()">
+          <ion-icon *ngIf="!isRecentSong" name="play"></ion-icon>
+          <p *ngIf="!isRecentSong">Start listening...</p>
+        </div>
+      </ng-template>
+
+      <ion-label (click)="playFirstSong()">
+        <p class="title"><b>{{ recentAmbienteTitle }}</b></p>
+        <p class="artist">{{ recentAmbienteArtist }}</p>
+      </ion-label>
+    </div>
+  </div>
+
+  <ion-segment (ionChange)="segmentChanged($event)" mode="md" [value]="segmentValue" class="playlist-segment">
+    <ion-segment-button value="1">
+      <ion-label>Featured</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="2">
+      <ion-label>Custom</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+  <ion-list *ngIf="segmentValue == '1'" lines="none" class="featured-list">
+    <ion-item color="transparent" *ngFor="let song of songs" (click)="playSong(song)"
+      [ngClass]="{ 'current-song': currentSong === song.songUrl }" class="featured-item">
+      <div class="playlist-song">
+        <ion-icon name="musical-notes"></ion-icon>
+        <div>
+          <p class="title"><b>{{ song.title }}</b></p>
+          <p class="artist">{{ song.artist }}</p>
+        </div>
+      </div>
+      <ion-icon class="more-icon" (click)="presentActionSheet(song); $event.stopPropagation()" name="ellipsis-vertical"
+        slot="end"></ion-icon>
+    </ion-item>
+  </ion-list>
+  <ion-list *ngIf="segmentValue == '2'" lines="none" class="custom-list">
+    <ion-item color="transparent" *ngFor="let customSong of customSongs; let i = index" (click)="playCustomSong(customSong, i)"
+      [ngClass]="{ 'current-song': currentSong === customSong.songUrl }">
+      <div class="playlist-song">
+        <ion-icon name="musical-notes"></ion-icon>
+        <div>
+          <p class="title"><b>{{ customSong.title }}</b></p>
+          <p class="artist">{{ customSong.artist }}</p>
+        </div>
+      </div>
+      <ion-icon class="remove-icon" (click)="removeFromCustomPlaylist(customSong); $event.stopPropagation()"
+        name="remove-circle" slot="end"></ion-icon>
+    </ion-item>
+  </ion-list>
+
+  <div class="audio-container">
+    <audio #audioPlayer id="ambienteSongs" width="320" height="240">
+      <source [src]="currentSong" type="audio/mpeg">
+    </audio>
+  </div>
 </ion-content>
+
+<div class="controls-container">
+  <div class="controls" *ngIf="currentSong">
+    <ion-row class="ion-padding">
+      <ion-col class="song-col">
+        <ion-label>
+          <p><b>{{ currentTitle }}</b></p>
+          <p>{{ currentArtist }}</p>
+        </ion-label>
+      </ion-col>
+      <ion-col size="auto" class="icon-col">
+        <ion-icon class="first-icon" name="play-skip-back-circle" (click)="previousSong()"></ion-icon>
+        <ion-icon [name]="isPlaying ? 'pause-circle' : 'play-circle'" (click)="togglePlayPause()"></ion-icon>
+        <ion-icon name="play-skip-forward-circle" (click)="nextSong()"></ion-icon>
+      </ion-col>
+    </ion-row>
+    <ion-range [(ngModel)]="currentTime" min="0" [max]="duration" (ionChange)="goToTime($event)"
+      class="time-bar"></ion-range>
+  </div>
+</div>

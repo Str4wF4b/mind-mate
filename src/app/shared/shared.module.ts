@@ -8,6 +8,7 @@ import { Camera } from '@awesome-cordova-plugins/camera/ngx'
 import { SpecialistsInfoComponent } from '../components/specialists-info/specialists-info.component';
 import { SettingsComponent } from '../components/settings/settings.component';
 import { TimePickerComponent } from '../components/time-picker/time-picker.component';
+import { FadeHeaderDirective } from '../directives/fade-header.directive';
 
 
 
@@ -17,7 +18,9 @@ import { TimePickerComponent } from '../components/time-picker/time-picker.compo
     EditProfileComponent,
     SpecialistsInfoComponent,
     SettingsComponent,
-    TimePickerComponent],
+    TimePickerComponent,
+    FadeHeaderDirective
+    ],
   imports: [
     CommonModule,
     IonicModule,
@@ -29,6 +32,8 @@ import { TimePickerComponent } from '../components/time-picker/time-picker.compo
     EditProfileComponent,
     SpecialistsInfoComponent,
     SettingsComponent,
-    TimePickerComponent]
+    TimePickerComponent,
+    FadeHeaderDirective
+    ]
 })
 export class SharedModule { }

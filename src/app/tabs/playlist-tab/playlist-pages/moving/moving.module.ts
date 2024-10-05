@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { MovingPageRoutingModule } from './moving-routing.module';
 
 import { MovingPage } from './moving.page';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    MovingPageRoutingModule
+    MovingPageRoutingModule,
+    SharedModule
   ],
   declarations: [MovingPage]
 })

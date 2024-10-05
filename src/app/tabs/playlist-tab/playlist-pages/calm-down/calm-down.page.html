@@ -1,4 +1,6 @@
-<!-- <ion-header>
+<!-- Farbiger Header beim Scrollen:
+
+<ion-header>
   <ion-toolbar>
     <ion-buttons slot="start" (click)="goBack()">
       <ion-icon name="arrow-back"></ion-icon>
@@ -10,21 +12,40 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <div class="header-background"></div> -->
+  <div class="header-background"></div> 
+  
+-->
 
-<ion-content [fullscreen]="true">
-  <ion-row class="header">
-    <ion-col size="auto">
-      <ion-buttons (click)="goBack()">
-        <ion-icon name="arrow-back"></ion-icon>
-      </ion-buttons>
-    </ion-col>
-    <ion-col>
-      <div class="title">
-        <ion-label>Calm Down</ion-label>
-      </div>
-    </ion-col>
-  </ion-row>
+
+  <!-- Kein scrollable Header:
+   
+  <ion-content [fullscreen]="true">
+    <ion-row class="header">
+      <ion-col size="auto">
+        <ion-buttons (click)="goBack()">
+         <ion-icon name="arrow-back"></ion-icon>
+        </ion-buttons>
+      </ion-col>
+      <ion-col>
+        <div class="title">
+         <ion-label>Calm Down</ion-label>
+        </div>
+      </ion-col>
+    </ion-row> 
+    
+  -->
+
+<ion-header class="ion-no-border">
+  <ion-toolbar #toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button icon="arrow-back"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Calm Down</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+  <ion-content [fullscreen]="true" [scrollEvents]="true" [appFadeHeader]="toolbar">
+  <div class="header-background"></div>
 
   <div class="caption">
     Engaging in mindfulness practices like deep breathing or meditation can significantly reduce stress and anxiety
@@ -45,8 +66,8 @@
       </ng-template>
 
       <ion-label (click)="playFirstSong()">
-        <p class="title"><b>{{ recentTitle }}</b></p>
-        <p class="artist">{{ recentArtist }}</p>
+        <p class="title"><b>{{ recentCalmDownTitle }}</b></p>
+        <p class="artist">{{ recentCalmDownArtist }}</p>
       </ion-label>
     </div>
   </div>

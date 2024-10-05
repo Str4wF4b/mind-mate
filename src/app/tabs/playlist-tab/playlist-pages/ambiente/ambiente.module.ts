@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { AmbientePageRoutingModule } from './ambiente-routing.module';
 
 import { AmbientePage } from './ambiente.page';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    AmbientePageRoutingModule
+    AmbientePageRoutingModule,
+    SharedModule
   ],
   declarations: [AmbientePage]
 })

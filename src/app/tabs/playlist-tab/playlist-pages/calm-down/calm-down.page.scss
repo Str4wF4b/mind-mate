@@ -15,17 +15,17 @@
 // ion-header {
 //     position: relative; /* Wichtig, um die Reihenfolge von Header und Hintergrund zu kontrollieren */
 //     background: transparent; /* Hintergrund transparent machen, um das Bild zu sehen */
-  
+
 //     ion-toolbar {
 //       background: transparent; /* Toolbar auch transparent, um Bild durchscheinen zu lassen */
 //       color: black; /* Text und Icons schwarz färben */
-  
+
 //       ion-title {
 //         font-weight: bold;
 //         font-size: 20px;
 //         text-align: center;
 //       }
-  
+
 //       ion-icon {
 //         color: black;
 //         font-size: 23px;
@@ -47,39 +47,60 @@
 //     z-index: -1; /* Damit das Bild hinter dem Header bleibt */
 //   }
 
+ion-toolbar {
+    --background: transparent; // url('/assets/images/playlists/playlist_calm-down.jpg');
+    --border-color: transparent;
+    //background-size: cover;
+    position: absolute;
+
+    ion-title {
+        color: black;
+        font-weight: 600;
+    }
+
+    ion-buttons {
+        color: black;
+        font-size: large;
+    }
+}
+
 
 ion-content {
     --background: var(--ion-color-secondary);
+    --offset-top: 0px;
 
-    .header {
+    .header-background {
         background: url('/assets/images/playlists/playlist_calm-down.jpg') no-repeat center;
         background-size: cover;
+        position: absolute;
         height: 240px;
         border-end-start-radius: 100%;
         border-end-end-radius: 100%;
+        left: 0;
+        right: 0;
 
-        .title {
-            margin-top: 12px;
-            margin-left: 22px;
+        // .title {
+        //     margin-top: 12px;
+        //     margin-left: 22px;
 
-            ion-label {
-                color: black;
-                font-size: 20px;
-                font-weight: bold;
-            }
-        }
+        //     ion-label {
+        //         color: black;
+        //         font-size: 20px;
+        //         font-weight: bold;
+        //     }
+        // }
 
-        ion-icon {
-            color: black;
-            font-size: 23px;
-            align-items: center;
-            margin-top: 12px;
-            margin-left: 12px;
-        }
+        // ion-icon {
+        //     color: black;
+        //     font-size: 23px;
+        //     align-items: center;
+        //     margin-top: 12px;
+        //     margin-left: 12px;
+        // }
     }
 
     .caption {
-        margin-top: 30px;
+        margin-top: 270px;
         margin-left: 40px;
         margin-right: 40px;
         font-size: 18px;
@@ -107,6 +128,30 @@ ion-content {
             margin-top: 10px;
             font-weight: bold;
             color: black;
+
+            @media (max-width: 406px) {
+                font-size: 19.5px;
+            }
+
+            @media (max-width: 396px) {
+                font-size: 19.25px;
+            }
+
+            @media (max-width: 386px) {
+                font-size: 19px;
+            }
+
+            @media (max-width: 376px) {
+                font-size: 18.75px;
+            }
+
+            @media (max-width: 366px) {
+                font-size: 18.5px;
+            }
+
+            @media (max-width: 356px) {
+                font-size: 18.25px;
+            }
         }
 
         .playing {

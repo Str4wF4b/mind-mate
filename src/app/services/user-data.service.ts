@@ -20,6 +20,8 @@ export class UserDataService {
   private selectedFeelingSubject = new BehaviorSubject<string>('empty');
   selectedFeeling$ = this.selectedFeelingSubject.asObservable();
 
+  private recentSong: { title: string, artist: string, songUrl: string } = { title: '', artist: '', songUrl: '' };
+
   constructor() { 
     const savedUsername = localStorage.getItem('usernameStorage');
     if (savedUsername) {
@@ -64,6 +66,7 @@ export class UserDataService {
     this.setWeeklyQuestionnaireResult({ short: '', text: '', weight: 0 });
     this.setDailyQuestionnaireResult({ short: '', text: '', weight: 0 });
     this.setShortQuestionnaireResult({ short: '', text: '', weight: 0 });
+    localStorage.clear();
   }
 
   getProfileImage(): string /* | ArrayBuffer */ | null | undefined {
@@ -83,7 +86,7 @@ export class UserDataService {
 
   getWeeklyQuestionnaireResult(): { short: string, text: string, weight: number} {
     return this.weeklyQuestionnaireResult;
-  }
+  } 
 
   setDailyQuestionnaireResult(result: { short: string, text: string, weight: number}) {
     this.dailyQuestionnaireResult = result;
@@ -103,5 +106,14 @@ export class UserDataService {
 
   saveUserFeeling(feeling: string) {
     this.selectedFeelingSubject.next(feeling);
+  }
+
+  saveRecentSong(song: { title: string, artist: string, songUrl: string }) {
+    this.recentSong = song;
+    console.log(song);
+  }
+
+  getRecentSong() {
+    return this.recentSong;
   }
 }
