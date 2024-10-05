@@ -27,6 +27,30 @@ const routes: Routes = [
   {
     path: 'ocd',
     loadChildren: () => import('./mindpedia-pages/ocd/ocd.module').then( m => m.OcdPageModule)
+  },
+  {
+    path: 'panic-agrophobia',
+    loadChildren: () => import('./mindpedia-pages/panic-agrophobia/panic-agrophobia.module').then( m => m.PanicAgrophobiaPageModule)
+  },
+  {
+    path: 'gad',
+    loadChildren: () => import('./mindpedia-pages/gad/gad.module').then( m => m.GadPageModule)
+  },
+  {
+    path: 'sad',
+    loadChildren: () => import('./mindpedia-pages/sad/sad.module').then( m => m.SadPageModule)
+  },
+  {
+    path: 'eating-disorder',
+    loadChildren: () => import('./mindpedia-pages/eating-disorder/eating-disorder.module').then( m => m.EatingDisorderPageModule)
+  },
+  {
+    path: 'sexual-dysfunctions-paraphilias',
+    loadChildren: () => import('./mindpedia-pages/sexual-dysfunctions-paraphilias/sexual-dysfunctions-paraphilias.module').then( m => m.SexualDysfunctionsParaphiliasPageModule)
+  },
+  {
+    path: 'personality-disorder',
+    loadChildren: () => import('./mindpedia-pages/personality-disorder/personality-disorder.module').then( m => m.PersonalityDisorderPageModule)
   }
 
 ];

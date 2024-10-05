@@ -14,7 +14,8 @@
   </div>
 
   <ion-list lines="none" *ngFor="let result of results">
-    <ion-item color="transparent" routerLink="{{ result.routerLink }}">
+    <ion-item color="transparent" routerLink="{{ result.routerLink }}"
+      [ngClass]="{'sex-dys-para': result.title === 'Sexual Dysfunction & Paraphilias'}">
       <ion-label>{{ result.title }}</ion-label>
       <ion-icon slot="end" name="arrow-forward"></ion-icon>
     </ion-item>
