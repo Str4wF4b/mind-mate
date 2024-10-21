@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { Chart } from 'chart.js';
 import { UserDataService } from 'src/app/services/user-data.service';
-import { LayoutManager } from 'src/app/utils/layout-manager';
+//import { LayoutManager } from 'src/app/utils/layout-manager';
 
 @Component({
   selector: 'app-home-tab',
@@ -40,7 +40,7 @@ export class HomeTabPage implements OnInit {
   ngAfterViewInit() {
     this.createHeartRateChart();
     this.createActivityChart();
-    new LayoutManager();
+    //new LayoutManager();
   }
 
   ionViewWillEnter() {
