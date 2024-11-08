@@ -19,9 +19,10 @@ ion-content {
     --padding-end: 20px;
 
 
-
     p {
         color: black;
+        text-align: justify;
+        hyphens: auto;
     }
 
     .headlines {
