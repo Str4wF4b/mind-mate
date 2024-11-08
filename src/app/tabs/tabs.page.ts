@@ -8,22 +8,27 @@ import { AnimationController, MenuController } from '@ionic/angular';
 })
 export class TabsPage {
 
-  selectedTab: any;
-
-  constructor(private animationCtrl: AnimationController, private menuController: MenuController) { }
+  selectedTab: any; // the currently selected tab
 
   /**
+   * Constructor for TabsPage.
+   * Initializes the page with necessary controllers for animation and menu.
    * 
+   * @param animationCtrl The controller to manage animations.
+   * @param menuController The controller for managing the side menu.
    */
-  ngOnInit() {
-
+  constructor(
+    private animationCtrl: AnimationController,
+    private menuController: MenuController) {
   }
 
+  ngOnInit() { }
+
   /**
-   * Sets the selected tab as the current event tab
-   * and creates an animation for this tab
+   * Sets the currently selected tab and triggers a tab animation when switching.
+   * It also closes the menu if it was previously open.
    * 
-   * @param event The current tab
+   * @param event The event that contains the information about the current tab being selected.
    */
   setCurrentTab(event: any) {
     this.selectedTab = event.tab;
@@ -35,16 +40,17 @@ export class TabsPage {
     fadeInAnimation.keyframes([
       { offset: 0, transform: 'scale(1)' },
       { offset: 0.5, transform: 'scale(1.05)' },
-      { offset: 1, transform: 'scale(1) '}
+      { offset: 1, transform: 'scale(1) ' }
     ]);
     fadeInAnimation.play();
   }
 
   /**
-   * Creates a bouncing animation when changing tabs
+   * Creates a fade-in animation effect for the tab button when switching tabs.
+   * This function is responsible for defining the animation and its properties.
    * 
-   * @param baseEl The HTML element that is animated
-   * @returns AnimationController with animation of the tabButtons
+   * @param baseEl The HTML element (tab button) to animate.
+   * @returns The AnimationController instance that will manage the animation.
    */
   private fadeInAnimation(baseEl: HTMLElement) {
     console.log("hi");
@@ -53,5 +59,4 @@ export class TabsPage {
       .duration(300)
       .easing('ease-in-out');
   }
-
 }
