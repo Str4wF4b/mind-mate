@@ -7,12 +7,11 @@ import { IonModal } from '@ionic/angular';
   styleUrls: ['./search-specialists.page.scss'],
 })
 export class SearchSpecialistsPage implements OnInit {
-  @ViewChild('infoModal') infoModal!: IonModal;
+  @ViewChild('infoModal') infoModal!: IonModal; // accessing IonModal component
 
-  locationInput: String = '';
-  
-  selectedType: String = '';
-  types: { value: string, display: string} [] = [
+  locationInput: String = ''; // stores user input for location
+  selectedType: String = ''; // stores user input for type of specialist
+  types: { value: string, display: string} [] = [ // array of specialist types with their display names
     { value: 'psychiatrist', display: 'Psychiatrist' },
     { value: 'psychotherapist', display: 'Psychotherapist' },
     { value: 'psychologist', display: 'Psychologist' },
@@ -27,13 +26,20 @@ export class SearchSpecialistsPage implements OnInit {
   ngOnInit() {
   }
 
-  
+  /**
+   * Constructs a Google search URL based on the selected specialist type and location input.
+   * Opens a new window or tab to perform the search.
+   */
   openGoogleSearch() {
     const query = `${this.selectedType} ${this.locationInput}`;
     const url = `https://www.google.com/search?q=${encodeURIComponent(query)}`;
     window.open(url, 'type location');
   }
 
+  /**
+   * Opens the informational modal using the ViewChild reference.
+   * Presents more information related to the specialists' search functionality.
+   */
   openInfoModal() {
     this.infoModal.present();
   }

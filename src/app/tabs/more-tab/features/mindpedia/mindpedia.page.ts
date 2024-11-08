@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MindpediaPage implements OnInit {
 
+  // Array containing data about various mental health disorders:
   public diseaseData: { title: string, routerLink: string }[] = [
     { title: 'Depression', routerLink: 'depression' },
     { title: 'Schizophrenia', routerLink: 'schizophrenia' },
@@ -21,12 +22,18 @@ export class MindpediaPage implements OnInit {
     { title: 'Sexual Dysfunction & Paraphilias', routerLink: 'sexual-dysfunctions-paraphilias' }
   ];
 
+  // Array holding the search results of mental health disorders:
   public results = [...this.diseaseData];
 
   constructor() {}
 
   ngOnInit() {}
 
+  /**
+   * Handles user input for searching the mental health disorders.
+   * Filters the `diseaseData` array based on the query input and updates `results`.
+   * @param event The event containing the input data from the user.
+   */
   handleInput(event:any) {
     const query = event.target.value.toLowerCase();
     this.results = this.diseaseData.filter((d) => d.title.toLowerCase().indexOf(query) > -1);

@@ -12,6 +12,7 @@ export class TipsPage implements OnInit {
 
   ngOnInit() { }
 
+  // Array of tips pages with their router link and image:
   allTips: { title: string, routerLink: string, image: string } [] = [
     { title: 'Music', routerLink: '/more-tab/tips/music', image: 'assets/images/pandas/panda_music.png'},
     { title: 'Breathing Fresh Air', routerLink: '/more-tab/tips/breathing-air', image: 'assets/images/penguins/penguin_happy.png'},

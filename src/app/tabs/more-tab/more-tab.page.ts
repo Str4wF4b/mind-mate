@@ -7,11 +7,11 @@ import { UserDataService } from 'src/app/services/user-data.service';
   styleUrls: ['./more-tab.page.scss'],
 })
 export class MoreTabPage implements OnInit {
-  username!: string;
-  profileImage: string | null | undefined = null;
+  username!: string; // current username
+  profileImage: string | null | undefined = null; // current profile image
 
-  selectedLanguage: string = 'english';
-  languages: { value: string, display: string }[] = [
+  selectedLanguage: string = 'english'; // the currently selected language
+  languages: { value: string, display: string }[] = [ // list of available languages for selection
     { value: 'arabic', display: 'Arabic' },
     { value: 'bosnian', display: 'Bosnian' },
     { value: 'chinese', display: 'Chinese' },
@@ -36,6 +36,11 @@ export class MoreTabPage implements OnInit {
     { value: 'turkish', display: 'Turkish' },
   ];
 
+  /**
+   * Constructor for the MoreTabPage class.
+   * Subscribes to the `usernameStorage$` observable to set the username.
+   * @param userDataService Service for user data management.
+   */
   constructor(
     private userDataService: UserDataService
   ) {
@@ -44,19 +49,13 @@ export class MoreTabPage implements OnInit {
     });
   }
 
+  /**
+   * Lifecycle hook that runs after the component is initialized.
+   * Subscribes to the `profileStorageImage$` observable to set the profile image.
+   */
   ngOnInit() {
     this.userDataService.profileStorageImage$.subscribe((image) => {
       this.profileImage = image;
     });
   }
-
-
-
-  //openFeature(page: string) {
-  //  this.navCtrl.navigateRoot(`/more-tab/${page}`);
-  //}
-
-  //openOthers(page: string) {
-  //  this.navCtrl.navigateRoot(`/more-tab/${page}`);
-  //}
 }
