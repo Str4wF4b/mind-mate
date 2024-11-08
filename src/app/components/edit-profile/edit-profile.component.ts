@@ -13,41 +13,55 @@ const { Permissions } = Plugins;
   styleUrls: ['./edit-profile.component.scss'],
 })
 export class EditProfileComponent implements OnInit {
-  @Input() username: string = '';
-  @Input() email!: string;
-  @Input() password!: string;
-  usernamePlaceholder: string = '';
-  emailPlaceholder: string = '';
-  newUsername: string = '';
-  newEmail: string = '';
-  newPassword: string = '';
-  passwordError: boolean = false;
-  form!: FormGroup;
-  isPwd: boolean = false;
-  profileImage: string | null | undefined = null;
-  currentProfileImage: string | null | undefined = null;
-  resetProfileImage: boolean = false;
+  @Input() username: string = ''; // the current username input from the parent component
+  @Input() email!: string; // the current email input from the parent component
+  @Input() password!: string; // the current password input from the parent component
+  usernamePlaceholder: string = ''; // placeholder for the username in the form
+  emailPlaceholder: string = ''; // placeholder for the email in the form
+  newUsername: string = ''; // holds new username input by the user
+  newEmail: string = ''; // holds new email input by the user
+  newPassword: string = ''; // holds new password input by the user
+  passwordError: boolean = false; // flag indicating if the password length is insufficient
+  form!: FormGroup; // the form used for editing the profile
+  isPwd: boolean = false; // flag indicating password visibility
+  profileImage: string | null | undefined = null; // the currently selected profile image
+  currentProfileImage: string | null | undefined = null; // the original profile image to compare changes
+  resetProfileImage: boolean = false; // flag indicating if the profile image has been reset
   isChanged: boolean = false; // flag to track active changes
 
-  @ViewChild('fileInput') fileInput: any;
+  @ViewChild('fileInput') fileInput: any; // reference to the file input element for profile image upload
 
+  /**
+   * Constructor for `EditProfileComponent`.
+   * Injects the necessary services for handling modals, user data management, toast notifications, and action sheets.
+   *
+   * @param modalController - Service to manage modal dialogs.
+   * @param userDataService - Service to handle user data storage and retrieval.
+   * @param toastController - Service to display toast notifications.
+   * @param actionSheetController - Service to create and present action sheets.
+   */
   constructor(
     private modalController: ModalController,
     private userDataService: UserDataService,
     private toastController: ToastController,
     private actionSheetController: ActionSheetController
-  ) {
-  }
+  ) { }
 
+  /**
+   * Lifecycle hook that runs when the component is initialized.
+   * Sets up initial data for profile image, username, and email placeholders.
+   */
   ngOnInit() {
     this.profileImage = this.userDataService.getProfileImage();
     this.currentProfileImage = this.profileImage; // save current profile image
     this.usernamePlaceholder = this.userDataService.getUsername();
     this.emailPlaceholder = this.userDataService.getEmail(); // get current email user has logged in or signed up with
-    console.log('Username Modal: ', this.username);
-    console.log('Email Modal: ', this.emailPlaceholder);
   }
 
+  /**
+   * Presents an action sheet allowing the user to choose the source of the profile image,
+   * or to remove the current profile image.
+   */
   async presentPhotoActionSheet() {
     const actionSheet = await this.actionSheetController.create({
       header: 'Select Image Source',
@@ -72,6 +86,7 @@ export class EditProfileComponent implements OnInit {
           handler: () => {
             this.resetProfileImage = true;
             this.profileImage = null;
+            this.userDataService.setProfileImage(this.profileImage);
           }
         }
       ]
@@ -79,6 +94,12 @@ export class EditProfileComponent implements OnInit {
     await actionSheet.present();
   }
 
+  /**
+   * Captures a photo from the specified source (camera or photo library),
+   * updates the profile image, and checks if changes have been made.
+   *
+   * @param source - The source from which to capture the photo (e.g., Camera or Photos).
+   */
   async takePhoto(source: CameraSource) {
     try {
       const image = await Camera.getPhoto({
@@ -93,9 +114,7 @@ export class EditProfileComponent implements OnInit {
         this.userDataService.setProfileImage(this.profileImage);
         this.isChanged = true;
       }
-      //console.log('Profile Image URL:', this.profileImage);
     } catch (error: any) {
-      //console.error('Camera issue:', error);
       if (error.message.includes('User cancelled photos app')) {
         const toast = await this.toastController.create({
           message: 'Photo selection cancelled.',
@@ -111,14 +130,16 @@ export class EditProfileComponent implements OnInit {
   }
 
   /**
-   * Checks if the new password is too short
+   * Checks if the new password length meets the minimum requirement.
+   * Sets `passwordError` to `true` if the length is less than 8 characters.
    */
   checkPasswordLength() {
     this.passwordError = this.newPassword.length < 8;
   }
 
   /**
-   * Handles saving of user changes and updates placeholders if fields are changed
+   * Saves changes made by the user, updates placeholders, and displays toast notifications for feedback.
+   * Checks if any modifications have been made before saving.
    */
   async saveChanges() {
     //let isChanged = false; // flag to track active changes
@@ -186,17 +207,20 @@ export class EditProfileComponent implements OnInit {
   }
 
   /**
-   * 
+   * Closes the modal dialog when called.
    */
   close() {
     this.modalController.dismiss();
   }
 
 
-
+  /**
+   * Array of action sheet buttons used to present options for saving or canceling profile edits.
+   */
   public actionSheetButtons = [
     {
       text: 'Save Changes',
+      icon: 'save',
       role: 'destructive',
       handler: () => this.saveChanges(),
       /* data: {
@@ -205,6 +229,7 @@ export class EditProfileComponent implements OnInit {
     },
     {
       text: 'Cancel',
+      icon: 'close-circle',
       role: 'cancel',
       data: {
         action: 'cancel',
@@ -212,6 +237,9 @@ export class EditProfileComponent implements OnInit {
     },
   ];
 
+  /**
+   * Toggles the visibility of the password field.
+   */
   togglePwd() {
     this.isPwd = !this.isPwd; // toggle password visibility
   }

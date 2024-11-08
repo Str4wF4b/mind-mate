@@ -7,7 +7,7 @@ import { IonModal, ModalController } from '@ionic/angular';
   styleUrls: ['./specialists-info.component.scss'],
 })
 export class SpecialistsInfoComponent implements OnInit {
-  @ViewChild('infoModal') infoModal!: IonModal;
+  @ViewChild('infoModal') infoModal!: IonModal; // reference to the info modal
   psychiatristInfoGer: string =
     '<b>Aufgabe:</b> Diagnostiziert und behandelt psychische Erkrankungen. Psychiater setzen oft Medikamente ein, bieten aber auch bei schweren psychischen Erkrankungen eine psychotherapeutische Therapie an.<br><br>'
     + '<b>Behandlung:</b> Medikamente (z.B. Antidepressiva, Antipsychotika), Psychotherapie.<br><br>'
@@ -69,8 +69,9 @@ export class SpecialistsInfoComponent implements OnInit {
   //sourcePsychiatrist: string = 'https://approbatio.de/facharztrichtungen/psychiater/';
   //sourcePsychotherapist: string = 'https://minddoc.de/magazin/psychotherapie-verfahren/';
   //sourceNonMedicalPractitionerInPsychotherapy: string = 'https://heilpraktiker-akademie.de/heilpraktiker-psychotherapie/'; // nur Heilpraktiker
-  sourceOthers: string = 'https://www.berufslexikon.at/berufe/'; // auch Psychotherapiest
+  sourceOthers: string = 'https://www.berufslexikon.at/berufe/'; // general source for mental health professions (also psychotherapist)
 
+  // List of professions with related information, display status and sources
   types: { name: string, info: string, showInfo: boolean, sources: string }[] = [
     { name: 'Psychiatrist', info: this.psychiatristInfo, showInfo: false, sources: 'https://approbatio.de/facharztrichtungen/psychiater/' },
     { name: 'Psychotherapist', info: this.psychotherapistInfo, showInfo: false, sources: 'https://minddoc.de/magazin/psychotherapie-verfahren/, https://www.berufslexikon.at/berufe/2271-PsychotherapeutIn/' },
@@ -81,21 +82,38 @@ export class SpecialistsInfoComponent implements OnInit {
     { name: 'Coaching & Life Counseling', info: this.coachingLifeCounselingInfo, showInfo: false, sources: 'https://www.berufslexikon.at/berufe/2081-LebensberaterIn-SozialberaterIn/' }
   ]
 
-
+  /**
+   * Constructor for the component, initializes the class variables.
+   * 
+   * @param modalController The modal controller to manage modals in this component.
+   */
   constructor(private modalController: ModalController) { }
 
   ngOnInit() { }
 
+  /**
+   * Closes the modal containing information about the profession.
+   */
   closeInfoModal() {
     this.modalController.dismiss();
   }
 
+  /**
+   * Toggles the visibility of the information for a specific profession.
+   * 
+   * @param type The profession object containing its details and visibility status.
+   */
   toggleInfo(type: { name: string, info: string, showInfo: boolean, sources: string }) {
     type.showInfo = !type.showInfo;
   }
 
+  /**
+   * Formats the information text by making certain keywords bold.
+   * 
+   * @param info The information text to be formatted.
+   * @returns The formatted text with bolded keywords.
+   */
   formatText(info: string): string {
     return info.replace(/(Aufgabe|Behandlung|Ausbildung)/g, '<b>$1</b>');
   }
-
 }
