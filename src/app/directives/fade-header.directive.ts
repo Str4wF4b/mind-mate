@@ -6,29 +6,43 @@ import { DomController } from '@ionic/angular';
   //standalone: true
 })
 export class FadeHeaderDirective implements OnInit {
+  @Input('appFadeHeader') toolbar: any; // toolbar element to which the fade effect will be applied
   
-  @Input('appFadeHeader') toolbar: any;
-  
-
+  /**
+   * Constructor for the FadeHeaderDirective.
+   * Initializes the directive with the DomController to manipulate DOM elements.
+   * 
+   * @param domController The DomController used to update the DOM asynchronously.
+   */
   constructor(private domController: DomController) { }
 
+  /**
+   * Lifecycle hook that is called after the directive's initialization.
+   * Sets the toolbar to the element passed in the input, providing access to it for DOM manipulation.
+   */
   ngOnInit() {
     this.toolbar = this.toolbar.el; // access toolbar element
   }
 
+  /**
+   * HostListener for the `ionScroll` event.
+   * It listens to the scroll events on the content and modifies the background color of the toolbar
+   * based on the scroll position. The background fades as the user scrolls down.
+   * 
+   * @param $event The scroll event containing the scrollTop value, indicating the vertical scroll position.
+   */
   @HostListener('ionScroll', ['$event']) onContentScroll($event: any) {
     let scrollTop = $event.detail.scrollTop;
-    if (scrollTop >= 240) {
+    if (scrollTop >= 240) { //cap scrollTop at 240 to avoid exceeding the maximum alpha value
       scrollTop = 240;
     }
 
-    const alphaValue = Math.round((scrollTop / 240) * 255);
-    const hexDist = alphaValue.toString(16).padStart(2, '0').toUpperCase();// parseInt(scrollTop,10).toString(16); // hex string
+    const alphaValue = Math.round((scrollTop / 240) * 255); // calculate the alpha value (transparency) based on scroll position
+    const hexDist = alphaValue.toString(16).padStart(2, '0').toUpperCase();// parseInt(scrollTop,10).toString(16); // convert the alpha value to a hexadecimal string and ensure it is 2 characters long
     this.domController.write(() => {
-      this.toolbar.style.setProperty('--background', `#CFEEF9${hexDist}`);
+      this.toolbar.style.setProperty('--background', `#CFEEF9${hexDist}`); // apply the background color change using the calculated alpha value
     })
   }
-
 }
 
 
