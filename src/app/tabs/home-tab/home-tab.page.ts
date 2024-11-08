@@ -95,6 +95,10 @@ export class HomeTabPage implements OnInit {
               },
               ticks: {
                 display: false
+              },
+              border: {
+                display: true,
+                color: 'rgba(240, 255, 255, 0.5)'
               }
             },
             x: {
@@ -103,6 +107,10 @@ export class HomeTabPage implements OnInit {
               },
               ticks: {
                 display: false
+              },
+              border: {
+                display: true,
+                color: 'rgba(240, 255, 255, 0.5)'
               }
             }
           }
@@ -137,6 +145,10 @@ export class HomeTabPage implements OnInit {
               },
               ticks: {
                 display: false
+              },
+              border: {
+                display: true,
+                color: 'rgba(240, 255, 255, 0.5)'
               }
             },
             x: {
@@ -145,6 +157,10 @@ export class HomeTabPage implements OnInit {
               },
               ticks: {
                 display: false
+              },
+              border: {
+                display: true,
+                color: 'rgba(240, 255, 255, 0.5)'
               }
             }
           },
