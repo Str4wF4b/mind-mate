@@ -10,6 +10,13 @@ import { UserDataService } from 'src/app/services/user-data.service';
 })
 export class DailyPage implements OnInit {
 
+  /**
+   * Constructor initializes services for navigation, user data management, and routing.
+   * 
+   * @param navController Service for handling navigation actions.
+   * @param userDataService Service for managing user-specific data.
+   * @param router Router service for programmatic navigation.
+   */
   constructor(
     private navController: NavController, 
     private userDataService: UserDataService, 
@@ -18,6 +25,7 @@ export class DailyPage implements OnInit {
   ngOnInit() {
   }
 
+  // Array of daily questionnaire objects containing questions, types, options, selected answers and point values:
   questions = [
     {
       questionText: '1. How stressed or burdened do you feel today?',
@@ -91,6 +99,7 @@ export class DailyPage implements OnInit {
     }, 
   ];
 
+  // Array of conclusion objects for evaluating daily well-being scores:
   conclusion = [
     {
       pointBorder: 42,
@@ -114,6 +123,9 @@ export class DailyPage implements OnInit {
     },
   ];
 
+  /**
+   * Submits the questionnaire answers, evaluates well-being and navigates to the questionnaire tab.
+   */
   submitAnswers() {
     let dailyResult = this.evaluateWellBeing();
     this.userDataService.setDailyQuestionnaireResult(dailyResult);
@@ -126,6 +138,11 @@ export class DailyPage implements OnInit {
     //this.navController.back();
   }
   
+  /**
+   * Calculates the total score based on selected answers and their respective points.
+   * 
+   * @returns Total score as a number.
+   */
   calculateDailyScore() {
     let totalScore = 0;
 
@@ -141,6 +158,11 @@ export class DailyPage implements OnInit {
     return totalScore;
   }
 
+  /**
+   * Evaluates the well-being based on the calculated score and returns the appropriate conclusion.
+   * 
+   * @returns An object containing a short conclusion, full conclusion text and a weight value.
+   */
   evaluateWellBeing(): { short: string, text: string, weight: number} {
     const totalScore = this.calculateDailyScore();
 

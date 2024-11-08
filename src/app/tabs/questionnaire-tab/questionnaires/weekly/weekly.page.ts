@@ -10,6 +10,13 @@ import { UserDataService } from 'src/app/services/user-data.service';
 })
 export class WeeklyPage implements OnInit {
 
+  /**
+   * Constructor initializes services for navigation, user data management, and routing.
+   * 
+   * @param navController Service for handling navigation actions.
+   * @param userDataService Service for managing user-specific data.
+   * @param router Router service for programmatic navigation.
+   */
   constructor(
     private navController: NavController, 
     private userDataService: UserDataService, 
@@ -18,6 +25,7 @@ export class WeeklyPage implements OnInit {
   ngOnInit() {
   }
 
+  // Array of weekly questionnaire objects containing questions, types, options, selected answers and point values:
   questions = [
     {
       questionText: '1. How often have you felt down or depressed in the past week?',
@@ -91,6 +99,7 @@ export class WeeklyPage implements OnInit {
     }, 
   ];
 
+  // Array of conclusion objects for evaluating weekly well-being scores:
   conclusion = [
     {
       pointBorder: 40,
@@ -114,6 +123,9 @@ export class WeeklyPage implements OnInit {
     },
   ];
 
+  /**
+   * Submits the questionnaire answers, evaluates well-being and navigates to the questionnaire tab.
+   */
   submitAnswers() {
     let weeklyResult = this.evaluateWellBeing();
     this.userDataService.setWeeklyQuestionnaireResult(weeklyResult);
@@ -121,11 +133,13 @@ export class WeeklyPage implements OnInit {
     this.router.navigateByUrl('tabs/questionnaire', { skipLocationChange: true }).then(() => { // save data by navigating "back" to questionnaires-tab
       this.router.navigate(['tabs/questionnaire']); 
     });
-    
-    //console.log('Selected Answers:', this.questions.map(q => q.selectedAnswer));
-    //this.navController.back();
   }
 
+  /**
+   * Calculates the total score based on selected answers and their respective points.
+   * 
+   * @returns Total score as a number.
+   */
   calculateWeeklyScore() {
     let totalScore = 0;
 
@@ -141,6 +155,11 @@ export class WeeklyPage implements OnInit {
     return totalScore;
   }
 
+  /**
+   * Evaluates the well-being based on the calculated score and returns the appropriate conclusion.
+   * 
+   * @returns An object containing a short conclusion, full conclusion text and a weight value.
+   */
   evaluateWellBeing(): { short: string, text: string, weight: number} {
     const totalScore = this.calculateWeeklyScore();
 
@@ -154,5 +173,4 @@ export class WeeklyPage implements OnInit {
       return { short: this.conclusion[3].conclusionShort, text: this.conclusion[3].conclusionText, weight: 4 };
     }
   }
-
 }

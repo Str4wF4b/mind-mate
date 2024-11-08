@@ -10,6 +10,13 @@ import { UserDataService } from 'src/app/services/user-data.service';
 })
 export class ShortPage implements OnInit {
 
+  /**
+   * Constructor initializes services for navigation, user data management, and routing.
+   * 
+   * @param navController Service for handling navigation actions.
+   * @param userDataService Service for managing user-specific data.
+   * @param router Router service for programmatic navigation.
+   */
   constructor(
     private navController: NavController, 
     private userDataService: UserDataService, 
@@ -18,6 +25,7 @@ export class ShortPage implements OnInit {
   ngOnInit() {
   }
 
+  // Array of short questionnaire objects containing questions, types, options, selected answers and point values:
   questions = [
     {
       questionText: '1. How often in the past 24 hours have you felt like you lacked control over your life?',
@@ -70,6 +78,7 @@ export class ShortPage implements OnInit {
     }
   ];
 
+  // Array of conclusion objects for evaluating short well-being scores:
   conclusion = [
     {
       pointBorder: 30,
@@ -94,7 +103,7 @@ export class ShortPage implements OnInit {
   ];
 
   /**
-   * 
+   * Submits the questionnaire answers, evaluates well-being and navigates to the questionnaire tab.
    */
   submitAnswers() {
     let shortResult = this.evaluateWellBeing();
@@ -109,8 +118,9 @@ export class ShortPage implements OnInit {
   }
 
   /**
+   * Calculates the total score based on selected answers and their respective points.
    * 
-   * @returns 
+   * @returns Total score as a number.
    */
   calculateShortScore() {
     let totalScore = 0;
@@ -128,8 +138,9 @@ export class ShortPage implements OnInit {
   }
 
   /**
+   * Evaluates the well-being based on the calculated score and returns the appropriate conclusion.
    * 
-   * @returns 
+   * @returns An object containing a short conclusion, full conclusion text and a weight value.
    */
   evaluateWellBeing(): { short: string, text: string, weight: number} {
     const totalScore = this.calculateShortScore();
