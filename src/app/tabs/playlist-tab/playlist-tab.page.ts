@@ -7,9 +7,10 @@ import { UserDataService } from 'src/app/services/user-data.service';
   styleUrls: ['./playlist-tab.page.scss'],
 })
 export class PlaylistTabPage implements OnInit {
-  username!: string;
-  profileImage: string | null | undefined = null;
+  username!: string; // current username
+  profileImage: string | null | undefined = null; // holds the URL or path to the profile image
 
+  // Array containing playlist details:
   public playlists: { title: string, caption: string, routerLink: string, imageSrc: string }[] = [
     { title: 'Calm Down', caption: 'Time to relax and rest', routerLink: '/playlist-tab/calm-down', imageSrc: 'girl_meditating.png' },
     { title: 'Work & Focus', caption: 'Start enjoying your work again', routerLink: '/playlist-tab/work-focus', imageSrc: 'girl_work.png' },
@@ -20,16 +21,23 @@ export class PlaylistTabPage implements OnInit {
     
   ];
 
+  /**
+   * Constructor to inject the UserDataService for accessing user data.
+   * 
+   * @param userDataService Service to manage user data
+   */
   constructor(private userDataService: UserDataService) {
     this.userDataService.usernameStorage$.subscribe(name => {
       this.username = name;
     })
    }
 
+  /**
+   * Lifecycle hook that runs after component initialization.
+   */ 
   ngOnInit() {
     this.userDataService.profileStorageImage$.subscribe((image) => {
       this.profileImage = image;
     });
   }
-
 }

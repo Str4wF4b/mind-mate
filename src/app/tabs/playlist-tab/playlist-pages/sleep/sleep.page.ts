@@ -8,25 +8,26 @@ import { UserDataService } from 'src/app/services/user-data.service';
   styleUrls: ['./sleep.page.scss'],
 })
 export class SleepPage implements OnInit {
-  segmentValue: string = '1';
-  currentSong: string = '';
-  currentTitle: string = '';
-  currentArtist: string = '';
-  recentSong: string = '';
-  recentTitle: string = '';
-  recentArtist: string = '';
-  recentSleepSong: string = '';
-  recentSleepTitle: string = '';
-  recentSleepArtist: string = '';
-  isRecentSong: boolean = false;
-  @ViewChild('audioPlayer', { static: false }) audioPlayer!: ElementRef<HTMLAudioElement>;
-  duration: number = 0;
-  currentTime: number = 0;
-  currentSongNumber: number = 0;
-  currentCustomSongNumber: number = 0;
-  isCustomList: boolean = false;
-  isPlaying: boolean = false;
+  segmentValue: string = '1'; // current segment value for page view
+  currentSong: string = ''; // path of the current song
+  currentTitle: string = ''; // title of the current song
+  currentArtist: string = ''; // artist of the current song
+  recentSong: string = ''; // path of the recently played song
+  recentTitle: string = ''; // title of the recently played song
+  recentArtist: string = ''; // artist of the recently played song
+  recentSleepSong: string = ''; // path of the recently played sleep song
+  recentSleepTitle: string = ''; // title of the recently played sleep song
+  recentSleepArtist: string = ''; // artist of the recently played sleep song
+  isRecentSong: boolean = false; // indicates whether a recent song is available
+  @ViewChild('audioPlayer', { static: false }) audioPlayer!: ElementRef<HTMLAudioElement>; // reference to the audio player element
+  duration: number = 0; // duration of the current song in seconds
+  currentTime: number = 0; // currently playing position in seconds
+  currentSongNumber: number = 0; // index of the current song in featured playlist
+  currentCustomSongNumber: number = 0; // index of the current song in custom playlist
+  isCustomList: boolean = false; // indicates if custom playlist is being used
+  isPlaying: boolean = false; // indicates if a song is currently playing
 
+  // Array of sleep songs containing song details:
   songs: { title: string, artist: string, songUrl: string }[] = [
     { title: 'Crescent Moon', artist: 'Tomomi Kato', songUrl: 'assets/songs/sleep/Crescent-Moon_TomomiKato.mp3' },
     { title: 'Dawn Break', artist: 'Tech Oasis', songUrl: 'assets/songs/sleep/Dawn-Break_TechOasis.mp3' },
@@ -39,32 +40,57 @@ export class SleepPage implements OnInit {
     { title: 'Sleep', artist: 'teodholina', songUrl: 'assets/songs/sleep/Sleep_teodholina.mp3' }
   ]
 
+  // Array for custom playlist songs:
   customSongs: { title: string, artist: string, songUrl: string }[] = [];
 
+  /**
+   * Constructor for SleepPage.
+   * @param navController service for handling navigation between pages
+   * @param actionSheetController service for displaying an action sheet with options
+   * @param userDataService service for managing and retrieving user data
+   */
   constructor(
     private navController: NavController,
     private actionSheetController: ActionSheetController,
     private userDataService: UserDataService
   ) { }
 
+  /**
+   * Getter method for accessing the current audio element.
+   * @returns {HTMLAudioElement} The audio element used for playing songs.
+   */
   get currentAudio() {
     return document.getElementById('sleepSongs') as HTMLAudioElement;
   }
 
+  /**
+   * Lifecycle hook that runs after the component's initialization.
+   * Sets up event listeners, loads the recent song, and loads the custom playlist from local storage.
+   */
   ngOnInit() {
     this.addEventListener();
     this.loadRecentSong();
     this.loadCustomPlaylist();
   }
 
+  /**
+   * Handles the change of segment value for UI updates.
+   * @param event the event containing the new segment value
+   */
   segmentChanged(event: any) {
     this.segmentValue = event.detail.value;
   }
 
+  /**
+   * Navigates back to the previous page.
+   */
   goBack() {
     this.navController.back();
   }
 
+  /**
+   * Plays the first song in the playlist or the most recently played song if available.
+   */
   playFirstSong() {
     if (this.isRecentSong) {
       const song = { title: this.recentSleepTitle, artist: this.recentSleepArtist, songUrl: this.recentSleepSong };
@@ -79,6 +105,10 @@ export class SleepPage implements OnInit {
     }
   }
 
+  /**
+   * Plays a specified song and updates the current song state.
+   * @param song the song object containing title, artist and song URL
+   */
   playSong(song: { title: string, artist: string, songUrl: string }) {
     this.currentSongNumber = this.songs.findIndex(s => s.songUrl === song.songUrl);
     this.isCustomList = false;
@@ -101,6 +131,11 @@ export class SleepPage implements OnInit {
     }
   }
 
+  /**
+   * Plays a song from the custom playlist and updates the state.
+   * @param song the song object from the custom playlist
+   * @param index the index of the song in the custom playlist
+   */
   playCustomSong(song: { title: string, artist: string, songUrl: string }, index: number) {
     this.isCustomList = true;
     this.currentSong = song.songUrl;
@@ -123,6 +158,9 @@ export class SleepPage implements OnInit {
     }
   }
 
+  /**
+   * Toggles between play and pause states for the current song.
+   */
   togglePlayPause() {
     if (this.currentAudio) {
       if (this.currentAudio.paused) {
@@ -138,6 +176,9 @@ export class SleepPage implements OnInit {
     }
   }
 
+  /**
+   * Plays the previous song in the current playlist.
+   */
   previousSong() {
     if (this.isCustomList) {
       this.currentCustomSongNumber = (this.currentCustomSongNumber - 1 + this.customSongs.length) % this.customSongs.length;
@@ -158,6 +199,9 @@ export class SleepPage implements OnInit {
     this.isPlaying = true;
   }
 
+  /**
+   * Plays the next song in the current playlist.
+   */
   nextSong() {
     if (this.isCustomList) {
       this.currentCustomSongNumber = (this.currentCustomSongNumber + 1) % this.customSongs.length;
@@ -178,10 +222,18 @@ export class SleepPage implements OnInit {
     this.isPlaying = true;
   }
 
+  /**
+   * Updates the current playback position to a specified time.
+   * @param event The event containing the new playback time (in seconds).
+   */
   goToTime(event: any) {
     this.currentAudio.currentTime = event.detail.value;
   }
 
+  /**
+   * Updates the most recently played song details and saves them to local storage.
+   * @param song The song object containing title, artist, and song URL.
+   */
   updateRecentSong(song: { title: string, artist: string, songUrl: string }) {
     localStorage.setItem('recentSong', song.songUrl);
     localStorage.setItem('recentTitle', song.title);
@@ -198,6 +250,9 @@ export class SleepPage implements OnInit {
     this.userDataService.saveRecentSong(song);
   }
 
+  /**
+   * Adds event listeners to the audio player for handling song end, loaded metadata, and time updates.
+   */
   addEventListener() {
     if (this.currentAudio) {
       // Event Listener to play next song if current song ended:
@@ -219,6 +274,9 @@ export class SleepPage implements OnInit {
     }
   }
 
+  /**
+   * Loads the most recently played song from local storage.
+   */
   loadRecentSong() {
     const savedSong = localStorage.getItem('recentSleepSong');
     const savedTitle = localStorage.getItem('recentSleepTitle');
@@ -235,6 +293,10 @@ export class SleepPage implements OnInit {
     }
   }
 
+  /**
+   * Presents an action sheet allowing the user to add a song to their custom playlist.
+   * @param song The song object containing title, artist and song URL.
+   */
   async presentActionSheet(song: { title: string, artist: string, songUrl: string }) {
     const actionSheet = await this.actionSheetController.create({
       header: 'Add \'' + song.title + '\' to your Custom Playlist?',
@@ -256,6 +318,10 @@ export class SleepPage implements OnInit {
     return await actionSheet.present();
   }
 
+  /**
+   * Adds a song to the custom playlist and updates local storage.
+   * @param song The song object to be added to the custom playlist.
+   */
   addToCustomPlaylist(song: { title: string, artist: string, songUrl: string }) {
     if (!this.customSongs.includes(song)) {
       this.customSongs.push(song);
@@ -266,6 +332,10 @@ export class SleepPage implements OnInit {
     localStorage.setItem('customSongs', JSON.stringify(this.customSongs));
   }
 
+  /**
+   * Removes a song from the custom playlist and updates local storage.
+   * @param song The song object to be removed from the custom playlist.
+   */
   removeFromCustomPlaylist(song: { title: string, artist: string, songUrl: string }) {
     const songIndex = this.customSongs.findIndex(
       customSong => (customSong.title === song.title && customSong.artist === song.artist && customSong.songUrl === song.songUrl)
@@ -276,6 +346,9 @@ export class SleepPage implements OnInit {
     }
   }
 
+  /**
+   * Loads the custom playlist from local storage.
+   */
   loadCustomPlaylist() {
     const savedCustomSongs = localStorage.getItem('customSongs');
     if (savedCustomSongs) {
