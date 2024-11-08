@@ -10,13 +10,20 @@ import { UserDataService } from 'src/app/services/user-data.service';
   styleUrls: ['./home-tab.page.scss'],
 })
 export class HomeTabPage implements OnInit {
-  username!: string;
-  profileImage: string | null | undefined = null;
-  selectedUserFeeling: string = 'empty';
-  recentTitle = '';
-  recentArtist = '';
-  isLoggedIn: boolean = false;
+  username!: string; // the username of the logged-in user
+  profileImage: string | null | undefined = null; // the profile image URL or data for the user
+  selectedUserFeeling: string = 'empty'; // the selected feeling of the user
+  recentTitle = ''; // the title of the most recent song
+  recentArtist = ''; // the artist of the most recent song
+  isLoggedIn: boolean = false; // flag to check if the user is logged in
 
+  /**
+   * Constructor for the HomeTabPage.
+   * Initializes the page and subscribes to the user data service for updates.
+   * 
+   * @param navCtrl The navigation controller for navigating between tabs.
+   * @param userDataService The service for managing user data, including username, profile image, and feelings.
+   */
   constructor(
     private navCtrl: NavController,
     private userDataService: UserDataService
@@ -26,6 +33,10 @@ export class HomeTabPage implements OnInit {
     });
   }
 
+  /**
+   * Lifecycle hook that runs when the component is initialized.
+   * Subscribes to the user data service to get the profile image and user feelings.
+   */
   ngOnInit() {
     this.userDataService.profileStorageImage$.subscribe((image) => {
       this.profileImage = image;
@@ -37,12 +48,20 @@ export class HomeTabPage implements OnInit {
     this.isLoggedIn = true;
   }
 
+  /**
+   * Lifecycle hook that runs after the view has been initialized.
+   * Creates charts for heart rate and activity.
+   */
   ngAfterViewInit() {
     this.createHeartRateChart();
     this.createActivityChart();
     //new LayoutManager();
   }
 
+  /**
+   * Lifecycle hook that runs when the view will enter.
+   * Updates the recent song title and artist if the user is logged in.
+   */
   ionViewWillEnter() {
     if (this.isLoggedIn) { // update title and artist only after the log in or sign up
       this.recentTitle = this.userDataService.getRecentSong().title;
@@ -51,14 +70,19 @@ export class HomeTabPage implements OnInit {
   }
 
   /**
+   * Switches the current tab to the specified tab.
    * 
-   * @param tab 
+   * @param tab The name of the tab to navigate to.
    */
   switchTab(tab: string) {
     this.navCtrl.navigateRoot(`/tabs/${tab}`);
   }
 
 
+  /**
+   * Creates the heart rate chart using the Chart.js library.
+   * This chart visualizes the heart rate over a 24-hour period.
+   */
   createHeartRateChart() {
     const ctx_hr = (document.getElementById('hr-trend-chart-home') as HTMLCanvasElement).getContext('2d');
 
@@ -119,6 +143,10 @@ export class HomeTabPage implements OnInit {
     }
   }
 
+  /**
+   * Creates the activity chart using the Chart.js library.
+   * This chart visualizes active minutes throughout a 24-hour period.
+   */
   createActivityChart() {
     const ctx_act = (document.getElementById('act-trend-chart-home') as HTMLCanvasElement).getContext('2d');
 
@@ -173,6 +201,4 @@ export class HomeTabPage implements OnInit {
       });
     }
   }
-
-
 }

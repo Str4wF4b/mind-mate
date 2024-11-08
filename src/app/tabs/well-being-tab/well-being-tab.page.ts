@@ -11,16 +11,23 @@ Chart.register(...registerables);
   styleUrls: ['./well-being-tab.page.scss'],
 })
 export class WellBeingTabPage implements OnInit, AfterViewInit {
-  progressBarType: string = 'indeterminate'
-  progressValue: number = 0;
-  connected: boolean = true;
-  isLoading: boolean = true;
-  selectedFeeling: string = "empty";
-  allActivities: string[] = [];
-  newActivity: string = '';
-  username!: string;
-  profileImage: string | null | undefined = null;
+  progressBarType: string = 'indeterminate'; // progress bar type
+  progressValue: number = 0; // current value of the progress bar
+  connected: boolean = true; // connection status
+  isLoading: boolean = true; // flag to indicate if data is loading
+  selectedFeeling: string = "empty"; // the selected feeling of the user
+  allActivities: string[] = []; // all added user activities of the to-do list
+  newActivity: string = ''; // new activity added by the user
+  username!: string; // the username of the logged in user
+  profileImage: string | null | undefined = null; // the profile image URL or data for the user
 
+  /**
+   * Constructor for the WellBeingTabPage.
+   * Initializes the page and subscribes to the user data service to update username.
+   * 
+   * @param menuController The menu controller for managing the side menu.
+   * @param userDataService The service for managing user data, including username, profile image, and feelings.
+   */
   constructor(
     private menuController: MenuController,
     private userDataService: UserDataService) {
@@ -29,7 +36,10 @@ export class WellBeingTabPage implements OnInit, AfterViewInit {
     })
   }
 
-
+  /**
+   * Lifecycle hook that runs when the component is initialized.
+   * Starts the progress bar and subscribes to the profile image and feeling observables.
+   */
   ngOnInit() {
     this.startProgressBar();
     this.userDataService.profileStorageImage$.subscribe((image) => {
@@ -40,12 +50,20 @@ export class WellBeingTabPage implements OnInit, AfterViewInit {
     });
   }
 
+  /**
+   * Lifecycle hook that runs after the view has been initialized.
+   * Creates charts for mood, heart rate, and activity.
+   */
   ngAfterViewInit(): void {
     this.createMoodChart();
     this.createHeartRateChart();
     this.createActivityChart();
   }
 
+  /**
+   * Starts the progress bar by increasing its value until 100%.
+   * This simulates loading the data, and after 3 seconds, the loading flag is set to false.
+   */
   startProgressBar() {
     // For normal progress bar type:
     /* let interval = setInterval(() => {this.progressValue += 0.01;
@@ -67,10 +85,17 @@ export class WellBeingTabPage implements OnInit, AfterViewInit {
     }, 3000);
   }
 
+  /**
+   * Toggles the connection status between connected and disconnected.
+   */
   toggleConnection() {
     this.connected = !this.connected;
   }
 
+  /**
+   * Creates the mood chart using the Chart.js library.
+   * This chart tracks the user's mood over a week (Monday to Sunday).
+   */
   createMoodChart() {
     const ctx_mood = (document.getElementById('mood-trend-chart') as HTMLCanvasElement).getContext('2d');
 
@@ -117,7 +142,6 @@ export class WellBeingTabPage implements OnInit, AfterViewInit {
               }
             },
             x: {
-
               ticks: {
                 // no label rotation and aligned horizontally:
                 maxRotation: 0,
@@ -130,12 +154,21 @@ export class WellBeingTabPage implements OnInit, AfterViewInit {
     }
   }
 
+  /**
+   * Saves the selected feeling and updates the user data service.
+   * 
+   * @param feeling The feeling selected by the user.
+   */
   saveFeeling(feeling: string) {
     this.selectedFeeling = feeling;
     this.userDataService.saveUserFeeling(feeling);
     console.log(`Selected Feeling: ${feeling}`);
   }
 
+  /**
+   * Creates the heart rate chart using the Chart.js library.
+   * This chart visualizes the heart rate over a 24-hour period.
+   */
   createHeartRateChart() {
     const ctx_hr = (document.getElementById('hr-trend-chart') as HTMLCanvasElement).getContext('2d');
 
@@ -194,6 +227,10 @@ export class WellBeingTabPage implements OnInit, AfterViewInit {
     }
   }
 
+  /**
+   * Adds a new activity to the list of activities.
+   * Clears the input field after the activity is added.
+   */
   addActivity(/* activity: string */) {
     if (this.newActivity && this.newActivity.trim() !== '') {
       this.allActivities.push(this.newActivity.trim());
@@ -201,10 +238,19 @@ export class WellBeingTabPage implements OnInit, AfterViewInit {
     }
   }
 
+  /**
+   * Removes an activity from the list of activities.
+   * 
+   * @param activity The activity to be removed.
+   */
   removeActivity(activity: string) {
     this.allActivities = this.allActivities.filter(a => a !== activity);
   }
 
+  /**
+   * Creates the activity chart using the Chart.js library.
+   * This chart visualizes active minutes over a 24-hour period.
+   */
   createActivityChart() {
     const ctx_act = (document.getElementById('act-trend-chart') as HTMLCanvasElement).getContext('2d');
 
