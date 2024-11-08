@@ -8,7 +8,7 @@ const routes: Routes = [
   },
   {
     path: 'auth-main',
-    loadChildren: () => import('./pages/auth/auth-main/auth-main.module').then(m => m.AuthMainPageModule)
+    loadChildren: () => import('./auth/auth-main/auth-main.module').then(m => m.AuthMainPageModule)
   },
   {
     path: 'tabs',

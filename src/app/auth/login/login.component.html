@@ -1,0 +1,55 @@
+<form [formGroup]="form">
+  <ion-item lines="none" class="ion-margin-horizontal ion-margin-top">
+    <ion-button slot="start" fill="clear" color="medium">
+      <ion-icon slot="icon-only" name="mail"></ion-icon>
+    </ion-button>
+    <ion-input 
+      labelPlacement="floating"
+      label="Email"
+      type="email" 
+      formControlName="email" 
+      placeholder="Enter Email here"
+      errorText="Email is not correct">
+      <div slot="label">Email</div>
+    </ion-input>
+  </ion-item>
+
+  <ion-item lines="none" class="ion-margin">
+    <ion-button slot="start" fill="clear" color="medium">
+      <ion-icon slot="icon-only" name="lock-closed"></ion-icon>
+    </ion-button>
+    <ion-input 
+      labelPlacement="floating" 
+      label="Password" 
+      [type]="isPwd ? 'text' : 'password'"
+      formControlName="password" 
+      placeholder="Enter Password here"
+      [errorText]="form!.get('password')!.hasError('minlength') ? 'Password is too short' : 'Enter a proper Password'">
+    </ion-input>
+    <ion-button slot="end" fill="clear" color="dark" (click)="togglePwd()">
+      <ion-icon class="pwd-eye" slot="icon-only" [name]="isPwd ? 'eye-off' : 'eye'"></ion-icon>
+    </ion-button>
+  </ion-item>
+
+  <div class="ion-text-right ion-margin-horizontal">
+    <ion-text id="forgot-passowrd" class="fpwd" color="light">Forgot Password?</ion-text>
+  </div>
+  <ion-modal 
+    #forgot_pwd_modal
+    trigger="forgot-passowrd"
+    (ionModalDidDismiss)="reset($event)"
+    [breakpoints]="[0.1, 0.5, 0.9]"
+    [initialBreakpoint]="0.5">
+    <ng-template>
+      <div class="transparent">
+      <app-reset-password></app-reset-password>
+    </div>
+    </ng-template>
+  </ion-modal>
+
+  <div class="ion-margin submit" (click)="onSubmit()">
+    <ion-button expand="block" size="large" shape="round">
+      <ion-text color="dark"><strong>Login</strong></ion-text>
+    </ion-button>
+  </div>
+</form>
