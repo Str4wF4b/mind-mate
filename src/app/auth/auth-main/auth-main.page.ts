@@ -16,10 +16,10 @@ export class AuthMainPage implements OnInit {
   constructor() {
   }
 
-/**
- * Lifecycle hook that is called after the component has been initialized.
- * Ensures that `segmentValue` is set to '1' when the component loads.
- */
+  /**
+   * Lifecycle hook that is called after the component has been initialized.
+   * Ensures that `segmentValue` is set to '1' when the component loads.
+   */
   ngOnInit() {
     this.segmentValue = '1';
   }

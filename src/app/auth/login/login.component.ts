@@ -15,12 +15,12 @@ export class LoginComponent implements OnInit {
 
 
   /**
-  * The constructor initializes the `LoginComponent` and sets up necessary services and dependencies.
-  * It also calls `initForm()` to create the form controls used in the component.
-  *
-  * @param router - The `Router` service for navigating between routes.
-  * @param userDataService - The service used to manage user data across the application.
-  */
+   * The constructor initializes the `LoginComponent` and sets up necessary services and dependencies.
+   * It also calls `initForm()` to create the form controls used in the component.
+   *
+   * @param router - The `Router` service for navigating between routes.
+   * @param userDataService - The service used to manage user data across the application.
+   */
   constructor(private router: Router, private userDataService: UserDataService) {
     this.initForm();
   }
@@ -29,9 +29,9 @@ export class LoginComponent implements OnInit {
   }
 
   /**
-  * Initializes the reactive form with `email` and `password` form controls.
-  * Sets up validation rules for each control to ensure proper input handling.
-  */
+   * Initializes the reactive form with `email` and `password` form controls.
+   * Sets up validation rules for each control to ensure proper input handling.
+   */
   initForm() {
     this.form = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]), // email is required and of type 'email'
@@ -40,18 +40,18 @@ export class LoginComponent implements OnInit {
   }
 
   /**
-  * Toggles the visibility of the password field by switching the `isPwd` boolean.
-  * Logs the current state of `isPwd` for debugging purposes.
-  */
+   * Toggles the visibility of the password field by switching the `isPwd` boolean.
+   * Logs the current state of `isPwd` for debugging purposes.
+   */
   togglePwd() {
     this.isPwd = !this.isPwd; // toggle password visibility
     console.log('isPwd' + this.isPwd);
   }
 
   /**
-  * Handles form submission. If the form is valid, it saves user data, navigates to another route,
-  * and initializes recent song data in `localStorage`. If invalid, it marks all fields as touched to display errors.
-  */
+   * Handles form submission. If the form is valid, it saves user data, navigates to another route,
+   * and initializes recent song data in `localStorage`. If invalid, it marks all fields as touched to display errors.
+   */
   onSubmit() {
     if (this.form.invalid) {
       this.form.markAllAsTouched(); // showing all errors
@@ -67,10 +67,10 @@ export class LoginComponent implements OnInit {
   }
 
   /**
-  * Placeholder method for resetting, which takes an event as a parameter.
-  *
-  * @param event - The event object, used when resetting the component's state or form.
-  */
+   * Placeholder method for resetting, which takes an event as a parameter.
+   *
+   * @param event - The event object, used when resetting the component's state or form.
+   */
   reset(event: any) {
   }
 }
